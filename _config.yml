@@ -103,7 +103,7 @@ analytics:
 # Site Author
 author:
   name             : "MOONGEONHUI"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/githubmain.jpg"
   bio              : "study blog"
   location         : "Incheon"
   email            : "moooongni@gmail.com"
