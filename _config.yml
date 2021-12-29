@@ -105,12 +105,12 @@ author:
   name             : "MOONGEONHUI"
   avatar           : "/assets/images/githubmain.jpg"
   bio              : "study blog"
-  location         : "Incheon"
+  location         : "Incheon, South Korea"
   email            : "moooongni@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:mooooongni@email.com"
+      url: "mailto:mooooongni@email.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
@@ -147,7 +147,11 @@ footer:
       # url:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      # url:
+      url: "https://instagram.com/mooooongni/"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:mooooongni@email.com"
+      
 
 
 # Reading Files
