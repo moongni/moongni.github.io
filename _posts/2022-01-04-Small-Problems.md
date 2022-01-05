@@ -4,6 +4,7 @@ title: "Small Problems"
 categories: algorithm
 tags: [python, algorithm, fibonacci sequence, recursion, generator, compression]
 toc: true
+toc_sticky: true
 author_profile: false
 sidebar:
     nav: "docs"
@@ -12,7 +13,8 @@ use_math: true
 # 알고리즘 학습동아리 1주차
 
 ## 교재소개
-![http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9791162242469](http://image.kyobobook.co.kr/images/book/large/469/l9791162242469.jpg)
+![http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9791162242469](http://image.kyobobook.co.kr/images/book/large/469/l9791162242469.jpg)  
+
 고전 컴퓨터 알고리즘 인 파이썬: 피보나치 수열부터 보드게임까지, 알고리즘으로 풀어보는 고전 문제 43선  
 
 ## 1. Small problems
@@ -273,7 +275,22 @@ fib6(50)을 실행하면 피보나치 수열의 51개 숫자가 출력되며 `fo
 - 서버에 저장될 때
 
 가장 쉬운 저장공간의 절약으로는 자료형을 명시하는 방법이 있다.  
-![자료형 크기](https://t1.daumcdn.net/cfile/tistory/2535004C585FD1E01B)  
+
+|자료형|크기(byte)|수의 표현 범위|
+|---|---:|---|
+|char|1|$-2^7$ ~ $2^7 - 1$ (-128 ~ 127)|
+|signed char|1|$-2^7$ ~ $2^7 - 1$ (-128 ~ 127)|
+|unsigned char|1|0 ~ $2^8 - 1$ (0 ~ 255)|
+|short int|2|$-2^15$ ~ $2^15 - 1$ (-32,768 ~ 32,767)|
+|unsinged short int|2|0 ~ $2^16$ (0 ~ 65,535)|
+|int|4|$-2^31$ ~ $2^31 - 1$ (-2,147,483,648 ~ 2,147,483,647)|
+|unsigned int|4|0 ~ $2^32 -1$ (0 ~ 4,294,967,295)|
+|long int|4|$-2^31$ ~ $2^31 - 1$ (-2,147,483,648 ~ 2,147,483,647)
+|unsigned long int|4|0 ~ $2^32 -1$ (0 ~ 4,294,967,295)|
+|float|4|$-10^128$ ~ $10^127$ : 소수 6자리 표현|
+|double|8|$-10^128$ ~ $10^127$ : 소수 15자리 표현|
+|long double|8 이상|double의 정밀도와 같거나 크다|
+
 하지만 파이썬의 경우 부호없는 자료형이 지원되지 않는다. python object system에서 28byte 이하의 `int` 자료형은 만들 수 없으며 초과시에 1bit씩 증가한다.  
   
   
@@ -364,7 +381,7 @@ print(f"original and decompressed are the same: {original == compressed.decompre
 ### 1.3 깨지지않는 암호화
 `one-time pad` 는 기존 데이터의 일부와 의미없는 더미데이터를 병합하여 암호화하여 더미 키와 product키를 만드는 암호화 기법이다. 
 암호화된 product와 더미데이터 모두 접근을 하지 못하면 기존 데이터를 복원하는 것은 불가능하다.  
-![one-time pad](https://i.ytimg.com/vi/vEbaF1jmbcM/maxresdefault.jpg)
+
 #### 1.3.1 데이터 순서 대로 가져오기
 `one-time pad` 암호화를 사용하여 문자열을 암호화 할 경우, Python3의 str은 UTF-8 bytes(Unicode character encoding)의 시퀀스를 생각해야 한다.  
 str은 `encode()`하여 UTF-8 bytes의 시퀀스로 변환되며 반대로 UTF-8 bytes는 `decode()`하여 str로 변환된다.
@@ -400,7 +417,14 @@ def random_key(length: int) -> int:
 
 #### 1.3.2 암호화와 복호화
 `unbreakable_encryption` 을 통해 만들어진 dummy data와 original data를 암호화 하는 방법은 `XOR`연산을 이용한다.  
-![xor-operation](https://mblogthumb-phinf.pstatic.net/MjAxOTA4MTdfMTk5/MDAxNTY2MDAzNjg4MTE3.9y3O_1k4p8-zUeEP7sN_WYWkIB4rElVMl8isWkFZAN8g.8tblY85F4FGg3YjYZrSvKendg4882tkB4Z3vg4sPmRwg.PNG.cni1577/%EC%BA%A1%EC%B2%98.PNG?type=w800)
+
+|A|B|A^B|
+|---|---|---|
+|0|0|0|
+|0|1|1|
+|1|0|1|
+|1|1|0|
+
 <pre>
 original_key ^ dummy = product
 product ^ dummy = original_key
@@ -484,6 +508,7 @@ Tip: 대부분의 플렛폼과 같이 Python 의 float자료형은 64bit 부동�
 - 가장 위에 있는 디스크만 옮길 수 있다.
 - 디스크 위에는 더 작은 디스크만이 올라갈 수 있다.
 ![하노이의 탑](https://shoark7.github.io/assets/img/algorithm/hanoi-tower-intro.png)
+>[https://shoark7.github.io/programming/algorithm/tower-of-hanoi](https://shoark7.github.io/programming/algorithm/tower-of-hanoi)
 
 #### 1.5.1 하노이의 탑 모델링
 `stack` 구조를 통해 모델링한다. `stack` 구조는 Last-In-First-Out(LIFO)의 방식을 따르는 자료구조이다.  

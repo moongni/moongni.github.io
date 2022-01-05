@@ -20,5 +20,8 @@ docs:
     children:
       - title: "Category"
         url: /categories/
+        children:
+          - title: "Algorithm"
+            url: /categories/#algorithm/
       - title: "Tag"
         url: /tags/
