@@ -16,12 +16,13 @@ main:
 
 #sidebar
 docs:
-  - title: "Contents"
+  - title: "Category"
+    url: /categories/
     children:
-      - title: "Category"
-        url: /categories/
-        children:
-          - title: "Algorithm"
-            url: /categories/#algorithm/
-      - title: "Tag"
-        url: /tags/
+      - title: "Algorithm"
+        url: /categories/#algorithm/
+  - title: "Tag"
+    url: /tags/
+    children:
+      - title: "Python"
+        url: /tags/#python/
