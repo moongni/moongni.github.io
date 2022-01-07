@@ -21,8 +21,12 @@ docs:
     children:
       - title: "Algorithm"
         url: /categories/#algorithm/
+      - title: "Node.js"
+        url: /categories/#node-js/
   - title: "Tag"
     url: /tags/
     children:
       - title: "Python"
         url: /tags/#python/
+      - title: "JavaScript"
+        url: /tags/#javascript/

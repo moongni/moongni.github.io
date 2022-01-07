@@ -2,7 +2,7 @@
 layout: single
 title: "Small Problems"
 categories: algorithm
-tags: [python, algorithm, fibonacci sequence, recursion, generator, compression]
+tags: [python, algorithm]
 toc: true
 toc_sticky: true
 author_profile: false
