@@ -3,8 +3,7 @@ layout: single
 title: "Search Problems"
 categories: algorithm
 tags: [python, algorithm]
-toc: true
-toc_sticky: true
+classes: wide
 author_profile: false
 sidebar:
     nav: "docs"
@@ -34,14 +33,15 @@ Nucleotide: IntEnum = IntEnum('Nucleotide', ('A','C','G','T'))
 
 ```python
 # dna_search.py 계속
-Codon = Tuple[Nucleotide, Nucleotide, Nucleotide] #코돈 타입 앨리어스
+Codon = Tuple[Nucleotide, Nucleotide, Nucleotide] # 코돈 타입 앨리어스
 Gene = List[Codon] # 유전자 타입 앨리어스
 ```
 
 NOTE: 파이썬은 비슷한 타입으로 구성된 튜플 간의 비교를 기본적으로 지원하기 때문에 코돈을 비교할 < 연산자로 사용자 정의 클래스를 정의할 필요는 없다. 
 {: .notice}
 
-일반적으로 유전자는 유전자 내부의 모든 뉴클레오타이드를 나열한 문자열을 토함하는 파일 형식일 것이다. 코드에서는 가상의 유전자에 대해 그러한 문자열을 `gene_str` 로 선언한다.
+일반적으로 유전자는 유전자 내부의 모든 뉴클레오타이드를 나열한 문자열을 포함하는 파일 형식일 것이다.  
+코드에서는 가상의 유전자에 대해 그러한 문자열을 `gene_str` 로 선언한다.
 
 
 ```python
@@ -70,13 +70,15 @@ my_gene: Gene = string_to_gene(gene_str)
 ```
 
 ### 2.1.2 선형 검색
-유전자에서 특정 코돈이 존재하는지 여부를 검색하는 문제이다. `선형 검색` 은 찾고자 하는 요소를 발견하거나 자료구조의 끝에 도달할 때까지 순서대로 모든 요소를 확인하는 검색으로 가장 간단한 방법이다.  
+유전자에서 특정 코돈이 존재하는지 여부를 검색하는 문제이다. `선형 검색` 은 찾고자 하는 요소를 발견하거나 자료구조의 끝에 도달할 때까지 순서대로 모든 요소를 확인하는 검색으로 가장 간단한 방법이다. 
+
 선형 검색의 시간복잡도는 아래 표와 같다.  
 
 ||최선|최악|평균
 |:---|---|---|---|
 항목에 존재할 경우|1|n|$\frac{n}{2}$|
 항목에 존재하지 않을 경우|n|n|n|
+
 
 단순히 자료구조의 모든 요소를 탐색하면서 탐색할 항목과 동등한지 확인한다. 다음 코드는 유전자에서 특정 코돈이 존재하는 지 찾는 선형 검색 함수이다.
 
@@ -100,6 +102,7 @@ print(linear_contains(my_gene, gat)) # False
     
 
 NOTE: 파이썬 내장 시퀀스 타입(List, Tuple, range)은 모두 `__contains__()` 특수 메서드를 구현해, `in` 연산자를 통해 특정 항목을 검색할 수 있다. 실제로 `in` 연산자는 `__contains__()` 메서드를 구현하는 모든 타입과 함께 사용할 수 있다. `my_gene` 변수에서 `acg` 변수를 검색한 뒤 `print(acg in my_gene)` 함수로 결과를 출력할 수 있다.
+{: .notice}
 
 
 ```python
@@ -111,11 +114,12 @@ print(acg in my_gene)
 
 ### 2.1.3 이진 검색
 이진 검색(binary search)는 선형 검색보다 빠른 검색이지만, 해당 자료구조의 저장 순서를 미리 알고 있어야 한다. 자료구조가 정렬되어 있고, 그 인덱스로 항목에 즉시 접근할 수 있는 경우 이진 검색을 할 수 있다.  
-사전 순 으로 정렬된 단어의 리스트 ["cat", "dog", "kangaroo", "llama", "rabbit", "rat", "zebra"]에서 'rat'을 찾는다.
+사전 순 으로 정렬된 단어의 리스트 `["cat", "dog", "kangaroo", "llama", "rabbit", "rat", "zebra"]`에서 `'rat'`을 찾는다.
+
 
 이진 검색의 과정
-1. 7개의 항목 중 중간요소는 'llama' 이다.
-2. 찾고자 하는 'rat'의 알파벳 순서가 'llama' 다음이므로 검색 범위를 중간 이후 리스트로 줄인다. 이 단계에서 'rat'을 발견했다면 해당 인덱스를 반환하고 만약 'rat'이 중간 요소의 알파벳순서보다 앞에 있다면 중간 이전 리스트로 줄인다.
+1. 7개의 항목 중 중간요소는 `'llama'` 이다.
+2. 찾고자 하는 `'rat'`의 알파벳 순서가 `'llama'` 다음이므로 검색 범위를 중간 이후 리스트로 줄인다. 이 단계에서 `'rat'`을 발견했다면 해당 인덱스를 반환하고 만약 `'rat'`이 중간 요소의 알파벳순서보다 앞에 있다면 중간 이전 리스트로 줄인다.
 3. 반으로 줄어든 범위의 리스트를 대상으로 1번과 2번과정을 다시 수행한다. 이 단계는 찾고자 하는 요소를 발견하거나 줄여진 리스트에 검색요소가 없을 때까지 계속 실행한다.
 
 |비교횟수|탐색구간의 크기|
@@ -126,7 +130,11 @@ print(acg in my_gene)
 |$\vdots$|$\vdots$|
 |k|$\frac{n}{2^k}$|
 
-이진 검색은 검색 공간을 계속해서 절반으로 줄이므로 최악의 시간복잡도는 O($\log_2 n$)이다. 그러나 선형 검색과 달리 정렬된 자료구조가 필요하며, 정렬에 시간이 소요된다. 최적의 정렬 알고리즘의 시간복잡도는 O($n\log_2 n$)이므로, 검색을 한 번만 수행하려 한다면 선형 검색이 좋을 수 있다. 반면 검색이 여러 번 수행된다면 이진 검색이 더 효율적일 것이다.
+이진 검색은 검색 공간을 계속해서 절반으로 줄이므로 최악의 시간복잡도는 $O(\log_2 n)$이다.  
+
+그러나 선형 검색과 달리 정렬된 자료구조가 필요하며, 정렬에 시간이 소요된다. 최적의 정렬 알고리즘의 시간복잡도는 O($n\log_2 n$)이므로, 검색을 한 번만 수행하려 한다면 선형 검색이 좋을 수 있다.  
+
+반면 검색이 여러 번 수행된다면 이진 검색이 더 효율적일 것이다.
 
 
 ```python
@@ -160,12 +168,15 @@ print(binary_contains(my_sorted_gene, gat)) # false
 `linear_contains()` 와 `binary_contains()` 함수는 파이썬의 거의 모든 시퀀스에서 동작하도록 일반화 할 수 있다.
 
 NOTE: 아래 코드를 실행하기 전에 파이썬 3.7 이전 버전에서는 `typing_extensions` 모듈을 설치해야 한다. 파이썬 인터프리터 구성에 따라 다음과 같이 설치한다.
-- `$pip install typing_extensions`  
+{: .notice}
+```
+- $pip install typing_extensions
 또는
-- `$pip3 install typing_extensions`
+- $pip3 install typing_extensions
+```
 프로토콜 타입에 접근하려면 위의 모듈이 필요하며 파이썬 3.8 버전 이후에는 `typing_extensions` 모듈을 설치할 필요가 없으며,  
 `from typing import Protocol`을 사용하면 된다.
-
+{: .notice}
 
 ```python
 #generic_search.py
@@ -222,9 +233,7 @@ print(binary_contains(["john","mark","ronald","sarah"],"sheila")) #false
 일반화된 코드를 사용하여 거의 모든 컬렉션에서 데이터 타입과 상관없이 사용가능하다.
 
 ## 2.2 미로 찾기
-미로(maze) 찾기는 컴퓨터 과학의 일반적인 검색 문제와 비슷하다.  
 미로의 경로를 문자를 이용해서 찾고 너비 우선 탐색, 깊이 우선 탐색, $A^*$ 알고리즘을 구현한다.
-
 
 ```python
 #maze.py
@@ -251,10 +260,13 @@ from generic_search 는 아래에서 정의한다.
 미로의 개별 위치를 나타내느 방법으로 행과 열 속성을 가진 네임드튜플(NamedTuple)을 사용한다.
 
 ### 2.2.1 미로 무작위로 생성하기
-`Maze` 클래스는 상태를 나타내는 격자 (리스트의 리스트)를 내부적으로 추적한다. 그리고 행 수, 열 수, 시작 위치 및 목표 위치에 대한 인스턴스 변수를 가지고 있다. 격자에는 막힌 공간이 무작위로 채워진다.  
+`Maze` 클래스는 상태를 나타내는 격자 (리스트의 리스트)를 내부적으로 추적한다.  
+행 수, 열 수, 시작 위치 및 목표 위치에 대한 인스턴스 변수를 가지고 있다.  
+격자에는 막힌 공간이 무작위로 채워진다.  
 
-`START` 에서 `GOAL` 까지 항상 경로가 존재해야 함으로 `BLOCKED`의 무작위 생성비율을 조정한다. 
-이 매개변수의 기본값(임곗값)은 20%이다(sparseness: float = 0.2). 무작위로 생성된 값이 sparseness 파라미터의 임곗값보다 더 작을 경우 공간은 벽으로 채워진다. 통계적으로 막힌 공간의 분포는 임곗값의 비율과 비슷하게 된다.
+`START` 에서 `GOAL` 까지 항상 경로가 존재해야 함으로 `BLOCKED`의 무작위 생성비율을 조정한다.  
+
+이 매개변수의 기본값(임곗값)은 20%이다(sparseness: float = 0.2). 무작위로 생성된 값이 `sparseness` 파라미터의 임곗값보다 더 작을 경우 공간은 벽으로 채워진다.
 
 
 ```python
@@ -303,19 +315,6 @@ class Maze:
         if ml.column - 1 >= 0 and self._grid[ml.row][ml.column - 1] != Cell.BLOCKED: # 상측 이동 가능
             locations.append(MazeLocation(ml.row, ml.column - 1))
         return locations
-    
-    # class Maze 계속
-    def mark(self, path: List[MazeLocation]):
-        for maze_location in path:
-            self._grid[maze_location.row][maze_location.column] = Cell.PATH
-        self._grid[self.start.row][self.start.column] = Cell.START
-        self._grid[self.goal.row][self.goal.column] = Cell.GOAL
-    
-    def clear(self, path: List[MazeLocation]):
-        for maze_location in path:
-            self._grid[maze_location.row][maze_location.column] = Cell.EMPTY
-        self._grid[self.start.row][self.start.column] = Cell.START
-        self._grid[self.goal.row][self.goal.column] = Cell.GOAL
 ```
 
 
@@ -338,15 +337,19 @@ print(maze)
     
 
 ### 2.2.2 미로 세부사항
-미로에서 길을 찾는 동안 목표 지점에 도달했는지 여부를 확인하는 기능이 있어야 한다. 검색된 특정 위치(MazeLocation 네임드튜플)가 목표 지점인지 확인하는 `goal_test()` 를 추가한다.  
+`goal_test()` 는 미로에서 길을 찾는 동안 목표 지점에 도달했는지 여부를 확인한다.  
+검색된 특정 위치(MazeLocation 네임드튜플)가 목표 지점인지 확인하여 `bool` 자료형으로 반환한다.
 
-주어진 미로 공간에서 한 번에 한 칸씩 수평 또는 수직으로 이동할 수 있다. `successors()` 메서드는 이러한 기준을 사용하여 지정된 위치(MazeLocation)에서 이동가능한 위치를 찾는 것이다. `successors()` 메서드는 미로에서 상하좌우 위치를 확인하여 해당 위치에서 이동할 수 있는 빈 공간을 좌표를 MazeLocation으로 구성된 List로 반환한다.
+
+`successors()` 메서드는 주어진 미로 공간에서 수평 또는 수직으로 한 칸씩 이동할 때, 지정된 위치(MazeLocation)에서 이동가능한 위치를 찾는 것이다.  
+
+`successors()` 메서드는 미로에서 상하좌우 위치를 확인하여 해당 위치에서 이동할 수 있는 빈 공간을 좌표를 MazeLocation으로 구성된 List로 반환한다.
 
 ### 2.2.3 깊이 우선 탐색
 깊이 우선 탐색(Depth-First-Search)은 막다른 지점에 도달하여 최종 결정 지점으로 되돌아오기 전까지 가능한 깊이 탐색한다.  
 DFS 알고리즘은 [스택(Last In First out)](https://moongni.github.io/algorithm/Small-Problems/#151-%ED%95%98%EB%85%B8%EC%9D%B4%EC%9D%98-%ED%83%91-%EB%AA%A8%EB%8D%B8%EB%A7%81) 자료구조에 의존한다.
 
-![](./assets/images/posting/DFS.jpg)
+![image](/assets/images/posting/DFS.jpg)
 
 `push()` 와 `pop()` 메서드와 스택이 비었는지 확인하는 메소드를 포함한 스택 코드를 [generic_search.py](http://localhost:8888/notebooks/workspace/02.Search%20problem.ipynb#2.1.4-%EC%A0%9C%EB%84%A4%EB%A6%AD-%EA%B2%80%EC%83%89)에 추가한다.
 
@@ -370,8 +373,9 @@ class Stack(Generic[T]):
     def __repr__(self) -> str:
         return repr(self._container)
 ```
+탐색은 한 장소에서 다른 장소의 변화를 추적하기 위해 Node 클래스가 필요하다.  
+미로 찾기에서 노드는 장소를 감싼 wrapper로 생각할 수 있다. 노드는 부모 노드에서 온 한 장소를 의미한다.  
 
-깊이 우선 탐색을 구현하기 전에 노드를 구현해야한다. 탐색은 한 장소에서 다른 장소의 변화를 추적하기 위해 Node 클래스가 필요하다. 미로 찾기에서 노드는 장소를 감싼 wrapper로 생각할 수 있다. 노드는 부모 노드에서 온 한 장소를 의미한다.  
 `Node` 클래스는 `cost` 와 `heuristic` 속성이 있고 `__lt__()` 특수 메서드를 구현하여 정의한다.
 
 
@@ -397,10 +401,10 @@ NOTE: [generic_search.py](http://localhost:8888/notebooks/workspace/02.Search%20
 
 깊이 우선탐색 코드
 
-1. 탐색 방문하려고 하는 장소 스택으로 다음 코드에서 `frontier` 변수로 표현한다.
-2. 이미 방문한 장소 셋으로 다음 코드에서 `explored` 변수로 표현한다.
-3. `frontier` 변수에서 장소를 방문하면서, 방문한 곳이 목표 지점인지 확인한다.(목표 지점에 도달할 시 종료)
-4. `successors` 변수에서 현재 지점을 확인하여 다음 이동할 장소를 `frontier` 변수에 추가한다.
+1. 탐색 방문하려고 하는 장소 `Stack`으로 다음 코드에서 `frontier` 변수로 표현한다.
+2. 이미 방문한 장소를 `Set` 자료형인 `explored` 변수로 표현한다.
+3. `frontier` 변수의 `pop()`한 곳이 목표 지점인지 확인한다.(목표 지점에 도달할 시 종료)
+4. `successors` 변수의 현재지점에서 다음 이동할 수 있는 장소를 `frontier` 변수에 `push()` 한다.
 5. `frontier` 변수가 비어 있다면 모든 장소를 방문했으므로 탐색 종료한다.
 
 
@@ -431,7 +435,8 @@ def dfs(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], Li
 ```
 
 `dfs()` 함수에서 목표 지점을 찾았다면 목표 지점 경로를 캡슐화한 노드(Node)를 반환한다.  
-출발지점에서부터 목표지점까지 경로는 Node의 `parent` 속성을 사용하여 노드를 reverse 함으로써 재구성할 수 있다.
+
+출발지점에서부터 목표지점까지 경로는 노드의 `parent` 속성을 사용하여 `reverse` 함으로써 재구성할 수 있다.
 
 
 ```python
@@ -505,14 +510,18 @@ else:
     
 
 ### 2.2.4 너비 우선 탐색
-깊이 우선 탐색으로 찾은 목표 지점에 대한 경로는 부자연스럽게 보일 수 있으며, 최단 경로가 아닐 수 있다.
-너비 우선 탐색(Breadth-First-Search)은 탐색의 각 반복마다 출발 지점에서 한 계층의 노드를 가까운 지점부터 순차적으로 탐색함으로써 항상 최단 경로를 찾는다.  
+깊이 우선 탐색으로 찾은 목표 지점에 대한 경로는 부자연스럽게 보일 수 있으며, 최단 경로가 아닐 수 있다.  
+
+너비 우선 탐색(Breadth-First-Search)은 탐색의 각 반복마다 출발 지점에서 같은 깊이의 노드를 가까운 지점부터 순차적으로 탐색함으로써 항상 최단 경로를 찾는다.  
 
 깊이 우선 탐색은 일반적으로 너비 우선 탐색보다 빨리 목표 지점을 찾을 가능성이 크다. 따라서 최단 경로를 선택하느냐 빠른 탐색의 가능성을 선택하느냐에 탐색 방법을 달리 할 수 있다.
-![]("./assets/images/posting/BFS.jpg")
 
-#### 큐
-너비 우선 탐색을 구현하려면 큐 자료구조가 필요하다. 스택과 다르게 선입선출(First-In-First-Out)인 자료구조이다.
+
+![BFS image](/assets/images/posting/BFS.jpg)
+
+#### 큐 자료구조
+너비 우선 탐색을 구현하려면 큐 자료구조가 필요하다. 스택과 다르게 선입선출(First-In-First-Out)인 자료구조이다.  
+
 큐에는 스택과 같이 `push()` 와 `pop()` 메서드가 있다. 다른 점은 `_container` 변수에서 오른쪽 끝 요소 대신 왼쪽 끝 요소를 제거하고 반환한다. 또한 리스트 대신 덱(deque)을 사용한다.
 
 
@@ -545,8 +554,10 @@ NOTE: 큐 구현을 덱을 사용하는 이유는 `pop()` 메서드를 통해 �
 |(리스트) pop(0)|O(n)|
 
 
-너비 우선 탐색
-깊이 우선 탐색 알고리즘과 동일하며, frontier 변수 타입만 스택에서 큐로 변경되었다. 타입 변경으로 탐색 순서가 변경되고, 출발 지점에서 가장 가까운 지점을 먼저 탐색한다.
+
+너비 우선 탐색은 깊이 우선 탐색 알고리즘과 동일하며, frontier 변수 타입만 스택에서 큐로 변경되었다.  
+
+타입 변경으로 탐색 순서가 변경되고, 출발 지점에서 가장 가까운 지점을 먼저 탐색한다.
 
 
 ```python
@@ -625,15 +636,23 @@ else:
     
 
 ### 2.2.5 $A^*$ 알고리즘
-너비 우선 탐색은 모든 경우를 다루기 때문에 시간이 많이 걸릴 수 있다. 너비 우선 탐색과 마찬가지로 $A^*$알고리즘은 출발 지점에서 목표 지점까지 최단 경로를 찾는 것을 목표로 한다.  
+너비 우선 탐색은 모든 경우를 다루기 때문에 시간이 많이 걸릴 수 있다.  
+너비 우선 탐색과 마찬가지로 $A^*$알고리즘은 출발 지점에서 목표 지점까지 최단 경로를 찾는 것을 목표로 한다.  
 
-$A^*$ 알고리즘은 `cost` 함수와 `heuristic` 함수를 사용하기 때문에 목표 지점에 가장 빨리 도달할 가능성이 있는 경로 탐색에 집중한다.  
-비용 함수 `g(n)`은 특정 지점에 도달하기 위한 비용을 구한다. 휴리스틱함수 `h(n)` 은 해당 지점에서 목표 지점까지의 비용을 추정한다. `h(n)` 이 허용 가능한 휴리스틱이라면 최적의 경로로 판단한다.  
-탐색을 고려하는 모든 지점에 대한 총 비용을 `f(n)` 이라고 할 때, `f(n) = g(n) + h(n)` 이다. $A^*$ 알고리즘은 `f(n)` 이 최소화 되는 경로를 선택한다.
+$A^*$알고리즘은 `cost` 함수와 `heuristic` 함수를 사용하기 때문에 목표 지점에 가장 빨리 도달할 가능성이 있는 경로 탐색에 집중한다.  
+- 비용 함수 `g(n)`은 특정 지점에 도달하기 위한 비용을 구한다.  
+- 휴리스틱함수 `h(n)` 은 해당 지점에서 목표 지점까지의 비용을 추정한다.  
+- `h(n)` 이 허용 가능한 휴리스틱이라면 최적의 경로로 판단한다.  
 
-#### 우선순위 큐
-최소의 `f(n)` 을 구하기 위해 $A^*$ 알고리즘은 우선순위 큐 자료구조를 사용한다. 우선순위 큐의 요소는 내부 순서를 유지하며, 첫 번째 가장 우선순위가 높은 요소이다.(f(n)이 가장 낮은 지점)  
-우선순위 큐는 보통 이진 힙을 내부적으로 사용하며, `push()`와 `pop()`의 시간복잡도는 $O(log_2 n)$ 이다.
+> 탐색을 고려하는 모든 지점에 대한 총 비용을 `f(n)` 이라고 할 때, `f(n) = g(n) + h(n)` 이다. $A^*$ 알고리즘은 `f(n)` 이 최소화 되는 경로를 선택한다.
+
+#### 우선순위 큐 자료구조
+최소의 `f(n)` 을 구하기 위해 $A^*$ 알고리즘은 우선순위 큐 자료구조를 사용한다.  
+우선순위 큐의 요소는 내부 순서를 유지하며, 첫 번째 가장 우선순위가 높은 요소이다.  
+>f(n)이 낮은 노드가 우선순위가 높다.
+
+우선순위 큐는 보통 이진 힙을 내부적으로 사용하며, `push()`와 `pop()`의 시간복잡도는 $O(log_2 n)$ 이다.  
+
 `PriorityQueue` 클래스는 `Stack` , `Queue` 클래스의 `push()` , `pop()` 메서드에서 각각 `heappush()` , `heappop()` 함수를 사용하도록 수정한다.
 
 
@@ -661,15 +680,20 @@ class PriorityQueue(Generic[T]):
 위에 `generic_search.py`의 `Node` 클래스에서 `__lt__()` 특수 메서드를 사용한다.
 
 #### 휴리스틱
-**휴리스틱**은 문제 해결방법을 직관적으로 제시한다. 미로 찾기의 경우, 방문하지 않은 지점 중 어느 노드가 가장 목표 지점에 가까운지 찾는다. 허용 가능한 휴리스틱(목표 도달 추정 비용 < 경로에서 현재 지점의 최저 가능 비용)안에 경로에 최단 경로가 포함되어있다. 이상적인 휴리스틱은 지점을 모두 탐색하지 않고 가능한 실제 최단 경로에 가까운 경로를 찾는 것이다.  
-그러므로 속도와 정확성의 tradeoff 속에서 적절한 휴리스틱 함수를 구성하는 것이 중요하다.  
+**휴리스틱**은 문제 해결방법을 직관적으로 제시한다.  
+미로 찾기의 경우, 방문하지 않은 지점 중 어느 노드가 가장 목표 지점에 가까운지 찾는다.  
 
-> [휴리스틱과 $A^*$ 알고리즘에 대한 자세한 내용](http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html)
+허용 가능한 휴리스틱(목표 도달 추정 비용 < 경로에서 현재 지점의 최저 가능 비용)안에 경로에 최단 경로가 포함되어있다. 이상적인 휴리스틱은 지점을 모두 탐색하지 않고 가능한 실제 최단 경로에 가까운 경로를 찾는 것이다.  
+
+>속도와 정확성의 tradeoff 속에서 적절한 휴리스틱 함수를 구성하는 것이 중요하다.  
+
+[휴리스틱과 $A^*$ 알고리즘에 대한 자세한 내용](http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html)
 
 #### 유클리드 거리
 두 점 사이의 최단 거리는 직선이다. 미로 찾기 문제의 휴리스틱에서는 유클리드 거리를 통해 휴리스틱을 계산한다.  
-피타고라스 정리에서 파생된 유클리드 거리는
-$$\sqrt{(두 x 좌표의 차이)^2 + (두 y 좌표의 차이)^2}$$
+
+피타고라스 정리에서 파생된 유클리드 거리는 $\sqrt{(두 x 좌표의 차이)^2 + (두 y 좌표의 차이)^2}$
+
 두 x 좌표의 차이는 미로에서 열의 차와 같다. 두 y 좌표의 차이는 미로에서 행의 차이와 같다.
 
 ```python
@@ -683,6 +707,8 @@ def euclidean_distance(goal: MazeLocation) -> Callable[[MazeLocation, float]]:
 ```
 
 NOTE: 위 `eulidean_distance()` 함수는 `distance()` 함수를 반환한다. 파이썬은 일급 함수(First-class function)을 지원함으로 이와 같은 패턴을 사용할 수 있다. `distance()` 함수는 `euclidean_distance()` 함수에서 전달받은 MazeLocation 네임드튜플의 goal 변수를 캡쳐링한다.  
+{: .notice}
+
 캡쳐링은 `distance()`함수가 호출될 때마다 영구적으로 goal 변수를 참조하여 목표 지점까지 거리를 계산한다. 이 패턴을 사용하면 더 적은 수의 매개변수를 필요로 하는 함수를 만들 수 있다. 
 {: .notice}
 
@@ -700,7 +726,7 @@ def manhattan_distance(goal: MazeLocation) -> Callable[[MazeLocation], float]:
     return distance
 ```
 
-#### $A^*$ 알고리즘
+#### $A^*$ 알고리즘 구현
 1. `frontier` 변수 타입을 큐에서 우선순위 큐로 변경한다. `frontier` 변수는 우선순위가 가장 높은(f(n)이 최소인) 노드를 `pop()`한다.
 2. `explored` 변수의 타입을 `Set` 에서 `Dict` 로 변경한다. 방문할 수 있는 각 노드의 최저 비용(g(n))을 축적할 수 있다.
 - 휴리스틱 함수를 사용했을 때, 노드의 휴리스틱 값이 일치하지 않으면 일부 노드는 두번 방문될 수 있다.
@@ -738,11 +764,12 @@ def astar(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], 
 ```
 
 깊이 우선 탐색과 너비 우선 탐색은 성능이 중요하지 않은 소규모 데이터셋과 공간에 적합하다.  
-조금 더 복잡한 $A^*$ 알고리즘은 최적의 경로를 제공할 뿐아니라 너비 우선 탐색보다 성능이 훨씬 좋다.  
+
+>적절한 휴리스틱 함수를 적용한 $A^*$ 알고리즘은 최적의 경로를 제공할 뿐아니라 너비 우선 탐색보다 성능이 훨씬 좋다.  
 
 
 ```python
-print("너비 우선 탐색")
+print("<너비 우선 탐색>")
 solution2: Optional[Node[MazeLocation]] = bfs(m.start, m.goal_test, m.successors)
 if solution2 is None:
     print("너비 우선 탐색으로 길을 찾을 수 없습니다.")
@@ -753,7 +780,7 @@ else:
     m.clear(path2)
 print("="*12)
 
-print("A* 알고리즘")
+print("<A* 알고리즘>")
 distance: Callable[[MazeLocation], float] = manhattan_distance(m.goal)
 solution3: Optional[Node[MazeLocation]] = astar(m.start, m.goal_test, m.successors, distance)
 if solution3 is None:
@@ -764,7 +791,7 @@ else:
     print(m)
 ```
 
-    너비 우선 탐색
+    <너비 우선 탐색>
     S X     X 
     *         
     *       X 
@@ -777,7 +804,7 @@ else:
       XXX****G
     
     ============
-    A* 알고리즘
+    <A* 알고리즘>
     S X     X 
     *         
     *       X 
@@ -792,10 +819,14 @@ else:
     
 
 `bfs()`와 `astar()` 함수가 모두 최적의 경로를 찾고 있음에도 출력 결과는 서로 다를 수 있다. `astar()` 함수는 휴리스틱 때문에 대각선으로 목표 지점을 향한다.  
-**결론적으로 `astar()` 함수는 `bfs()` 함수보다 더 적은 수의 노드를 검색하므로 성능이 더 좋다.**
+
+>결론적으로 `astar()` 함수는 `bfs()` 함수보다 더 적은 수의 노드를 검색하므로 성능이 더 좋다.
 
 ## 2.3 선교사와 식인종 문제
-세명의 선교사와 세명의 식인종이 강 서쪽에 있다. 두명이 탈 수 있는 배를 가지고 있으며, 배를 타고 동쪽으로 이동해야한다. 강 양쪽에 선교사보다 더 많은 식인종이 있다면 식인종은 선교사를 잡아먹는다. 강을 건널 때 배에는 적어도 한 명이 탑승해야 한다.
+- 세명의 선교사와 세명의 식인종이 강 서쪽에 있다.  
+- 두명이 탈 수 있는 배를 가지고 있으며, 배를 타고 동쪽으로 이동해야한다.  
+- 강 양쪽에 선교사보다 더 많은 식인종이 있다면 식인종은 선교사를 잡아먹는다.  
+- 강을 건널 때 배에는 적어도 한 명이 탑승해야 한다.
 
 ### 2.3.1 문제
 서쪽 강둑에 선교사와 식인종이 몇명 있는가?와 배가 서쪽에 있는가? 이 두 질문을 파악할 수 있으면 전체에 어떻게 퍼져 있는지 확인 할 수 있다.
@@ -861,7 +892,9 @@ class MCState:
 ```
 
 `goal_test()` 는 동쪽 강둑으로 선교사 3명과 식인종 3명이 이동했을 경우, 목표 상태 확인을 위한 함수이다.  
-`is_legal()` 이동하는 과정에서 합법적인 상태(선교사 >= 식인종)규칙을 판단하기 위한 함수이다.
+
+`is_legal()` 이동하는 과정에서 합법적인 상태(선교사 >= 식인종)규칙을 판단하기 위한 함수이다.  
+
 `successors()` 함수는 한 강둑에서 다른 강둑으로 이동 가능한 모든 상태를 확인한 다음 합법적인 상태인지 검사하고 이동할 수 있는 경우의 수를 List로 반환한다.
 
 ### 2.3.2 문제풀이
@@ -877,9 +910,11 @@ def display_solution(path: List[MCState]):
     print(old_state)
     for current_state in path[1:]:
         if current_state.boat:
-            print(f"{old_state.em - current_state.em}명의 선교사와 {old_state.ec - current_state.ec}명의 식인종이 독쪽 강둑에서 서쪽 강둑으로 갔다.\n")
+            print(f"{old_state.em - current_state.em}명의 선교사와
+             {old_state.ec - current_state.ec}명의 식인종이 독쪽 강둑에서 서쪽 강둑으로 갔다.\n")
         else:
-            print(f"{old_state.wm - current_state.wm}명의 선교사와 {old_state.wc - current_state.wc}명의 식인종이 서쪽 강둑에서 동쪽 강둑으로 갔다.\n")
+            print(f"{old_state.wm - current_state.wm}명의 선교사와 
+            {old_state.wc - current_state.wc}명의 식인종이 서쪽 강둑에서 동쪽 강둑으로 갔다.\n")
         print(current_state)
         old_state = current_state
 ```
@@ -1020,36 +1055,43 @@ for search in search_list:
     binary_et = time.time()
     print(f"{search} 검색에 대한 시간 \n"+
          f"linear search = {linear_et - linear_st:10.9f} 초\n"+
-         f"binary search = {binary_et - binary_st:10.9f} 초")
+         f"binary search = {binary_et - binary_st:10.9f} 초\n")
 ```
 
     1 검색에 대한 시간 
     linear search = 0.000000000 초
     binary search = 0.000000000 초
+
     5000 검색에 대한 시간 
     linear search = 0.000998497 초
     binary search = 0.000000000 초
+
     500000 검색에 대한 시간 
     linear search = 0.022004366 초
     binary search = 0.000000000 초
+
     1000000 검색에 대한 시간 
     linear search = 0.033698559 초
     binary search = 0.000000000 초
+
     1000001 검색에 대한 시간 
     linear search = 0.065702200 초
     binary search = 0.000000000 초
     
 
-정렬된 리스트에 관해서 linear search는 매우 앞쪽에 정렬된 데이터를 찾는 경우에 관해서 빠른 속도를 보이지만 뒤쪽에 정렬된 요소를 찾는 경우는 느린 속도를 보인다.
-반면에 binary search는 앞쪽에 정렬된 데이터와 뒤쪽에 정렬된 데이터의 차이가 거의 없이 빠른 속도를 보인다.  
+1. 정렬된 리스트에 요소가 있을 경우
+- `linear search`는 매우 앞쪽에 정렬된 데이터를 찾는 경우에 관해서 빠른 속도를 보이지만 뒤쪽에 정렬된 요소를 찾는 경우는 느린 속도를 보인다.  
+- `binary search`는 앞쪽에 정렬된 데이터와 뒤쪽에 정렬된 데이터의 차이가 거의 없이 빠른 속도를 보인다.  
+  
+2. 정렬된 리스트에 없는 요소를 찾는 경우 
+- `linear search`는 가장 오랜 시간이 걸린다.  
+- `binary search`는 일관적으로 빠른 속도를 보인다.
 
-정렬된 리스트에 없는 요소를 찾는 경우 linear search는 가장 오랜 시간이 걸린다.
-반면 binary search는 일관적으로 빠른 속도를 보인다.
 
 |              |최선|평균|최악|
 |:---|---:|---:|---:|
-| linear search | 1 | $$O(\frac{n}{2})$$ | $$O(n)$$ |
-| binary search | $$O(\log_2 n)$$ | $$O(\log_2 n)$$ | $$O(\log_2 n)$$ |
+| linear search | 1 | $O(\frac{n}{2})$ | $O(n)$ |
+| binary search | $O(\log_2 n)$ | $O(\log_2 n)$ | $O(\log_2 n)$ |
 
 ### 2번
 dfs(), bfs(), astar() 함수에 카운터를 추가하여 동일한 미로를 검색하는 지점의 수를 확인하라. 통계적으로 의미 있는 결과를 얻기 위해 100개의 미로 샘플에 대해 조사한다.
@@ -1123,7 +1165,8 @@ class PriorityQueue(Generic[T]):
     def __repr__(self) -> str:
         return repr(self._container)
     
-def dfs(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], List[T]]) -> int:
+def dfs(initial: T, goal_test: Callable[[T], bool],
+        successors: Callable[[T], List[T]]) -> int:
     count = 0
     # frontier 방문하지 않은 곳
     frontier: Stack[Node[T]] = Stack()
@@ -1148,7 +1191,8 @@ def dfs(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], Li
             frontier.push(Node(child, current_node))
     return 67 # 탐색 결과 목표지점에 도달하지 못함
 
-def bfs(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], List[T]]) -> Optional[Node[T]]:
+def bfs(initial: T, goal_test: Callable[[T], bool], 
+        successors: Callable[[T], List[T]]) -> Optional[Node[T]]:
     count = 0
     # frontier 아직 방문하지 않은 곳
     frontier: Queue[Node[T]] = Queue()
@@ -1288,8 +1332,11 @@ print(f"dfs 알고리즘의 평균 방문 노드의 수 {count_mean[0]}\n",
      astar 알고리즘의 평균 방문 노드의 수 59.54
     
 
-`dfs()` , `bfs()` , `astar()` 알고리즘에 경로를 탐색하는 가지의 수를 `count` 변수로 세어 반환한다. `maze`가 랜덤하게 100번 생성되는 count 개수를 2차원 numpy array로 만든 후 `numpy` 모듈의 `mean()` 평균값을 구하는 메서드를 활용하여 평균값을 구한다.  
-경로를 찾지 못하는 경우 `None`을 반환하게 되면 평균을 구하지 못함으로 시간복잡도 상으로 걸리는 시간을 반환시켰다.  
+`dfs()` , `bfs()` , `astar()` 알고리즘에 경로를 탐색하는 가지의 수를 `count` 변수로 세어 반환한다.  
+
+`maze`가 랜덤하게 100번 생성되는 count 개수를 2차원 numpy array로 만든 후 `numpy` 모듈의 `mean()` 평균값을 구하는 메서드를 활용하여 평균값을 구한다.  
+
+경로를 찾지 못하는 경우 `None`을 반환하게 되면 평균을 구하지 못함으로 평균 방문 노드의 수의 예상치를 반환시켰다.  
 - dfs()의 경우, 방문하는 노드의 최단거리는 18회 최장거리는 99회 이므로 $\frac{18+99}{2} \approx$ 67을 반환한다. 
 - bfs()의 경우, 목표 노드에 인접한 노드까지 경우가 95개 중 장애물의 임곗값이 20% 이므로 $95 * 0.2$ = 76을 반환한다.
 - astar()의 경우, 4방향으로 움직일 수 있는 노드에서 최적의 경로를 찾는 예상치 58를 반환한다.
