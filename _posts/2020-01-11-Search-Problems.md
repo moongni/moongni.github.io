@@ -1090,7 +1090,7 @@ for search in search_list:
 
 |              |최선|평균|최악|
 |:---|---:|---:|---:|
-| linear search | 1 | $O(\frac{n}{2})$ | $O(n)$ |
+| linear search | $O(1)$ | $O(\frac{n}{2})$ | $O(n)$ |
 | binary search | $O(\log_2 n)$ | $O(\log_2 n)$ | $O(\log_2 n)$ |
 
 ### 2번
