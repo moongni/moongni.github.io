@@ -1103,6 +1103,8 @@ from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, De
 from typing_extensions import Protocol
 from heapq import heappush, heappop
 
+T = TypeVar('T')
+
 class Node(Generic[T]):
     def __init__(self, state: T, parent: Optional[Node], cost: float = 0.0,
                 heuristic: float = 0.0) -> None:
@@ -1192,7 +1194,7 @@ def dfs(initial: T, goal_test: Callable[[T], bool],
     return 67 # 탐색 결과 목표지점에 도달하지 못함
 
 def bfs(initial: T, goal_test: Callable[[T], bool], 
-        successors: Callable[[T], List[T]]) -> Optional[Node[T]]:
+        successors: Callable[[T], List[T]]) -> int:
     count = 0
     # frontier 아직 방문하지 않은 곳
     frontier: Queue[Node[T]] = Queue()
@@ -1217,7 +1219,7 @@ def bfs(initial: T, goal_test: Callable[[T], bool],
     return 76 # 탐색 결과 목표지점에 도달하지 못함
 
 def astar(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], List[T]],
-          heuristic: Callable[[T], float]) -> Optional[Node[T]]:
+          heuristic: Callable[[T], float]) -> int:
     count = 0
     # frontier 아직 방문하지 않은 곳
     frontier: PriorityQueue[Node[T]] = PriorityQueue()
