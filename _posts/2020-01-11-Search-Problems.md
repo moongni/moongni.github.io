@@ -174,7 +174,7 @@ NOTE: 아래 코드를 실행하기 전에 파이썬 3.7 이전 버전에서는 
 또는
 - $pip3 install typing_extensions
 ```
-프로토콜 타입에 접근하려면 위의 모듈이 필요하며 파이썬 3.8 버전 이후에는 `typing_extensions` 모듈을 설치할 필요가 없으며,  
+프로토콜 타입에 접근하려면 위의 모듈이 필요하며 파이썬 3.8 버전 이후에는 `typing_extensions` 모듈을 설치할 필요가 없으며, 
 `from typing import Protocol`을 사용하면 된다.
 {: .notice}
 
