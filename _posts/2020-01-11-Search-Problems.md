@@ -266,7 +266,7 @@ from generic_search 는 아래에서 정의한다.
 
 `START` 에서 `GOAL` 까지 항상 경로가 존재해야 함으로 `BLOCKED`의 무작위 생성비율을 조정한다.  
 
-이 매개변수의 기본값(임곗값)은 20%이다(sparseness: float = 0.2). 무작위로 생성된 값이 `sparseness` 파라미터의 임곗값보다 더 작을 경우 공간은 벽으로 채워진다.
+>이 매개변수의 기본값(임곗값)은 20%이다(sparseness: float = 0.2). 무작위로 생성된 값이 `sparseness` 파라미터의 임곗값보다 더 작을 경우 공간은 벽으로 채워진다.
 
 
 ```python
