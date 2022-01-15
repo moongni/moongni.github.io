@@ -1351,5 +1351,130 @@ print(f"dfs 알고리즘의 평균 방문 노드의 수 {count_mean[0]}\n",
 
 
 ```python
+# missionaries.py 수정
 
+MAX_NUM : int = 5
+
+# MCState class 수정
+    ...
+    def __eq__(self, other) -> bool:
+        return self.wm == other.wm and self.wc == other.wc and self.boat == other.boat
+    
+    def __hash__(self):
+        return hash((self.wm, self.wc, self.boat))
+
+    def successors(self) -> List[MCState]:
+        sucs: List[MCState] = []
+        if self.boat: # 서쪽에 배 존재
+            if self.wm > 2:
+                sucs.append(MCState(self.wm - 3, self.wc, not self.boat))
+            if self.wm > 1:
+                sucs.append(MCState(self.wm - 2, self.wc, not self.boat))
+            if self.wm > 0:
+                sucs.append(MCState(self.wm - 1, self.wc, not self.boat))
+            if self.wc > 2:
+                sucs.append(MCState(self.wm, self.wc - 3, not self.boat))
+            if self.wc > 1:
+                sucs.append(MCState(self.wm, self.wc - 2, not self.boat))
+            if self.wc > 0:
+                sucs.append(MCState(self.wm, self.wc - 1, not self.boat))
+            if (self.wc > 1) and (self.wm > 0):
+                sucs.append(MCState(self.wm - 1, self.wc - 2, not self.boat))
+            if (self.wc > 0) and (self.wm > 1):
+                sucs.append(MCState(self.wm - 2, self.wc - 1, not self.boat))
+            if (self.wc > 0) and (self.wm > 0):
+                sucs.append(MCState(self.wm - 1, self.wc - 1, not self.boat))
+        else: # 동쪽에 배 존재
+            if self.em > 2:
+                sucs.append(MCState(self.wm + 3, self.wc, not self.boat))
+            if self.em > 1:
+                sucs.append(MCState(self.wm + 2, self.wc, not self.boat))
+            if self.em > 0:
+                sucs.append(MCState(self.wm + 1, self.wc, not self.boat))
+            if self.ec > 2:
+                sucs.append(MCState(self.wm, self.wc + 3, not self.boat))
+            if self.ec > 1:
+                sucs.append(MCState(self.wm, self.wc + 2, not self.boat))
+            if self.ec > 0:
+                sucs.append(MCState(self.wm, self.wc + 1, not self.boat))
+            if (self.ec > 1) and (self.em > 0):
+                sucs.append(MCState(self.wm + 1, self.wc + 2, not self.boat))
+            if (self.ec > 0) and (self.em > 1):
+                sucs.append(MCState(self.wm + 2, self.wc + 1, not self.boat))
+            if (self.ec > 0) and (self.em > 0):
+                sucs.append(MCState(self.wm + 1, self.wc + 1, not self.boat))
+        return [x for x in sucs if x.is_legal]
+    ...
 ```
+
+`MAX_NUM = 5` 선교사와 식인종은 각각 5명으로 증가
+`successors()` 보트를 3명 탈 수 있을 때, 이동 가능한 경우 추가
+
+```python
+start: MCState = MCState(MAX_NUM, MAX_NUM, True)
+solution: Optional[Node[MCState]] = bfs(start, MCState.goal_test, MCState.successors)
+if solution is None:
+    print("답을 찾을 수 없습니다.")
+else:
+    path: List[MCState] = node_to_path(solution)
+    display_solution(path)
+```
+
+    서쪽 강둑에는 5명의 선교사와 5명의 식인종이 있다. 
+    동쪽 강둑에는 0명의 선교사와 0명의 식인종이 있다. 
+    배는 서쪽에 있다.
+    0명의 선교사와 3명의 식인종이 서쪽 강둑에서 동쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 5명의 선교사와 2명의 식인종이 있다. 
+    동쪽 강둑에는 0명의 선교사와 3명의 식인종이 있다. 
+    배는 동쪽에 있다.
+    0명의 선교사와 2명의 식인종이 독쪽 강둑에서 서쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 5명의 선교사와 4명의 식인종이 있다. 
+    동쪽 강둑에는 0명의 선교사와 1명의 식인종이 있다. 
+    배는 서쪽에 있다.
+    0명의 선교사와 3명의 식인종이 서쪽 강둑에서 동쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 5명의 선교사와 1명의 식인종이 있다. 
+    동쪽 강둑에는 0명의 선교사와 4명의 식인종이 있다. 
+    배는 동쪽에 있다.
+    0명의 선교사와 1명의 식인종이 독쪽 강둑에서 서쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 5명의 선교사와 2명의 식인종이 있다. 
+    동쪽 강둑에는 0명의 선교사와 3명의 식인종이 있다. 
+    배는 서쪽에 있다.
+    3명의 선교사와 0명의 식인종이 서쪽 강둑에서 동쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 2명의 선교사와 2명의 식인종이 있다. 
+    동쪽 강둑에는 3명의 선교사와 3명의 식인종이 있다. 
+    배는 동쪽에 있다.
+    1명의 선교사와 1명의 식인종이 독쪽 강둑에서 서쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 3명의 선교사와 3명의 식인종이 있다. 
+    동쪽 강둑에는 2명의 선교사와 2명의 식인종이 있다. 
+    배는 서쪽에 있다.
+    3명의 선교사와 0명의 식인종이 서쪽 강둑에서 동쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 0명의 선교사와 3명의 식인종이 있다. 
+    동쪽 강둑에는 5명의 선교사와 2명의 식인종이 있다. 
+    배는 동쪽에 있다.
+    0명의 선교사와 2명의 식인종이 독쪽 강둑에서 서쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 0명의 선교사와 5명의 식인종이 있다. 
+    동쪽 강둑에는 5명의 선교사와 0명의 식인종이 있다. 
+    배는 서쪽에 있다.
+    0명의 선교사와 3명의 식인종이 서쪽 강둑에서 동쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 0명의 선교사와 2명의 식인종이 있다. 
+    동쪽 강둑에는 5명의 선교사와 3명의 식인종이 있다. 
+    배는 동쪽에 있다.
+    0명의 선교사와 1명의 식인종이 독쪽 강둑에서 서쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 0명의 선교사와 3명의 식인종이 있다. 
+    동쪽 강둑에는 5명의 선교사와 2명의 식인종이 있다. 
+    배는 서쪽에 있다.
+    0명의 선교사와 3명의 식인종이 서쪽 강둑에서 동쪽 강둑으로 갔다.
+    
+    서쪽 강둑에는 0명의 선교사와 0명의 식인종이 있다. 
+    동쪽 강둑에는 5명의 선교사와 5명의 식인종이 있다. 
+    배는 동쪽에 있다.
