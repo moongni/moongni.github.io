@@ -51,8 +51,6 @@ NOTE: 추상 클래스는 메서드의 목록만 가진 클래스이며 상속�
 {: .notice --public}
 
 `CSP` 클래스 : 변수, 도메인, 제약조건 저장  
-변수: List[V]  
-도메인: Dict[V, D]
 
 
 ```python
@@ -106,18 +104,17 @@ class CSP(Generic[V, D]):
 ```
 
 `__init__()` 메서드에서 제약조건을 Dict 타입의 `self.constraints` 변수를 생성한다.  
+
 `add_constraint()` 메서드에서 모든 변수에 대해 제약 조건을 확인하고, 각 제약 조건 매핑에 자신을 추가한다.  
 
 주어진 변수 구성을 `assignment(할당)`이라고 하며, `consistent()` 메서드는 주어진 변수와 선택된 도메인값이 제약조건을 충족시키는지 확인한다.  
 
 `backtracking_search()` 메서드에서 구현된 백트래킹은 재귀 깊이 우선 탐색의 일종이다.  
-`backtracking_search()` 의 기저조건은 모든 변수에 대한 유효한 할당을 찾는 것으로, 할당된 변수와 변수들의 길이가 같을 경우이다. 
-> ```python
-if len(assignment) == len(self.variables):
-    return assignment
 
-
-모든 변수가 할당되지 않았을 경우
+>`backtracking_search()` 의 기저조건은 모든 변수에 대한 유효한 할당을 찾는 것이다. 즉 할당된 변수와 변수들의 길이가 같을 경우이다.   
+  
+  
+**모든 변수가 할당되지 않았을 경우**
 1. `unassigned` 변수에 할당이 되지않은 List를 구성하고 첫 번째 항목을 `first` 변수에 할당한다.  
 
 2. `first` 변수에 가능한 모든 도메인 값을 `local_assignment`에 Dict형태로 저장한다.  
@@ -127,8 +124,8 @@ if len(assignment) == len(self.variables):
 4. 특정 변수에서 가능한 모든 도메인값을 확인했을 때 솔루션이 없다면 `None`을 반환하고, 이전 재귀 체인으로 돌아간다.(백트랙킹)
 
 ## 3.2 지도 색칠 문제
-![지도색칠문제](https://greenblog.co.kr/wp-content/uploads/2020/08/%ED%98%B8%EC%A3%BC-%EC%A7%80%EB%8F%84-min.jpg)
-> 출처: https://greenblog.co.kr/2020/08/24/%ed%98%b8%ec%a3%bc-%ec%a7%80%eb%8f%84-4%ea%b0%80%ec%a7%80-%ec%a2%85%eb%a5%98-%eb%ac%b4%eb%a3%8c-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c/
+![지도색칠문제](https://greenblog.co.kr/wp-content/uploads/2020/08/%ED%98%B8%EC%A3%BC-%EC%A7%80%EB%8F%84-min.jpg)  
+[출처: 호주지도 무료이미지](https://greenblog.co.kr/2020/08/24/%ed%98%b8%ec%a3%bc-%ec%a7%80%eb%8f%84-4%ea%b0%80%ec%a7%80-%ec%a2%85%eb%a5%98-%eb%ac%b4%eb%a3%8c-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c/)
 
 호주의 지도를 아래의 제약을 만족하며 색을 칠 할 것이다.  
 
@@ -199,14 +196,15 @@ else:
     {'뉴사우스웨일스': '빨강', '빅토리아': '초록', '퀸즐랜드': '초록', '사우스 오스트레일리아': '파랑', '웨스턴 오스트레일리아': '초록', '태즈메이니아': '빨강', '노던 준주': '빨강'}
     
 
-![지도색칠문제](assets/images/posting/coloring.jpg)
+![지도색칠문제](/assets/images/posting/coloring.jpg)
 
 
 ## 3.3 여덟 퀸 문제
 
 8 X 8 격자로 되어 있는 체스보드에서 퀸은 체스보드의 모든 행과 열, 대각선으로 이동가능할 때, 한 퀸의 이동영역에 다른 퀸이 존재하지 않도록 여덟개의 퀸을 배치하는 것이다.  
 
-![여덟 퀸 문제-출처 위키백과](assets/images/posting/queen_sol.jpg)
+![여덟 퀸 문제-출처 위키백과](/assets/images/posting/queen_sol.jpg)  
+
 출처 [위키백과](https://ko.wikipedia.org/wiki/%EC%97%AC%EB%8D%9F_%ED%80%B8_%EB%AC%B8%EC%A0%9C)
 
 모델링
@@ -496,13 +494,11 @@ def generate_domain(board: int, grid: Grid) -> List[List[GridLocation]]:
     return domain
 ```
 
-[3.4 문자검색]() 의 코드를 변형하여 회로판 레이아웃을 해결한다.  
+[3.4 단어검색](http://localhost:4000/algorithm/Constraint-Satisfaction-Problems/#34-%EB%8B%A8%EC%96%B4-%EA%B2%80%EC%83%89) 의 코드를 변형하여 회로판 레이아웃을 해결한다.  
 
 
-`generate_domain()` 함수는 도메인을 생성하는 함수로 `int` 자료형의 형태로 넘어온 변수(61: $6 \times\ 1$)를 통해 회로의 높이와 넓이를 구한다.  
-> ```python
-    board_height: int = board // 10 # 회로의 높이
-    board_width: int = board % 10 # 회로의 넓이
+`generate_domain()` 함수는 도메인을 생성하는 함수로 `int` 자료형의 형태로 넘어온 변수(61: $6\times 1$)를 통해 회로의 높이와 넓이를 구한다.  
+
 
 격자의 가로와 세로의 크기를 넘지 않는 범위를 도메인 List에 `append`하여 반환한다.
 
