@@ -553,3 +553,181 @@ else:
     
 
 `fill_board` 는 출력을 보기 편하게 하기 위해 Dict로 변수와 `str`자료형으로 선언한 후 `solution`을 구해 출력한다.
+
+
+## 연습문제
+
+### 1번
+WordSearchConstraint 클래스를 수정하여 중복 단어를 허용하는 단어 검색을 구현하라.
+
+
+```python
+# word_search.py
+class WordSearchConstraint(Constraint[str, List[GridLocation]]):
+    def __init__(self, words: List[str]) -> None:
+        super().__init__(words)
+        self.words: List[str] = words
+    
+    def satisfied(self, assignment: Dict[str, List[GridLocation]]) -> bool:
+        board = [["" for c in range(9)] for r in range(9)]
+        for word, locations in assignment.items():
+            for i in range(len(word)):
+                if board[locations[i].row][locations[i].column] != "":
+                    if board[locations[i].row][locations[i].column] != word[i]:
+                        return False
+                else:
+                    board[locations[i].row][locations[i].column] = word[i]
+        return True
+```
+
+제약 조건: 중복을 허용하지 않는다. -> 각 단어의 한자리씩 곂칠 수 있다. (직선으로 할당되면, 단어가 곂치는 부분은 서로 한개 이상 있을 수 없기 때문에)  
+
+`satisfied()` 함수 내에서 보드를 만들어 단어를 할당시킬 때, board에 다른 단어가 있으면 `False`를 반환했다.  
+메모리를 낭비하기 때문에 더 좋은 방법이 있나 찾아봐야겠다.
+
+```python
+# word_search.py
+grid: Grid = generate_grid(9, 9)
+words: List[str] = ["MATTHEW", "JOE", "MARY", "SARAH", "SALLY"]
+locations: Dict[str, List[GridLocation]] = {}
+for word in words:
+    locations[word] = generate_domain(word, grid)
+csp: CSP[str, List[GridLocation]] = CSP(words, locations)
+csp.add_constraint(WordSearchConstraint(words))
+
+solution: Optional[Dict[str, List[GridLocation]]] = csp.backtracking_search()
+if solution is None:
+    print("답을 찾을 수 없습니다.")
+else:
+    for word, grid_locations in solution.items():
+        # 50% 확률로 grid_locations를 반전한다.
+        if choice([True, False]):
+            grid_locations.reverse()
+        for index, letter in enumerate(word):
+            (row, col) = (grid_locations[index].row, grid_locations[index].column)
+            grid[row][col] = letter
+    display_grid(grid)
+```
+
+    M A T T H E W U P
+    S A L L Y E N E H
+    T J R X U K L O A
+    K Y S Y Z B D J R
+    Y K G C T E O O A
+    Q L Q H O V H F S
+    D N J D N Q B S P
+    J Z I T G P Q L U
+    Y U S S T F U R I
+    
+
+### 3번
+제약 충족 문제 해결 프레임워크를 이용하여 스도쿠 문제를 해결할 수 있는 프로그램을 작성하라.  
+
+모델링
+- 변수 : $9 \times 9$ 의 그리드 중 빈 그리드
+- 도메인이 : 1 ~ 9 까지의 수
+- 제약: 가로, 세로, $3 \times 3$ 9칸에 중복되는 수가 없어야 한다.
+
+
+```python
+from typing import NamedTuple, List, Dict, Optional
+#from csp import CSP, Constraint
+
+Grid = List[List[str]] # 격자 타입 앨리어스
+
+class GridLocation(NamedTuple):
+    row: int
+    column: int
+
+
+def display_grid(grid: Grid) -> None:
+    for row in grid:
+        print(row)
+
+def find_empty(board: Grid) -> List[GridLocation]:
+    variables: List[GridLocation] = []
+    for i in range(len(board)):
+        for j in range(len(board)):
+            if board[i][j] == 0:
+                variables.append(GridLocation(i,j))  # row, col
+    return variables
+
+```
+
+> `find_empty()` 함수는 변수를 구하기 위해 `board` 에서 0인 `GridLocation` 을 반환한다.
+
+
+```python
+class SudokuSearchConstraint(Constraint[GridLocation, int]):
+    def __init__(self, grid_locations: List[GridLocation]) -> None:
+        super().__init__(grid_locations)
+        self.grid_locations: List[GridLocation] = grid_locations
+            
+    def satisfied(self, assignment: Dict[GridLocation, int]):
+        for loc, num in assignment.items():
+            # 가로확인
+            for x in range(9):
+                if board[loc.row][x] == num and x != loc.column:
+                    board[loc.row][loc.column] = 0
+                    return False
+            # 세로확인
+            for y in range(9):
+                if board[y][loc.column] == num and y != loc.row:
+                    board[loc.row][loc.column] = 0
+                    return False
+            startRow = loc.row - (loc.row % 3)
+            startCol = loc.column - (loc.column % 3)
+            for i in range(startRow, startRow + 3):
+                for j in range(startCol, startCol + 3):
+                    if board[i][j] == num and GridLocation(i,j) != loc:
+                        board[loc.row][loc.column] = 0
+                        return False
+        for loc, num in assignment.items():
+            board[loc.row][loc.column] = num
+        return True
+```
+
+`SudokuSearchConstraint()` 의 `satisfied()` 메서드는 제약 조건 가로, 세로, $3 \times 3$ 의 9 그리드의 중복되는 숫자가 없음을 찾는다.
+
+
+```python
+board: Grid = [
+    [7,8,0,4,0,0,1,2,0],
+    [6,0,0,0,7,5,0,0,9],
+    [0,0,0,6,0,1,0,7,8],
+    [0,0,7,0,4,0,2,6,0],
+    [0,0,1,0,5,0,9,3,0],
+    [9,0,4,0,6,0,0,0,5],
+    [0,7,0,3,0,0,0,1,2],
+    [1,2,0,0,0,7,4,0,0],
+    [0,4,9,2,0,6,0,0,7]
+]
+variables: List[GridLocation] = find_empty(board) # 변수
+domains: List[int] = [1,2,3,4,5,6,7,8,9] # 도메인
+locations: Dict[GridLocation, List[int]] = {} # 제약
+for variable in variables:
+    locations[variable] = domains
+
+csp: CSP[GridLocation, List[int]] = CSP(variables, locations)
+csp.add_constraint(SudokuSearchConstraint(variables))
+
+solution: Optional[Dict[Grid, int]] = csp.backtracking_search()
+    
+if solution is None:
+    print("답을 찾을 수 없습니다.")
+else:
+    for loc, num in solution.items():
+        board[loc.row][loc.column] = num
+    display_grid(board)
+```
+
+    [7, 8, 5, 4, 3, 9, 1, 2, 6]
+    [6, 1, 2, 8, 7, 5, 3, 4, 9]
+    [4, 9, 3, 6, 2, 1, 5, 7, 8]
+    [8, 5, 7, 9, 4, 3, 2, 6, 1]
+    [2, 6, 1, 7, 5, 8, 9, 3, 4]
+    [9, 3, 4, 1, 6, 2, 7, 8, 5]
+    [5, 7, 8, 3, 9, 4, 6, 1, 2]
+    [1, 2, 6, 5, 8, 7, 4, 9, 3]
+    [3, 4, 9, 2, 1, 6, 8, 5, 7]
+    
