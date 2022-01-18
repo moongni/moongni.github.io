@@ -142,7 +142,7 @@ class CSP(Generic[V, D]):
 
 ```python
 #map_coloring.py
-#from csp import Constraint, CSP
+from csp import Constraint, CSP
 from typing import Dict, List, Optional
 
 class MapColoringConstraint(Constraint[str, str]):
@@ -227,7 +227,7 @@ csp:CSP[int, int] = CSP(columns, rows)
 
 ```python
 #queens.py
-#from csp import Constraint, CSP
+from csp import Constraint, CSP
 from typing import Dict, List, Optional
 
 class QueensConstraint(Constraint[int, int]):
@@ -277,7 +277,7 @@ else:
 from typing import NamedTuple, List, Dict, Optional
 from random import choice
 from string import ascii_uppercase
-#from csp import CSP, Constraint
+from csp import CSP, Constraint
 
 Grid = List[List[str]] # 격자 타입 앨리어스
 
@@ -392,7 +392,7 @@ else:
 
 
 ```python
-#from csp import Constraint, CSP
+from csp import Constraint, CSP
 from typing import Dict, List, Optional
 
 class SendMoreMoneyConstraint(Constraint[str, int]):
@@ -462,7 +462,7 @@ else:
 ```python
 # 회로판 레이아웃
 from typing import NamedTuple, List, Dict, Optional
-#from csp import CSP, Constraint
+from csp import CSP, Constraint
 
 Grid = List[List[str]] # 격자 타입 앨리어스
 
