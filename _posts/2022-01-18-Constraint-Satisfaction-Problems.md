@@ -703,12 +703,11 @@ board: Grid = [
     [0,4,9,2,0,6,0,0,7]
 ]
 variables: List[GridLocation] = find_empty(board) # 변수
-domains: List[int] = [1,2,3,4,5,6,7,8,9] # 도메인
-locations: Dict[GridLocation, List[int]] = {} # 제약
+domains: Dict[GridLocation, List[int]] = {} # 도메인
 for variable in variables:
-    locations[variable] = domains
+    domains[variable] = [1,2,3,4,5,6,7,8,9]
 
-csp: CSP[GridLocation, List[int]] = CSP(variables, locations)
+csp: CSP[GridLocation, List[int]] = CSP(variables, domains)
 csp.add_constraint(SudokuSearchConstraint(variables))
 
 solution: Optional[Dict[Grid, int]] = csp.backtracking_search()
