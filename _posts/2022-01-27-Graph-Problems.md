@@ -270,7 +270,7 @@ class WeightedEdge(Edge):
 - \__init__()
 - WeightedEdge 객체를 추가하는 헬퍼 메서드
 - neighbors_for_index_with_weights() 한 정점의 각 이웃과 에지의 가중치를 반환하는 메서드
-- \__str()__
+- \__str__()
 
 
 ```python
