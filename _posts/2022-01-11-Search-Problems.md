@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Search Problems"
+title: "[Algorithm] 검색 문제"
 categories: algorithm
 tags: [python, algorithm]
 classes: wide

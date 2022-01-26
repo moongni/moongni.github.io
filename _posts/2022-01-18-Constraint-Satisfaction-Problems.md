@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Constraint Satisfaction Problems"
+title: "[Algorithm] 제약 충족 문제"
 categories: algorithm
 tags: [python, algorithm]
 classes: wide

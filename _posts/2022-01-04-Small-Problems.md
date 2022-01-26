@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Small Problems"
+title: "[Algorithm] Small Problems"
 categories: algorithm
 tags: [python, algorithm]
 toc: true
