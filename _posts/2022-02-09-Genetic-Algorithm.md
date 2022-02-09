@@ -11,6 +11,37 @@ use_math: true
 ---
 # 고전 알고리즘 인 파이썬
 
+<div class = "notice--info">
+    <h3> 목차 </h3>
+    <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">유전 알고리즘</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#51-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98">5.1 시뮬레이션</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#52-%EC%A0%9C%EB%84%A4%EB%A6%AD-%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">5.2 제네릭 유전 알고리즘</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#%ED%99%9C%EC%9A%A9">활용 예제</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#53-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B0%A9%EC%A0%95%EC%8B%9D">5.3 간단한 방정식</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#54-send--more--money">5.4 SEND+MORE=MONEY</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#55-%EC%B5%9C%EC%A0%81%ED%99%94-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%95%95%EC%B6%95">5.5 최적화 리스트 압축</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%A0%95%EB%A6%AC">정리</a>
+    <ul>
+        <li>
+            <a href=""></a>
+        </li>
+    </ul>
+</div>
+
 ## 유전 알고리즘
 유전 알고리즘은 일반적으로 쉬운 해결책이 없으며 복잡한 문제를 위한 알고리즘이다.  
 예시로 단백질-리간드 결합과 약물 설계이다. 약물을 전달하기 위해 수용체에 결합할 분자를 설계한다.  
@@ -358,8 +389,8 @@ difference|difference + 1|fitness(1 / (difference + 1))
 
 
 **CAUTION**: 1을 적합도로 나누는 것은 최소화 문제를 최대화 문제로 변환하는 간단한 방법이지만 **편향**이 있어서 절대로 안전한 방법은 아니다.  
-1을 정수의 균일분포로 나누는 경우 1에 가까운 숫자가 많이 생길 수 있다. >> 일반적인 마이크로프로세서가 부동소수점수를 해석하는 미묘한 방식에 따라 예기치 않은 결과가 발생할 수 있다.
-{: .notice--caution}
+1을 정수의 균일분포로 나누는 경우 1에 가까운 숫자가 많이 생길 수 있다. **>>** 일반적인 마이크로프로세서가 부동소수점수를 해석하는 미묘한 방식에 따라 예기치 않은 결과가 발생할 수 있다.
+{: .notice--warning}
 
 ### 5.5 최적화 리스트 압축
 리스트로 구성된 정보를 압축하려고 할때, 어떤 순서가 모든 항목이 손상되지 않으면서 압축비율을 높일 수 있는가의 문제이다.  
