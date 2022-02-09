@@ -34,10 +34,16 @@ use_math: true
             <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#55-%EC%B5%9C%EC%A0%81%ED%99%94-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%95%95%EC%B6%95">5.5 최적화 리스트 압축</a>
         </li>
     </ul>
-    <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%A0%95%EB%A6%AC">정리</a>
+    <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습문제</a>
     <ul>
         <li>
-            <a href=""></a>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#1-%EC%B2%B4%EA%B0%90%ED%99%95%EC%9C%A8%EC%9D%84-%EA%B8%B0%EB%B0%98%EC%9C%BC%EB%A1%9C-%EB%95%8C%EB%A1%9C%EB%8A%94-%EB%91%90-%EB%B2%88%EC%A7%B8-%ED%98%B9%EC%9D%80-%EC%84%B8-%EB%B2%88%EC%A7%B8%EB%A1%9C-%EA%B0%80%EC%9E%A5-%EC%A2%8B%EC%9D%80-%EC%97%BC%EC%83%89%EC%B2%B4%EB%A5%BC-%EC%84%A0%ED%83%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EA%B3%A0%EA%B8%89-%ED%86%A0%EB%84%88%EB%A8%BC%ED%8A%B8-%EC%84%A0%ED%83%9D-%EC%9C%A0%ED%98%95%EC%9D%84-geneticalgorithm-%ED%81%B4%EB%9E%98%EC%8A%A4%EC%97%90-%EC%B6%94%EA%B0%80%ED%95%98%EB%9D%BC">1 번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#2-%EC%A0%9C%EC%95%BD-%EC%B6%A9%EC%A1%B1-%EB%AC%B8%EC%A0%9C-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC%EC%97%90-%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%97%AC-%EC%9E%84%EC%9D%98%EC%9D%98-%EC%A0%9C%EC%95%BD-%EC%B6%A9%EC%A1%B1-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%95%B4%EA%B2%B0%ED%95%98%EB%8A%94-%EC%83%88%EB%A1%9C%EC%9A%B4-%EB%A9%94%EC%84%9C%EB%93%9C%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EB%9D%BC-%EC%A0%81%ED%95%A9%EB%8F%84%EC%9D%98-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%B8%A1%EC%A0%95%EC%9D%80-%EC%97%BC%EC%83%89%EC%B2%B4%EC%97%90-%EC%9D%98%ED%95%B4-%ED%95%B4%EA%B2%B0%EB%90%98%EB%8A%94-%EC%A0%9C%EC%95%BD%EC%A1%B0%EA%B1%B4%EC%9D%98-%EC%88%98%EB%8B%A4">2 번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#3-chromosome-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A5%BC-%EC%83%81%EC%86%8D%EB%B0%9B%EB%8A%94-bitstring-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A5%BC-%EC%83%9D%EC%84%B1%ED%95%98%EA%B3%A0-53-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B0%A9%EC%A0%95%EC%8B%9D-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%95%B4%EA%B2%B0%ED%95%98%EB%9D%BC">3 번</a>
         </li>
     </ul>
 </div>
