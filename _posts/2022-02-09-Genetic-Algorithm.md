@@ -526,3 +526,82 @@ print(result)
   
 > 유전 알고리즘은 최적의 솔루션을 요구하지 않고 **충분히 좋은** 솔루션을 요구하는 상황에서 잘 활용될 수 있다. 
 
+## 연습문제
+### 1. 체감확율을 기반으로 때로는 두 번째 혹은 세 번째로 가장 좋은 염색체를 선택할 수 있는 고급 토너먼트 선택 유형을 GeneticAlgorithm 클래스에 추가하라
+
+```python
+#genetic_algorithm.py
+...
+
+class GeneticAlgorithm(Generic[C]):
+    # 알고리즘 내부에 사용되는 방식: 룰렛, 토너먼트, 고급 토너먼트
+    SelectionType = Enum("SelectionType", "ROULETTE TOURNAMENT ADVANCEDTOURNAMENT")
+
+    ...
+    
+    # 적합도 기준으로 상위 3개 중 2개를 무작위로 뽑는다.
+    def _pick_adtournament(self) -> Tuple[C, C]:
+        participants: List[C] = list(nlargest(3, self._population, key=self._fitness_key))
+        return tuple(choices(participants, k=2))
+    
+    def _reproduce_and_replace(self) -> None:
+        new_population: List[C] = []
+        while len(new_population) < len(self._population):
+            if self._selection_type == GeneticAlgorithm.SelectionType.ROULETTE:
+                parents: Tuple[C, C] = self._pick_roulette([x.fitness() for x in self._population])
+
+            # ADVANCEDTOURNAMENT 방식으로 부모를 선정한다.
+            elif self._selection_type == GeneticAlgorithm.SelectionType.ADVANCEDTOURNAMENT:
+                parents: Tuple[C, C] = self._pick_adtournament()
+            
+            else:
+                parents: Tuple[C, C] = self._pick_tournament(len(self._population) // 2)
+            if random() < self._crossover_chance: # random < 0.7
+                new_population.extend(parents[0].crossover(parents[1]))
+            else:
+                new_population.extend(parents)
+        if len(new_population) > len(self._population):
+            new_population.pop()
+
+        self._population = new_population
+        
+    ...
+```
+
+```python
+# 실행
+initial_population: List[SimpleEquation] = [SimpleEquation.random_instance() for _ in range(20)]
+ga: GeneticAlgorithm[SimpleEquation] = GeneticAlgorithm(initial_population = initial_population,
+                                                        threshold = 13.0, max_generations = 100,
+                                                       mutation_chance = 0.1, crossover_chance=0.7,
+                                                       selection_type = GeneticAlgorithm.SelectionType.ADVANCEDTOURNAMENT)
+result: SimpleEquation = ga.run()
+print(result)
+```
+
+    세대 0 최상 -16 평균 -6033.4
+    세대 1 최상 -27 평균 -292.65
+    세대 2 최상 -16 평균 -21.5
+    세대 3 최상 -16 평균 -16.55
+    세대 4 최상 -7 평균 -13.3
+    세대 5 최상 0 평균 -6.55
+    세대 6 최상 0 평균 -3.8
+    세대 7 최상 5 평균 -0.3
+    세대 8 최상 8 평균 3.15
+    세대 9 최상 8 평균 7.25
+    세대 10 최상 9 평균 6.65
+    세대 11 최상 9 평균 8.2
+    세대 12 최상 9 평균 8.8
+    세대 13 최상 12 평균 9.3
+    세대 14 최상 12 평균 11.05
+    세대 15 최상 12 평균 11.95
+    세대 16 최상 12 평균 12
+    세대 17 최상 12 평균 11.65
+    X: 3 Y: 2 적합도: 13
+    
+
+### 2. 제약 충족 문제 프레임워크에 유전 알고리즘을 사용하여 임의의 제약 충족 문제를 해결하는 새로운 메서드를 추가하라. 적합도의 가능한 측정은 염색체에 의해 해결되는 제약조건의 수다.
+
+
+### 3. Chromosome 클래스를 상속받는 BitString 클래스를 생성하고, 5.3 '간단한 방정식' 문제를 해결하라
+
