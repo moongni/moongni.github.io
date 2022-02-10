@@ -608,6 +608,95 @@ print(result)
 
 ### 2. 제약 충족 문제 프레임워크에 유전 알고리즘을 사용하여 임의의 제약 충족 문제를 해결하는 새로운 메서드를 추가하라. 적합도의 가능한 측정은 염색체에 의해 해결되는 제약조건의 수다.
 
+**지도 색칠문제**  
+변수 : 호주의 7개 지역 (뉴사우스웨일스, 빅토리아, 퀸즐랜드, 사우스 오스트레일리아, 웨스턴 오스트레일리아, 태즈메이니아, 노던 준주)  
+도메인 : 3가지 색상 (빨강, 파랑, 녹색)  
+제약 : 인접한 두 지역을 같은 색상을 할당할 수 없다.  
 
+
+```python
+#MapColoringConstraint.py
+from __future__ import annotations
+from typing import Tuple, List
+#from Chromosome import Chromosome
+#from genetic_algorithm import GeneticAlgorithm
+from random import randrange, random, sample
+from copy import deepcopy
+
+class MapColoringConstraint(Chromosome):
+    def __init__(self, place: List[str], color: List[str]) -> None:
+        self.place: List[str] = place
+        self.color: List[str] = color
+    
+    def fitness(self) -> float:
+        count = 0
+        if self.color[self.place.index("웨스턴 오스트레일리아")] != self.color[self.place.index("노던 준주")]:
+            count += 1
+        if self.color[self.place.index("웨스턴 오스트레일리아")] != self.color[self.place.index("사우스 오스트레일리아")]:
+            count += 1
+        if self.color[self.place.index("사우스 오스트레일리아")] != self.color[self.place.index("노던 준주")]:
+            count += 1
+        if self.color[self.place.index("사우스 오스트레일리아")] != self.color[self.place.index("퀸즐랜드")]:
+            count += 1
+        if self.color[self.place.index("퀸즐랜드")] != self.color[self.place.index("노던 준주")]:
+            count += 1
+        if self.color[self.place.index("퀸즐랜드")] != self.color[self.place.index("뉴사우스웨일스")]:
+            count += 1
+        if self.color[self.place.index("뉴사우스웨일스")] != self.color[self.place.index("사우스 오스트레일리아")]:
+            count += 1
+        if self.color[self.place.index("빅토리아")] != self.color[self.place.index("사우스 오스트레일리아")]:
+            count += 1
+        if self.color[self.place.index("빅토리아")] != self.color[self.place.index("뉴사우스웨일스")]:
+            count += 1
+        if self.color[self.place.index("빅토리아")] != self.color[self.place.index("태즈메이니아")]:
+            count += 1
+       
+        return (count // 10)
+    
+    @classmethod
+    def random_instance(cls) -> MapColoringConstraint:
+        place: List[str] = ["뉴사우스웨일스", "빅토리아", "퀸즐랜드", "사우스 오스트레일리아",
+                        "웨스턴 오스트레일리아", "태즈메이니아", "노던 준주"]
+        color: List[str] = ["빨강", "초록", "파랑"]
+        return MapColoringConstraint(place, list((choices(color, k=1)) for _ in range(len(place))))
+    
+    
+    def crossover(self, other: MapColoringConstraint) -> Tuple[MapColoringConstraint, MapColoringConstraint]:
+        child1: MapColoringConstraint = deepcopy(self)
+        child2: MapColoringConstraint = deepcopy(other)
+        idx1, idx2 = sample(range(len(child1.place)), k = 2)
+        child1.color[idx1] , child2.color[idx2] = child2.color[idx2] , child1.color[idx1]
+        
+        return child1, child2
+    
+    def mutate(self) -> None:
+        if random() > 0.5:
+            idx1 = randrange(len(self.place))
+            self.color[idx1] = choices(["빨강","초록","파랑"], k = 1)
+    
+    def __str__(self) -> str:
+        return f"place  {self.place} \n color  {self.color}"
+```
+
+
+```python
+initial_population: List[MapColoringConstraint] = [MapColoringConstraint.random_instance() for _ in range(20)]
+ga: GeneticAlgorithm[MapColoringConstraint] = GeneticAlgorithm(initial_population = initial_population,
+                                                              threshold = 1, max_generations = 100,
+                                                              mutation_chance = 0.2, crossover_chance=0.7)
+result: MapColoringConstraint = ga.run()
+print(result)
+```
+
+    세대 0 최상 0 평균 0
+    세대 1 최상 0 평균 0
+    
+    ...
+
+    세대 16 최상 0 평균 0
+    세대 17 최상 0 평균 0
+    place  ['뉴사우스웨일스', '빅토리아', '퀸즐랜드', '사우스 오스트레일리아', '웨스턴 오스트레일리아', '태즈메이니아', '노던 준주'] 
+     color  [['빨강'], ['초록'], ['초록'], ['파랑'], ['초록'], ['파랑'], ['빨강']]
+    
 ### 3. Chromosome 클래스를 상속받는 BitString 클래스를 생성하고, 5.3 '간단한 방정식' 문제를 해결하라
 
