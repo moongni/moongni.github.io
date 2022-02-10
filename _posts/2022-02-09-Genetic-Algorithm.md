@@ -618,8 +618,8 @@ print(result)
 #MapColoringConstraint.py
 from __future__ import annotations
 from typing import Tuple, List
-#from Chromosome import Chromosome
-#from genetic_algorithm import GeneticAlgorithm
+from Chromosome import Chromosome
+from genetic_algorithm import GeneticAlgorithm
 from random import randrange, random, sample
 from copy import deepcopy
 
