@@ -696,4 +696,518 @@ def alphabeta(board: Board, maximizing: bool, original_player: Piece, max_depth:
 
 ```
 
+## 연습문제
 
+### 1. 틱택도에 단위 테스트를 추가하여 `legal_moves`, `is_win`, `is_draw` 속성이 잘 작동하는지 확인하라
+
+
+```python
+import unittest
+from typing import List
+# from minimax import find_best_move
+# from tictactoe import TTTPiece, TTTBoard
+# from board import Move
+
+class TTTMethodTest(unittest.TestCase):
+    def test_legal_moves(self):
+        move_positions: List[TTTPiece] = [TTTPiece.X, TTTPiece.O, TTTPiece.X,
+                                         TTTPiece.X, TTTPiece.X, TTTPiece.O,
+                                         TTTPiece.O, TTTPiece.E, TTTPiece.O]
+        test_board1: TTTBoard = TTTBoard(move_positions, TTTPiece.X)
+        answer1: List[Move] = test_board1.legal_moves
+        self.assertEqual(answer1, [7])
+    
+    def test_is_win(self):
+        win_positions: List[TTTPiece] = [TTTPiece.X, TTTPiece.O, TTTPiece.X,
+                                         TTTPiece.X, TTTPiece.O, TTTPiece.O,
+                                         TTTPiece.X, TTTPiece.E, TTTPiece.O]
+        test_board2: TTTBoard = TTTBoard(win_positions, TTTPiece.X)
+        answer2: bool = test_board2.is_win
+        self.assertTrue(answer2)
+    
+    def test_is_draw(self):
+        draw_positions: List[TTTPiece] = [TTTPiece.X, TTTPiece.O, TTTPiece.X,
+                                         TTTPiece.X, TTTPiece.O, TTTPiece.O,
+                                         TTTPiece.O, TTTPiece.X, TTTPiece.O]
+        test_board3: TTTBoard = TTTBoard(draw_positions, TTTPiece.X)
+        answer3: bool = test_board3.is_draw
+        self.assertTrue(answer3)
+        
+if __name__ == "__main__":
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)
+```
+
+    ...
+    ----------------------------------------------------------------------
+    Ran 3 tests in 0.007s
+    
+    OK
+    
+<hr>
+
+### 2. 커넥트포에 대한 최소최대 알고리즘의 단위 테스트를 작성하라
+
+```python
+import unittest
+from typing import List, Tuple
+from minimax import find_best_move
+#from connectfour import C4Piece, C4Board
+#from board import Move
+
+class ConnectfourMinimaxTest(unittest.TestCase):
+    def test_easy_position(self):
+        # 1번 움직여서 이기는 자리 찾기
+        column1: C4Board.Column = C4Board.Column()
+        
+        column2: C4Board.Column = C4Board.Column()
+        column2.push(C4Piece.R)
+        column2.push(C4Piece.B)
+        
+        column3: C4Board.Column = C4Board.Column()
+        column3.push(C4Piece.B)
+        column3.push(C4Piece.R)
+        column3.push(C4Piece.B)
+        column3.push(C4Piece.R)
+        column3.push(C4Piece.B)
+
+        column4: C4Board.Column = C4Board.Column()
+        column4.push(C4Piece.B)
+        column4.push(C4Piece.B)
+        column4.push(C4Piece.R)
+        column4.push(C4Piece.R)
+        column4.push(C4Piece.B)
+        
+        column5: C4Board.Column = C4Board.Column()
+        column5.push(C4Piece.R)
+        column5.push(C4Piece.R)
+        column5.push(C4Piece.B)
+        
+        column6: C4Board.Column = C4Board.Column()
+
+        column7: C4Board.Column = C4Board.Column()
+        
+        to_win_easy_position: List[List[C4Piece]] = []
+        to_win_easy_position.append(column1)
+        to_win_easy_position.append(column2)
+        to_win_easy_position.append(column3)
+        to_win_easy_position.append(column4)
+        to_win_easy_position.append(column5)
+        to_win_easy_position.append(column6)
+        to_win_easy_position.append(column7)
+        
+        test_board1: C4Board = C4Board(to_win_easy_position, C4Piece.R)
+        answer1: Move = find_best_move(test_board1, 3)
+        self.assertEqual(answer1, 4)
+    
+    def test_block_position(self):
+        # B가 우승하는 것을 막기
+        column1: C4Board.Column = C4Board.Column()
+        column1.push(C4Piece.R)
+        
+        column2: C4Board.Column = C4Board.Column()
+        column2.push(C4Piece.B)
+        column2.push(C4Piece.R)
+        
+        column3: C4Board.Column = C4Board.Column()
+        column3.push(C4Piece.B)
+        column3.push(C4Piece.B)
+
+        column4: C4Board.Column = C4Board.Column()
+        column4.push(C4Piece.R)
+        column4.push(C4Piece.B)
+        column4.push(C4Piece.R)
+        column4.push(C4Piece.R)
+
+        column5: C4Board.Column = C4Board.Column()
+        column5.push(C4Piece.B)
+        column5.push(C4Piece.R)
+        column5.push(C4Piece.B)
+     
+        column6: C4Board.Column = C4Board.Column()
+        column6.push(C4Piece.R)
+        column6.push(C4Piece.B)
+        column6.push(C4Piece.B)
+        
+
+        column7: C4Board.Column = C4Board.Column()
+        
+        to_block_position: List[List[C4Piece]] = []
+        to_block_position.append(column1)
+        to_block_position.append(column2)
+        to_block_position.append(column3)
+        to_block_position.append(column4)
+        to_block_position.append(column5)
+        to_block_position.append(column6)
+        to_block_position.append(column7)
+        
+        test_board2: C4Board = C4Board(to_block_position, C4Piece.R)
+        answer2: Move = find_best_move(test_board2, 3)
+        self.assertEqual(answer2, 5)
+    
+    def test_hard_position(self):
+        # 2번을 고려해야 하는 어려운 경우
+        column1: C4Board.Column = C4Board.Column()
+        column1.push(C4Piece.B)
+       
+        column2: C4Board.Column = C4Board.Column()
+        column2.push(C4Piece.B)
+        column2.push(C4Piece.R)
+
+        column3: C4Board.Column = C4Board.Column()
+        column3.push(C4Piece.B)
+        column3.push(C4Piece.B)
+        column3.push(C4Piece.R)
+        column3.push(C4Piece.B)
+        
+        column4: C4Board.Column = C4Board.Column()
+        column4.push(C4Piece.R)
+        column4.push(C4Piece.B)
+        column4.push(C4Piece.R)
+        column4.push(C4Piece.R)
+        
+        column5: C4Board.Column = C4Board.Column()
+        column5.push(C4Piece.B)
+        column5.push(C4Piece.R)
+        column5.push(C4Piece.B)
+        
+        column6: C4Board.Column = C4Board.Column()
+        column6.push(C4Piece.R)
+        
+        column7: C4Board.Column = C4Board.Column()
+        
+        to_win_hard_position: List[List[C4Piece]] =[]
+        to_win_hard_position.append(column1)
+        to_win_hard_position.append(column2)
+        to_win_hard_position.append(column3)
+        to_win_hard_position.append(column4)
+        to_win_hard_position.append(column5)
+        to_win_hard_position.append(column6)
+        to_win_hard_position.append(column7)
+        
+        test_board3: C4Board = C4Board(to_win_hard_position, C4Piece.R)
+        answer3: Move = find_best_move(test_board3, 3)
+        self.assertEqual(answer3, 3)
+
+if __name__ == '__main__':
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)    
+```
+
+    ...
+    ----------------------------------------------------------------------
+    Ran 3 tests in 3.678s
+    
+    OK
+
+<hr>
+
+### 3. tictactoe_ai.py와 connectfour_ai.py의 코드를 두 게임 모두에서 사용할 수 있도록 두 메서드를 작성하여 리팩토링하라
+
+
+```python
+from __future__ import annotations
+from typing import NewType, List
+from abc import ABC, abstractmethod
+
+Move = NewType('Move', int)
+
+
+class Piece:
+    @property
+    def opposite(self) -> Piece:
+        raise NotImplementedError("Should be implemented by subclasses.")
+
+
+class Board(ABC):
+    @property
+    @abstractmethod
+    def turn(self) -> Piece:
+        ...
+
+    @abstractmethod
+    def move(self, location: Move) -> Board:
+        ...
+
+    @property
+    @abstractmethod
+    def legal_moves(self) -> List[Move]:
+        ...
+
+    @property
+    @abstractmethod
+    def is_win(self) -> bool:
+        ...
+
+    @property
+    def is_draw(self) -> bool:
+        return (not self.is_win) and (len(self.legal_moves) == 0)
+
+    @abstractmethod
+    def evaluate(self, player: Piece) -> float:
+        ...
+```
+
+
+```python
+from __future__ import annotations
+from typing import List, Optional, Tuple
+from enum import Enum
+#from board import Piece, Board, Move
+
+def generate_segments(num_columns: int, num_rows: int, segment_length: int) -> List[List[int]]:
+    segments: List[int] = []
+    # 열 세그먼트
+    for c in range(num_columns):
+        for r in range(num_rows - segment_length + 1):
+            segment: List[int] = []
+            for t in range(segment_length):
+                segment.append(c + (r + t) * num_columns)
+            segments.append(segment)
+    # 행 세그먼트
+    for r in range(num_rows):
+        for c in range(num_columns - segment_length + 1):
+            segment: List[int] = []
+            for t in range(segment_length):
+                segment.append(c + t + r * num_columns)
+            segments.append(segment)
+    # / 대각선 세그먼트
+    for c in range(num_columns - segment_length + 1):
+        for r in range(num_rows - segment_length + 1):
+            segment = []
+            for t in range(segment_length):
+                segment.append(c + r * num_columns + t * (num_columns + 1))
+            segments.append(segment)
+    # \ 대각선 세그먼트
+    for c in range(num_columns - segment_length + 1):
+        for r in range(segment_length - 1, num_rows):
+            segment = []
+            for t in range(segment_length):
+                segment.append(c + r * num_columns - t * (num_columns - 1))
+            segments.append(segment)
+            
+    return segments
+
+class GamePiece(Piece, Enum):
+    F = "F" # first player
+    S = "S" # second player
+    E = " " # 빈 공간
+    
+    @property
+    def opposite(self) -> GamePiece:
+        if self == GamePiece.F:
+            return GamePiece.S
+        elif self == GamePiece.S:
+            return GamePiece.F
+        else:
+            return GamePiece.E
+    
+    def __str__(self) -> str:
+        return self.value
+    
+class GameBoard(Board):
+    GameType = Enum("GameType", "tictactoe connectfour")
+    
+    def __init__(self, position: List[GamePiece] = None, game_type: GameType = GameType.tictactoe, turn: GamePiece = GamePiece.F) -> None:
+        self.game_type = game_type
+        if position == None:
+            if self.game_type == GameBoard.GameType.tictactoe:
+                self.position = [GamePiece.E] * 9
+                self.num_columns = 3
+                self.num_rows = 3
+                self.segment_length = 3
+
+            elif self.game_type == GameBoard.GameType.connectfour:
+                self.position = [GamePiece.E] * 42
+                self.num_columns = 7
+                self.num_rows = 6
+                self.segment_length = 4
+        else:
+            if self.game_type == GameBoard.GameType.tictactoe:
+                self.num_columns = 3
+                self.num_rows = 3
+                self.segment_length = 3
+
+            elif self.game_type == GameBoard.GameType.connectfour:
+                self.num_columns = 7
+                self.num_rows = 6
+                self.segment_length = 4
+
+            self.position = position
+            
+        self.segments = generate_segments(self.num_columns, self.num_rows, self.segment_length)
+        self._turn: GamePiece = turn
+    
+    @property
+    def turn(self) -> Piece:
+        return self._turn
+
+    def move(self, location: Move) -> Board:
+        temp_position: List[GamePiece] = self.position.copy()
+        if self.game_type == GameBoard.GameType.tictactoe:
+            temp_position[location] = self._turn
+        else:
+            temp_location = location % 7
+            while self.position[location] != GamePiece.E:
+                location += 7
+            temp_position[location] = self._turn
+        return GameBoard(temp_position, self.game_type, self._turn.opposite)
+    
+    @property
+    def legal_moves(self) -> List[Move]:
+        if self.game_type == GameBoard.GameType.tictactoe:
+            return [Move(t) for t in range(len(self.position)) if self.position[t] == GamePiece.E]
+        else:
+            return list(set(Move(c % 7) for c in range(len(self.position)) if self.position[c] == GamePiece.E))
+    
+    def _count_segment(self, segment: List[int]) -> Tuple[int, int]:
+        first_count: int = 0
+        second_count: int = 0
+        for i in segment:
+            if self.position[i] == GamePiece.F:
+                first_count += 1
+            elif self.position[i] == GamePiece.S:
+                second_count += 1
+        return first_count, second_count
+    
+    @property
+    def is_win(self) -> bool:
+        for segment in self.segments:
+            first_count, second_count = self._count_segment(segment)
+            if first_count == self.segment_length or second_count == self.segment_length:
+                return True
+        return False
+    
+    def _evaluate_segment(self, segment: List[int], player: Piece) -> float:
+        first_count, second_count = self._count_segment(segment)
+        if first_count > 0 and second_count > 0:
+            return 0 # 완성 불가
+        count: int = max(first_count, second_count)
+        score: float = 0
+        if count == 2:
+            score = 1
+        if count == 3:
+            score = 1000
+        if count == 4:
+            score = 1000000
+        color: GamePiece = GamePiece.F
+        if first_count < second_count:
+            color = GamePiece.S
+        if color != player:
+            return -score
+        return score
+    
+    def evaluate(self, player: Piece) -> float:
+        total: float = 0
+        for segment in self.segments:
+            total += self._evaluate_segment(segment, player)
+        return total
+    
+    def __repr__(self) -> str:
+        display: str = ""
+        for r in reversed(range(self.num_rows)):
+            display += "|"
+            for c in range(self.num_columns):
+                display += f"{self.position[c + r * self.num_columns]}" + "|"
+            display += "\n"
+        return display
+```
+
+커넥트포 게임의 경우 위에서 **Column** 내부클래스를 사용한 것과 달리 리스트를 통해 게임을 진행할 수 있도록 메서드를 바꿨다. 커넥트포 보드의 형태는 아래와 같다.
+```
+|35|36|37|38|39|40|41|
+|28|29|30|31|32|33|34|
+|21|22|23|24|25|26|27|
+|14|15|16|17|18|19|20|
+|7 |8 |9 |10|11|12|13|
+|0 |1 |2 |3 |4 |5 |6 |
+```
+
+<hr>
+
+### 4. 컴퓨터 플레이어가 자신과 게임할 수 있도록 connectfour_ai.py 코드를 변경해보자. 첫 번째와 두 번째 플레이어의 승률은?
+
+
+```python
+# from minimax import find_best_move
+# from connectfour import C4Board
+# from board import Move, Board
+from random import randrange
+
+if __name__ == "__main__":
+    # main game loop
+
+    for move in range(7):
+        first_win = 0
+        second_win = 0
+
+        for _ in range(5):
+            board: Board = C4Board()
+            board = board.move(move)
+
+            while True:
+                second_move: Move = find_best_move(board, 3)
+                board = board.move(second_move)
+                if board.is_win:
+                    print("second wins!")
+                    second_win += 1
+                    break
+                elif board.is_draw:
+                    print("Draw!")
+                    break
+                first_move: Move = find_best_move(board, 3)
+                board = board.move(first_move)
+                if board.is_win:
+                    print("first wins!")
+                    first_win += 1
+                    break
+                elif board.is_draw:
+                    print("Draw!")
+                    break
+        print(f"{move}이동을 시작으로 5번을 실행한 결과 first : {first_win} second : {second_win}")
+```
+
+    first wins!
+    first wins!
+    first wins!
+    first wins!
+    first wins!
+    0이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
+    second wins!
+    second wins!
+    second wins!
+    second wins!
+    second wins!
+    1이동을 시작으로 5번을 실행한 결과 first : 0 second : 5
+    second wins!
+    second wins!
+    second wins!
+    second wins!
+    second wins!
+    2이동을 시작으로 5번을 실행한 결과 first : 0 second : 5
+    first wins!
+    first wins!
+    first wins!
+    first wins!
+    first wins!
+    3이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
+    second wins!
+    second wins!
+    second wins!
+    second wins!
+    second wins!
+    4이동을 시작으로 5번을 실행한 결과 first : 0 second : 5
+    first wins!
+    first wins!
+    first wins!
+    first wins!
+    first wins!
+    5이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
+    first wins!
+    first wins!
+    first wins!
+    first wins!
+    first wins!
+    6이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
+    
+
+게임을 바로 시작하면 first 컴퓨터가 `find_best_move()` 메서드로 인해 Move(2)를 선택하는 경우가 나와 second 컴퓨터가 이기는 경우만 나오게 된다.  
+first의 첫 move를 변화시키며 5번씩 경기를 진행했을 때, first : second 가 4 : 3 의 비율로 승리하는 것을 볼 수 있다.
