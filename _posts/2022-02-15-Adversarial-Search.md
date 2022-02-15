@@ -93,7 +93,7 @@ class Board(ABC):
 from __future__ import annotations
 from typing import List
 from enum import Enum
-#from board import Piece, Board, Move
+from board import Piece, Board, Move
 
 
 class TTTPiece(Piece, Enum):
@@ -329,7 +329,7 @@ if __name__ == "__main__":
 from __future__ import annotations
 from typing import List, Optional, Tuple
 from enum import Enum
-#from board import Piece, Board, Move
+from board import Piece, Board, Move
 
 class C4Piece(Piece, Enum):
     B = "B"
@@ -536,9 +536,9 @@ Stack 클래스와 비슷한 형태를 가지나 `pop`되지 않는 스택이다
 
 
 ```python
-#from minimax import find_best_move
-#from connectfour import C4Board
-#from board import Move, Board
+from minimax import find_best_move
+from connectfour import C4Board
+from board import Move, Board
 
 board: Board = C4Board()
 
