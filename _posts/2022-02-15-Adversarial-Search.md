@@ -243,7 +243,7 @@ class TTTBoard(Board):
 ```python
 # minimax.py
 from __future__ import annotations
-# from board import Piece, Board, Move
+from board import Piece, Board, Move
 
 
 # 게임 플레이어의 가능한 최선의 움직임을 찾는다.
@@ -290,9 +290,9 @@ def find_best_move(board: Board, max_depth: int = 8) -> Move:
 ```python
 #tictactoe_ai.py
 
-# from minimax import find_best_move
-# from tictactoe import TTTBoard
-# from board import Move, Board
+from minimax import find_best_move
+from tictactoe import TTTBoard
+from board import Move, Board
 
 board: Board = TTTBoard()
 
@@ -681,9 +681,9 @@ def alphabeta(board: Board, maximizing: bool, original_player: Piece, max_depth:
 ```python
 import unittest
 from typing import List
-# from minimax import find_best_move
-# from tictactoe import TTTPiece, TTTBoard
-# from board import Move
+from minimax import find_best_move
+from tictactoe import TTTPiece, TTTBoard
+from board import Move
 
 class TTTMethodTest(unittest.TestCase):
     def test_legal_moves(self):
@@ -1104,9 +1104,9 @@ class GameBoard(Board):
 
 
 ```python
-# from minimax import find_best_move
-# from connectfour import C4Board
-# from board import Move, Board
+from minimax import find_best_move
+from connectfour import C4Board
+from board import Move, Board
 from random import randrange
 
 if __name__ == "__main__":
@@ -1167,7 +1167,7 @@ if __name__ == "__main__":
     5이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
 
     ...
-    
+
     6이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
     
 
