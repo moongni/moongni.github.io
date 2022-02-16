@@ -335,20 +335,9 @@ if __name__ == "__main__":
      |X| 
     -----
      | | 
-    이동할 위치를 입력하세요 (0-8):2
-    컴퓨터가 6(으)로 이동했습니다.
-    O| |X
-    -----
-     |X| 
-    -----
-    O| | 
-    이동할 위치를 입력하세요 (0-8):3
-    컴퓨터가 5(으)로 이동했습니다.
-    O| |X
-    -----
-    X|X|O
-    -----
-    O| | 
+
+    ...
+
     이동할 위치를 입력하세요 (0-8):1
     컴퓨터가 7(으)로 이동했습니다.
     O|X|X
@@ -631,69 +620,8 @@ if __name__ == "__main__":
     | | | | | | | |
     | | | | | | | |
     | |B| |R| | | |
-    
-    이동할 열 위치를 입력하세요 (0-6):5
-    컴퓨터가 1 열을 선택했습니다.
-    | | | | | | | |
-    | | | | | | | |
-    | | | | | | | |
-    | | | | | | | |
-    | |R| | | | | |
-    | |B| |R| |B| |
-    
-    이동할 열 위치를 입력하세요 (0-6):3
-    컴퓨터가 3 열을 선택했습니다.
-    | | | | | | | |
-    | | | | | | | |
-    | | | | | | | |
-    | | | |R| | | |
-    | |R| |B| | | |
-    | |B| |R| |B| |
-    
-    이동할 열 위치를 입력하세요 (0-6):5
-    컴퓨터가 1 열을 선택했습니다.
-    | | | | | | | |
-    | | | | | | | |
-    | | | | | | | |
-    | |R| |R| | | |
-    | |R| |B| |B| |
-    | |B| |R| |B| |
-    
-    이동할 열 위치를 입력하세요 (0-6):1
-    컴퓨터가 5 열을 선택했습니다.
-    | | | | | | | |
-    | | | | | | | |
-    | |B| | | | | |
-    | |R| |R| |R| |
-    | |R| |B| |B| |
-    | |B| |R| |B| |
-    
-    이동할 열 위치를 입력하세요 (0-6):4
-    컴퓨터가 1 열을 선택했습니다.
-    | | | | | | | |
-    | |R| | | | | |
-    | |B| | | | | |
-    | |R| |R| |R| |
-    | |R| |B| |B| |
-    | |B| |R|B|B| |
-    
-    이동할 열 위치를 입력하세요 (0-6):4
-    컴퓨터가 3 열을 선택했습니다.
-    | | | | | | | |
-    | |R| | | | | |
-    | |B| |R| | | |
-    | |R| |R| |R| |
-    | |R| |B|B|B| |
-    | |B| |R|B|B| |
-    
-    이동할 열 위치를 입력하세요 (0-6):4
-    컴퓨터가 4 열을 선택했습니다.
-    | | | | | | | |
-    | |R| | | | | |
-    | |B| |R|R| | |
-    | |R| |R|B|R| |
-    | |R| |B|B|B| |
-    | |B| |R|B|B| |
+
+    ...
     
     이동할 열 위치를 입력하세요 (0-6):5
     컴퓨터가 3 열을 선택했습니다.
@@ -1214,47 +1142,32 @@ if __name__ == "__main__":
         print(f"{move}이동을 시작으로 5번을 실행한 결과 first : {first_win} second : {second_win}")
 ```
 
-    first wins!
-    first wins!
-    first wins!
-    first wins!
-    first wins!
+    ...
+
     0이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
-    second wins!
-    second wins!
-    second wins!
-    second wins!
-    second wins!
+
+    ...
+
     1이동을 시작으로 5번을 실행한 결과 first : 0 second : 5
-    second wins!
-    second wins!
-    second wins!
-    second wins!
-    second wins!
+
+    ...
+
     2이동을 시작으로 5번을 실행한 결과 first : 0 second : 5
-    first wins!
-    first wins!
-    first wins!
-    first wins!
-    first wins!
+
+    ...
+
     3이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
-    second wins!
-    second wins!
-    second wins!
-    second wins!
-    second wins!
+
+    ...
+
     4이동을 시작으로 5번을 실행한 결과 first : 0 second : 5
-    first wins!
-    first wins!
-    first wins!
-    first wins!
-    first wins!
+
+    ...
+
     5이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
-    first wins!
-    first wins!
-    first wins!
-    first wins!
-    first wins!
+
+    ...
+    
     6이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
     
 
