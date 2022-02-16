@@ -751,8 +751,8 @@ if __name__ == "__main__":
 import unittest
 from typing import List, Tuple
 from minimax import find_best_move
-#from connectfour import C4Piece, C4Board
-#from board import Move
+from connectfour import C4Piece, C4Board
+from board import Move
 
 class ConnectfourMinimaxTest(unittest.TestCase):
     def test_easy_position(self):
@@ -951,7 +951,7 @@ class Board(ABC):
 from __future__ import annotations
 from typing import List, Optional, Tuple
 from enum import Enum
-#from board import Piece, Board, Move
+from board import Piece, Board, Move
 
 def generate_segments(num_columns: int, num_rows: int, segment_length: int) -> List[List[int]]:
     segments: List[int] = []
