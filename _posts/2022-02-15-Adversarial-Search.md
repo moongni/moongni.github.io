@@ -10,6 +10,55 @@ sidebar:
 use_math: true
 ---
 # 고전 알고리즘 인 파이썬
+
+<div class = "notice--success">
+    <h3> 목차 </h3>
+    <a href="https://moongni.github.io/algorithm/Adversarial-Search/#%EC%A0%81%EB%8C%80%EC%A0%81-%ED%83%90%EC%83%89">적대적 탐색</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#81-%EB%B3%B4%EB%93%9C-%EA%B5%AC%EC%84%B1">8.1 보드 구성</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Adversarial-Search/#82-%ED%8B%B1%ED%83%9D%ED%86%A0">틱택토</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#821-%ED%8B%B1%ED%83%9D%ED%86%A0-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC">8.2.1 틱택토 상태관리</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#822-%EC%B5%9C%EC%86%8C%EC%B5%9C%EB%8C%80minimax-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">8.2.1 최소최대 알고리즘</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#823-%ED%8B%B1%ED%83%9D%ED%86%A0-ai">8.2.3 틱택토 AI</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Adversarial-Search/#83-%EC%BB%A4%EB%84%A5%ED%8A%B8%ED%8F%AC">커넥트포</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#831-%EC%BB%A4%EB%84%A5%ED%8A%B8%ED%8F%AC-%EA%B5%AC%ED%98%84">8.3.1 커넥트포 구현</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#832-%EC%BB%A4%EB%84%A5%ED%8A%B8%ED%8F%AC-ai">8.3.2 커넥트포 AI</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#833-%EC%95%8C%ED%8C%8C-%EB%B2%A0%ED%83%80-%EA%B0%80%EC%A7%80%EC%B9%98%EA%B8%B0%EB%A1%9C-%EC%B5%9C%EC%86%8C%EC%B5%9C%EB%8C%80-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EA%B0%9C%EC%84%A0%ED%95%98%EA%B8%B0">8.3.2 알파-베타 가지치기</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Adversarial-Search/#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습문제</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#1-%ED%8B%B1%ED%83%9D%EB%8F%84%EC%97%90-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EC%97%AC-legal_moves-is_win-is_draw-%EC%86%8D%EC%84%B1%EC%9D%B4-%EC%9E%98-%EC%9E%91%EB%8F%99%ED%95%98%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8%ED%95%98%EB%9D%BC">1번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#2-%EC%BB%A4%EB%84%A5%ED%8A%B8%ED%8F%AC%EC%97%90-%EB%8C%80%ED%95%9C-%EC%B5%9C%EC%86%8C%EC%B5%9C%EB%8C%80-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%98-%EB%8B%A8%EC%9C%84-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%9D%BC">2번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#3-tictactoe_aipy%EC%99%80-connectfour_aipy%EC%9D%98-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%91%90-%EA%B2%8C%EC%9E%84-%EB%AA%A8%EB%91%90%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8F%84%EB%A1%9D-%EB%91%90-%EB%A9%94%EC%84%9C%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EC%97%AC-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81%ED%95%98%EB%9D%BC">3번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Adversarial-Search/#4-%EC%BB%B4%ED%93%A8%ED%84%B0-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%EA%B0%80-%EC%9E%90%EC%8B%A0%EA%B3%BC-%EA%B2%8C%EC%9E%84%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8F%84%EB%A1%9D-connectfour_aipy-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4%EB%B3%B4%EC%9E%90-%EC%B2%AB-%EB%B2%88%EC%A7%B8%EC%99%80-%EB%91%90-%EB%B2%88%EC%A7%B8-%ED%94%8C%EB%A0%88%EC%9D%B4%EC%96%B4%EC%9D%98-%EC%8A%B9%EB%A5%A0%EC%9D%80">4번</a>
+        </li>
+    </ul>
+</div>
 ## 적대적 탐색
 2인용 게임, 제로섬, 완전 정보 게임인 틱택토, 커넥트포, 체커스, 체스 등과 같은 게임의 인공적인 상대 플레이어를 만든느 법을 배운다.  
   
