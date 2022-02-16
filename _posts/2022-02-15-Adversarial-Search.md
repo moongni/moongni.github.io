@@ -805,7 +805,6 @@ class ConnectfourMinimaxTest(unittest.TestCase):
         column6.push(C4Piece.B)
         column6.push(C4Piece.B)
         
-
         column7: C4Board.Column = C4Board.Column()
         
         to_block_position: List[List[C4Piece]] = []
