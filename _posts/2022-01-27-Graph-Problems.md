@@ -277,7 +277,7 @@ class WeightedEdge(Edge):
 # weighted_graph.py
 from typing import TypeVar, Generic, List, Tuple
 from graph import Graph
-from weighted_edge impoprt WeightedEdge
+from weighted_edge import WeightedEdge
 
 V = TypeVar('V') # 그래프 정점(vertex) 타입
 
