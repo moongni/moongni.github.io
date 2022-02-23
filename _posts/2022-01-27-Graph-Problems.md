@@ -242,7 +242,7 @@ else:
 
 
 ```python
-# WeightedEdge.py
+# weighted_edge.py
 from __future__ import annotations
 from dataclasses import dataclass
 from edge import Edge
