@@ -43,9 +43,10 @@ class Edge:
 ```
 
 방향성이 없는 그래프를 다룰 예정이기 때문에 `reversed()`는 에지의 반대 방향으로 이동하는 `Edge`를 반환한다.  
-> 방향성이 없는 그래프: 에지가 양방향인 그래프
+  
+- **방향성이 없는 그래프: 에지가 양방향인 그래프**
 
-**NOTE**: **dataclass** 모듈을 사용한다. `@dataclass` 데커레이터로 표시된 클래스는 자동적으로 `__init__()` 메서드를 생성한다. 타입 어노테이션으로 선언된 변수를 자동으로 인스턴스화한다.
+**NOTE: dataclass모듈을 사용한다. `@dataclass` 데커레이터로 표시된 클래스는 자동적으로 `__init__()` 메서드를 생성한다. 타입 어노테이션으로 선언된 변수를 자동으로 인스턴스화한다.**
 {: .notice--info}
 
 
@@ -131,6 +132,8 @@ class Graph(Generic[V]):
 
 정점에 대한 인덱스를 모르는 경우 `_vertiecs` 를 검색하여 찾아야하기 때문에, 인덱스와 V 타입에 대한 각각의 메서드가 존재한다. 
 
+<hr>
+
 ### 4.2.1 Edge와 Graph 클래스 사용
 구현된 `Edge` , `Graph` 클래스를 사용하여 미국 도시를 잇는 네트워크를 만든다.
 
@@ -196,6 +199,7 @@ print(city_graph)
 1. 경로는 에지 리스트를 취해서 연결된 정점을 파악한다.
 2. 정점 목록을 유지하고 에지 리스트를 하나씩 제거하며 경로를 찾는다.
 
+<hr>
 
 ### 4.3.1 너비 우선 탐색
 시작 지점과 목표 지점 사이의 에지가 가장 적은 경로를 찾는 것이다.  
@@ -207,8 +211,8 @@ Boston 에서 Miami 사이의 가장 짧은 길을 찾을 것이다.
 `generic_search.py` 에서 구현한 `bfs()` 함수는 3개의 매개변수를 취한다.  
 
 - initial: 시작지점 = "Boston"
-- goal_test: Callable 함수로 목표지점이 맞는지 확인 = "Miami"인지 확인하는 lambda 함수
-- successors: Callable 다음 이동지점 확인 함수 = neighbors_for_vertex() 메서드
+- goal_test: Callable >>  함수로 목표지점이 맞는지 확인 = "Miami"인지 확인하는 lambda 함수
+- successors: Callable >> 다음 이동지점 확인 함수 = neighbors_for_vertex() 메서드
 
 
 ```python
@@ -235,7 +239,7 @@ else:
 
 ### 4.4.1 가중치
 노선의 양을 이해하려면 에지가 나타내는 거리를 알아야 한다. 이 예제의 가중치(weight)은 연결된 두 대도시 사이의 거리이다.  
-
+  
 가중치를 처리하기 위해 `Edge` 의 서브클래스 `WeightedEdge` 와 `Graph` 의 서브클래스 `WeightedGraph` 를 구현한다.  
 
 **프림(Prim)알고리즘**(야르니크 알고리즘)에서 한 에지를 다른 에지와 비교하여 가장 작은 가중치를 가진 에지를 찾는 함수가 필요하다.
@@ -361,10 +365,10 @@ print(city_graph2)
     Philadelphia -> [('New York', 81), ('Washington', 123)]
     Washington -> [('Atlanta', 543), ('Miami', 923), ('Detroit', 396), ('Philadelphia', 123)]
     
-    
+<hr>    
 
 ### 4.4.2 최소 신장 트리 찾기
->**트리**란 두 정점 사이에 한 방향의 경로만 존재하는 그래프의 일종으로 **사이클(cycle)**이 없다는 것을 의미한다.  
+**트리**란 두 정점 사이에 한 방향의 경로만 존재하는 그래프의 일종으로 **사이클(cycle)**이 없다는 것을 의미한다.  
 
 그래프의 한 시작점에서 같은 에지를 반복하지 않고 다시 같은 시작점으로 돌아올 수 있다면 사이클이 존재하는 것이다.
 
@@ -402,7 +406,8 @@ def total_weight(wp: WeightedPath) -> float:
     <li>그래프의 모든 정점이 최소 신장 트리에 추가될 때까지 2와 3을 반복한다.</li>
 </ol>
 </div>
->프림 알고리즘은 우선순위 큐를 사용하여 새 정점이 최소 신장 트리에 추가될 때마다 트리 외부 정점에 연결되는 모든 출력 에지가 우선순위 큐에 추가된다.  
+  
+프림 알고리즘은 우선순위 큐를 사용하여 새 정점이 최소 신장 트리에 추가될 때마다 트리 외부 정점에 연결되는 모든 출력 에지가 우선순위 큐에 추가된다.  
 최소 가중치 에지는 우선순위 큐에서 `pop()` 되며, 알고리즘은 우선순위 큐가 빌 때까지 실행된다.
 
 **CAUTION**: 프림 알고리즘은 방향이 있는 그래프에서 제대로 작동하지 않는다. 또한 연결되지 않은 그래프에서는 아예 작동하지 않는다.
@@ -410,8 +415,8 @@ def total_weight(wp: WeightedPath) -> float:
 
 
 ```python
-#minimum_spanning_tree.py 계속
-
+#minimum_spanning_tree.py
+...
 def mst(wg: WeightedGraph[V], start: int = 0) -> Optional[WeightedPath]:
     if start > (wg.vertex_count - 1) or start < 0: # 시작 정점이 유효한지 판단
         return None
@@ -443,12 +448,12 @@ def print_weighted_path(wg: WeightedGraph, wp: WeightedPath) -> None:
     print(f"가중치 총합 : {total_weight(wp)}")
 ```
 
->`mst()` 함수는 최소 신장 트리를 표현하는 `WeightedPath` 타입 앨리어스에서 선택된 경로를 반환한다.  
+- `mst()` 함수는 최소 신장 트리를 표현하는 `WeightedPath` 타입 앨리어스에서 선택된 경로를 반환한다.  
 
->`result` 변수에 최소 신장 트리의 가중치 경로를 저장한다. 최소 가중치의 에지를 `pop()`하여 이를 추가하고, 그래프의 다른 정점으로 이동한다.  
+- `result` 변수에 최소 신장 트리의 가중치 경로를 저장한다. 최소 가중치의 에지를 `pop()`하여 이를 추가하고, 그래프의 다른 정점으로 이동한다.  
 프림 알고리즘은 항상 최소 가중치의 에지를 선택하기 때문에 **탐욕 알고리즘(greedy algorithm)**이다.
 
->`visit()` 함수는 내부 헬퍼 함수로 방문한 정점을 표시하고, pq에 방문하지 않은 정점에 연결된 에지를 추가한다.
+- `visit()` 함수는 내부 헬퍼 함수로 방문한 정점을 표시하고, pq에 방문하지 않은 정점에 연결된 에지를 추가한다.
 
 
 ```python
@@ -484,8 +489,9 @@ else:
 ### 4.5.1 다익스트라 알고리즘
 다익스트라 알고리즘은 가중치 그래프에서 최단 경로를 반환한다. 단일 소스 정점에서 가장 가까운 정점을 계속 탐색한다.  
 >프림 알고리즘과 동일하게 탐욕적이다.
+  
+**다익스트라 알고리즘**  
 <div class="notice">
-다익스트라 알고리즘의 과정  
 <ol start="1">
     <li>시작 정점을 우선순위 큐에 추가한다.</li>
     <li>우선순위 큐에서 가장 가까운 정점을 팝한다.</li>
@@ -569,10 +575,10 @@ def path_dict_to_path(start: int, end: int, path_dict: Dict[int, WeightedEdge]) 
     return list(reversed(edge_path))
 ```
 
->`while not pq.empty`  
+- `while not pq.empty`  
 우선순위 큐가 빌 때까지 다익스트라 알고리즘을 계속 실행한다. 변수 `u`는 현재 정점이고, `dist_u` 는 `u` 에 대한 거리이다.  
 
->`for we in wg.edges_for_index(u):`  
+- `for we in wg.edges_for_index(u):`  
 변수 `u` 에 연결된 모든 에지를 탐색하고 이 단계에서 탐색한 모든 정점은 거리가 갱신된다.
 
 
@@ -617,8 +623,10 @@ print_weighted_path(city_graph2, path)
 다익스트라 알고리즘과 프림 알고리즘은 탐욕 알고리즘으로 비슷한 코드를 사용하여 구현할 수 있다.  
 또한 2장의 $A^*$ 알고리즘과 닮았다. 다익스트라 알고리즘에서 단일 대상을 찾도록 제한하고, 휴리스틱을 추가하면 두 알고리즘은 동일하다.  
 
-**NOTE**: 위의 다익스트라 알고리즘은 양수 가중치 그래프를 다루도록 설계되었다. 음수 가중치 그래프를 다루려면 수정하거나 대체 알고리즘을 사용해야 한다.
+**NOTE: 위의 다익스트라 알고리즘은 양수 가중치 그래프를 다루도록 설계되었다. 음수 가중치 그래프를 다루려면 수정하거나 대체 알고리즘을 사용해야 한다.**
 {: .notice--info}
+
+<hr>
 
 ## 프림 알고리즘 증명
 프림 알고리즘으로 최소 신장 트리를 구할 수 있다는 것을 증명한다.  
@@ -647,3 +655,188 @@ print_weighted_path(city_graph2, path)
 즉 프림 알고리즘에 의해 선택된 $edge_1$ 은 $T$ 에 포함된다. {$edge_1$} $\subset$ $T$  
 
 **과정 4**: 프림 알고리즘으로 n-1번째 선택된 집합을 $E_{n-1}$라 할 때, 집합 $T$와 $E_{n-1}$은 $E_{n-2}$와 $\{edge_{n-1}\}$ 차이가 난다. $T$는 최소비용 트리이며, $E_{n-1}$는 $\{edge_{n-1}\}$는 프림알고리즘으로 인해 최소 비용의 에지임으로 $T$와 $E_{n-1}$의 비용은 같다.
+
+## 연습문제
+### 1.
+**그래프 프레임워크에 에지 및 정점 제거를 위한 메서드를 추가하라.**
+
+```python
+class Graph(Generic[V]):
+    ...
+    # ===== remove method=====
+    # 에지 제거 메서드
+    def remove_edge(self, edge: Edge, reversed: bool = False) -> None:
+        for idx, e in enumerate(self._edges[edge.u]):
+            if e.v == edge.v:
+                del self._edges[edge.u][idx]
+                break
+        
+        if not reversed:
+            self.remove_edge(edge.reversed(), reversed = True)
+    
+    def remove_edge_by_indice(self, u: int, v: int) -> None:
+        edge: Edge = Edge(u, v)
+        self.remove_edge(edge)
+    
+    def remove_edge_by_vertices(self, first: V, second: V) -> None:
+        u: int = self._vertices.index(first)
+        v: int = self._vertices.index(second)
+        self.remove_edge_by_indice(u, v)
+
+    # 정점 제거 메서드
+    def remove_vertex(self, vertex: V) -> int:
+        idx = self._vertices.index(vertex)
+        del self._vertices[idx]
+        del self._edges[idx]
+
+        # 정점과 에지 삭제로 에지 인덱스 조정
+        for edges in self._edges:
+            for i, edge in reversed(list(enumerate(edges))):
+                if edge.v == idx:
+                    del edges[i]
+                else:
+                    if edge.v > idx:
+                        edges[i].v -= 1
+                    if edge.u > idx:
+                        edges[i].u -= 1
+
+        return self.vertex_count - 1
+    ...
+```
+
+<hr>
+
+### 2.
+**그래프 프레임워크에 유향 그래프를 사용할 수 있도록 코드를 추가하라.**
+```python
+class Graph(Generic[V]):
+    ...
+    def add_edge(self, edge: Edge, directed: bool = False) -> None:
+        self._edges[edge.u].append(edge)
+        if not directed:
+            self._edges[edge.v].append(edge.reversed())
+
+    def add_edge_by_indices(self, u: int, v: int, directed: bool = False) -> None:
+        edge: Edge = Edge(u, v)
+        self.add_edge(edge, directed)
+
+    def add_edge_by_vertices(self, first: V, second: V, directed: bool = False) -> None:
+        u: int = self._vertices.index(first)
+        v: int = self._vertices.index(second)
+        self.add_edge_by_indices(u, v, directed)
+    ...
+```
+
+<hr>
+
+### 3.
+**그래프 프레임워크를 사용하여 쾨니히스베르크 다리 건너기 문제를 증명 또는 반증하라**
+```python
+from __future__ import annotations
+from typing import List, Optional
+from graph import Graph
+from edge import Edge
+from generic_search import Stack
+import copy
+
+path = List[Edge] # path type alias
+
+def konigsberger(konigs_graph: Graph) -> Optional[path]:
+    vertex_count = konigs_graph.vertex_count
+    # 시작 정점
+    for vertex_idx in range(vertex_count):
+        cur_graph = copy.deepcopy(konigs_graph)
+        first: int = vertex_idx
+        result: path = []
+        frontier: Stack[Edge] = Stack()
+
+        # 정점과 연결된 에지 Stack에 추가
+        def successors(index: int) -> bool:
+            flag: bool = False
+            for edge in cur_graph.edges_for_index(index):
+                frontier.push(edge)
+                flag = True
+            return flag
+
+        successors(first)
+
+        # 방문한 에지 삭제와 pop()할 때 다시 에지 추가
+        def visit(edge, v: bool) -> None:
+            if v:
+                cur_graph.remove_edge_by_indice(edge.u, edge.v)
+            else:
+                cur_graph.add_edge_by_indices(edge.u, edge.v)
+
+        while not frontier.empty:
+            edge = frontier.pop()
+            # stack에 들어있는 edge가 이동 가능한 지 확인
+            if len(result) == 0 or (edge in cur_graph._edges[edge.u] and edge.u == result[-1].v):
+                visit(edge, True)
+                result.append(edge)
+                # 모든 에지를 삭제했다면 결과 도출
+                if cur_graph.edge_count == 0:
+                    return result
+                next: bool = successors(edge.v)
+                if not next:
+                    result.pop()
+                    visit(edge, False)
+            elif not frontier.empty:
+                frontier.pop()
+    return None
+
+def print_path(graph: Graph, path: path) -> None:
+    for edge in path:
+        print(" >> ", end = "")
+        print(f"{graph.vertex_at(edge.u)} > {graph.vertex_at(edge.v)}" ,end="")
+    print()
+
+if __name__ == "__main__":
+    konigs_graph: Graph[str] = Graph(["A", "B", "C", "D"])
+
+    konigs_graph.add_edge_by_vertices("A", "B")
+    konigs_graph.add_edge_by_vertices("A", "B")
+    konigs_graph.add_edge_by_vertices("A", "C")
+    konigs_graph.add_edge_by_vertices("A", "C")
+    konigs_graph.add_edge_by_vertices("A", "D")
+    konigs_graph.add_edge_by_vertices("B", "D")
+    konigs_graph.add_edge_by_vertices("C", "D")
+
+    graph = Graph(["A", "B", "C", "D", "E", "F"])
+    graph.add_edge_by_vertices("A", "B")
+    graph.add_edge_by_vertices("A", "F")
+    graph.add_edge_by_vertices("B", "C")
+    graph.add_edge_by_vertices("B", "E")
+    graph.add_edge_by_vertices("B", "F")
+    graph.add_edge_by_vertices("C", "D")
+    graph.add_edge_by_vertices("C", "E")
+    graph.add_edge_by_vertices("C", "F")
+    graph.add_edge_by_vertices("D", "E")
+    graph.add_edge_by_vertices("E", "F")
+
+    
+    result: Optional[path] = konigsberger(konigs_graph)
+    if result is None:
+        print("No solution found!")
+    else:
+        print_path(konigs_graph, result)
+
+    result: Optional[path] = konigsberger(graph)
+    if result is None:
+        print("No solution found!")
+    else:
+        print_path(graph, result)
+```
+**출력**
+```
+        No solution found!
+        >> A > F >> F > E >> E > D >> D > C >> C > F >> F > B >> B > E >> E > C >> C > B >> B > A
+```
+
+한붓그리기 문제, Eulerian circuit으로 불리는 이 문제는 그래프가 주어졌을 때 그래프의 한 시작점으로부터 모든 에지를 한번씩만 지나 다시 시작점으로 돌아오는 경로를 찾는 문제이다.  
+  
+
+**무향 그래프에서 오일러 서킷이 존재하기 위한 조건**
+- 모든 간선이 단 하나의 그래프에 연결되어 있을 떄
+- 모든 정점의 연결된 에지가 짝수일 때
+
+위에 `konigsberger()` 함수는 `Stack()` 자료구조를 통해 이전 포스팅에서 다뤘던 **깊이 우선탐색(BFS)** 으로 경로를 구한다.
