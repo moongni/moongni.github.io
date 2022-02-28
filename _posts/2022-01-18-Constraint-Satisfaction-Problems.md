@@ -383,7 +383,8 @@ else:
     
 
 ## 3.5 SEND+MORE=MONEY
-> 복면산 퍼즐 : 계산식에서 숫자를 문자나 그림 등으로 가려놓고 어떤 숫자가 들어가는지 알아맞히는 퍼즐이다. 숫자가 마치 복면을 쓰고 있는 것 같다고 하여 복면산이라고 부른다. 
+**NOTICE: 복면산 퍼즐이란 계산식에서 숫자를 문자나 그림 등으로 가려놓고 어떤 숫자가 들어가는지 알아맞히는 퍼즐이다. 숫자가 마치 복면을 쓰고 있는 것 같다고 하여 복면산이라고 부른다.** 
+{: .notice--info}
 
 모델링
 - 변수 : 8개의 문자 ("S","E","N","D","M","O","R","Y")
@@ -535,7 +536,7 @@ if solution is None:
     print("답을 찾을 수 없습니다.")
 else:
     for board, grid_locations in solution.items():
-        for index in range((board//10)*(board%10)):
+        for index in range((board // 10) * (board % 10)):
             (row, col) = (grid_locations[index].row, grid_locations[index].column)
             grid[row][col] = fill_board[board]
     display_grid(grid)
@@ -560,9 +561,14 @@ else:
 ### 1번
 WordSearchConstraint 클래스를 수정하여 중복 단어를 허용하는 단어 검색을 구현하라.
 
+모델링
+- 변수 : 5가지의 단어 ("MATTHEW", "JOE", "MARY", "SARAH", "SALLY")
+- 도메인 : 격자 안에 들어갈 수 있는 위치
+- 제약 : 단어의 위치가 하나만 중복 될 수 있다.
 
 ```python
 # word_search.py
+...
 class WordSearchConstraint(Constraint[str, List[GridLocation]]):
     def __init__(self, words: List[str]) -> None:
         super().__init__(words)
@@ -572,15 +578,16 @@ class WordSearchConstraint(Constraint[str, List[GridLocation]]):
         board = [["" for c in range(9)] for r in range(9)]
         for word, locations in assignment.items():
             for i in range(len(word)):
-                if board[locations[i].row][locations[i].column] != "":
-                    if board[locations[i].row][locations[i].column] != word[i]:
+                if board[locations[i].row][locations[i].column] != "" and \
+                board[locations[i].row][locations[i].column] != word[i]:
                         return False
                 else:
                     board[locations[i].row][locations[i].column] = word[i]
         return True
+
 ```
 
-제약 조건: 중복을 허용하지 않는다. -> 각 단어의 한자리씩 곂칠 수 있다. (직선으로 할당되면, 단어가 곂치는 부분은 서로 한개 이상 있을 수 없기 때문에)  
+제약 조건: 중복을 허용하지 않는다. >> 각 단어의 한자리씩 곂칠 수 있다. (직선으로 할당되면, 단어가 곂치는 부분은 서로 한개 이상 있을 수 없기 때문에)  
 
 `satisfied()` 함수 내에서 보드를 만들어 단어를 할당시킬 때, board에 다른 단어가 있으면 `False`를 반환했다.  
 메모리를 낭비하기 때문에 더 좋은 방법이 있나 찾아봐야겠다.
@@ -600,9 +607,6 @@ if solution is None:
     print("답을 찾을 수 없습니다.")
 else:
     for word, grid_locations in solution.items():
-        # 50% 확률로 grid_locations를 반전한다.
-        if choice([True, False]):
-            grid_locations.reverse()
         for index, letter in enumerate(word):
             (row, col) = (grid_locations[index].row, grid_locations[index].column)
             grid[row][col] = letter
@@ -631,7 +635,7 @@ else:
 
 ```python
 from typing import NamedTuple, List, Dict, Optional
-#from csp import CSP, Constraint
+from csp import CSP, Constraint
 
 Grid = List[List[str]] # 격자 타입 앨리어스
 
@@ -639,11 +643,11 @@ class GridLocation(NamedTuple):
     row: int
     column: int
 
-
 def display_grid(grid: Grid) -> None:
     for row in grid:
         print(row)
 
+# board에서 빈 칸을 찾는 함수
 def find_empty(board: Grid) -> List[GridLocation]:
     variables: List[GridLocation] = []
     for i in range(len(board)):
@@ -652,12 +656,6 @@ def find_empty(board: Grid) -> List[GridLocation]:
                 variables.append(GridLocation(i,j))  # row, col
     return variables
 
-```
-
-> `find_empty()` 함수는 변수를 구하기 위해 `board` 에서 0인 `GridLocation` 을 반환한다.
-
-
-```python
 class SudokuSearchConstraint(Constraint[GridLocation, int]):
     def __init__(self, grid_locations: List[GridLocation]) -> None:
         super().__init__(grid_locations)
@@ -675,6 +673,7 @@ class SudokuSearchConstraint(Constraint[GridLocation, int]):
                 if board[y][loc.column] == num and y != loc.row:
                     board[loc.row][loc.column] = 0
                     return False
+            # 3 * 3 확인
             startRow = loc.row - (loc.row % 3)
             startCol = loc.column - (loc.column % 3)
             for i in range(startRow, startRow + 3):
@@ -686,8 +685,9 @@ class SudokuSearchConstraint(Constraint[GridLocation, int]):
             board[loc.row][loc.column] = num
         return True
 ```
+- `find_empty()` 함수는 변수를 구하기 위해 `board` 에서 0인 `GridLocation` 을 반환한다.
 
-`SudokuSearchConstraint()` 의 `satisfied()` 메서드는 제약 조건 가로, 세로, $3 \times 3$ 의 9 그리드의 중복되는 숫자가 없음을 찾는다.
+- `SudokuSearchConstraint()` 의 `satisfied()` 메서드는 제약 조건 가로, 세로, $3 \times 3$ 의 9 그리드의 중복되는 숫자가 없음을 찾는다.
 
 
 ```python
