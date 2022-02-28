@@ -10,6 +10,47 @@ sidebar:
 use_math: true
 ---
 # 고전 알고리즘 인 파이썬
+<div class = "notice--success">
+    <h3> 목차 </h3>
+    <a href="https://moongni.github.io/algorithm/Search-Problems/#21-dna-%EA%B2%80%EC%83%89">DNA 검색</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#212-%EC%84%A0%ED%98%95-%EA%B2%80%EC%83%89">선형 검색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#213-%EC%9D%B4%EC%A7%84-%EA%B2%80%EC%83%89">이진 검색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#214-%EC%A0%9C%EB%84%A4%EB%A6%AD-%EA%B2%80%EC%83%89">제네릭 검색</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Search-Problems/#22-%EB%AF%B8%EB%A1%9C-%EC%B0%BE%EA%B8%B0">미로찾기</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#223-%EA%B9%8A%EC%9D%B4-%EC%9A%B0%EC%84%A0-%ED%83%90%EC%83%89">깊이 우선 탐색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#224-%EB%84%88%EB%B9%84-%EC%9A%B0%EC%84%A0-%ED%83%90%EC%83%89">너비 우선 탐색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#225-a-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">A-star 알고리즘</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Search-Problems/#23-%EC%84%A0%EA%B5%90%EC%82%AC%EC%99%80-%EC%8B%9D%EC%9D%B8%EC%A2%85-%EB%AC%B8%EC%A0%9C">선교사와 식인종 문제</a>
+    <a href="https://moongni.github.io/algorithm/Search-Problems/#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습 문제</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#1%EB%B2%88">1 번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#2%EB%B2%88">2 번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#3%EB%B2%88">3 번</a>
+        </li>
+    </ul>
+</div>
+
 ## 제약 충족 문제
 
 광범위한 제약 충족 문제 해결의 기초

@@ -10,7 +10,46 @@ sidebar:
 use_math: true
 ---
 # 고전 알고리즘 인 파이썬
-
+<div class = "notice--success">
+    <h3> 목차 </h3>
+    <a href="https://moongni.github.io/algorithm/Search-Problems/#21-dna-%EA%B2%80%EC%83%89">DNA 검색</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#212-%EC%84%A0%ED%98%95-%EA%B2%80%EC%83%89">선형 검색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#213-%EC%9D%B4%EC%A7%84-%EA%B2%80%EC%83%89">이진 검색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#214-%EC%A0%9C%EB%84%A4%EB%A6%AD-%EA%B2%80%EC%83%89">제네릭 검색</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Search-Problems/#22-%EB%AF%B8%EB%A1%9C-%EC%B0%BE%EA%B8%B0">미로찾기</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#223-%EA%B9%8A%EC%9D%B4-%EC%9A%B0%EC%84%A0-%ED%83%90%EC%83%89">깊이 우선 탐색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#224-%EB%84%88%EB%B9%84-%EC%9A%B0%EC%84%A0-%ED%83%90%EC%83%89">너비 우선 탐색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#225-a-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">A-star 알고리즘</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Search-Problems/#23-%EC%84%A0%EA%B5%90%EC%82%AC%EC%99%80-%EC%8B%9D%EC%9D%B8%EC%A2%85-%EB%AC%B8%EC%A0%9C">선교사와 식인종 문제</a>
+    <a href="https://moongni.github.io/algorithm/Search-Problems/#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습 문제</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#1%EB%B2%88">1 번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#2%EB%B2%88">2 번</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Search-Problems/#3%EB%B2%88">3 번</a>
+        </li>
+    </ul>
+</div>
 ## 2.1 DNA 검색
 유전자는 A, C, G, T의 문자 시퀀스로 표현하며, 각 문자는 **nucleotide** 를 나타내고, 세 개의 뉴클레오타이드의 조합을 **codon** 이라고 한다. 특정 아미노산에 대한 코돈 코드는 다른 아미노산과 함께 단백질을 형성 할 수 있다.  
 
@@ -1136,68 +1175,8 @@ from heapq import heappush, heappop
 
 T = TypeVar('T')
 
-class Node(Generic[T]):
-    def __init__(self, state: T, parent: Optional[Node], cost: float = 0.0,
-                heuristic: float = 0.0) -> None:
-        self.state: T = state
-        self.parent: Optional[Node] = parent
-        self.cost: float = cost
-        self.heuristic: float = heuristic
-            
-    def __lt__(self, other: Node) -> bool:
-        return (self.cost + self.heuristic) < (other.cost + other.heuristic)
-    
-class Stack(Generic[T]):
-    def __init__(self) -> None:
-        self._container: List[T] = []
-    
-    @property
-    def empty(self) -> bool:
-        return not self._container # 스택이 비었다면 true(= false 가 아니다)
-    
-    def push(self, item: T) -> None:
-        self._container.append(item)
-    
-    def pop(self) -> T:
-        return self._container.pop()  # 후입선출(LIFO)
-    
-    def __repr__(self) -> str:
-        return repr(self._container)
-    
-class Queue(Generic[T]):
-    def __init__(self) -> None:
-        self._container: Deque[T] = Deque()
-    
-    @property
-    def empty(self) -> bool:
-        return not self._container # 요소가 없을시에 true 반환 (= false가 아니다)
-    
-    def push(self, item: T) -> None:
-        self._container.append(item)
-        
-    def pop(self) -> T:
-        return self._container.popleft() # 가장 왼쪽에 있는 요소 제거 및 반환
-    
-    def __repr__(self) -> str:
-        return repr(self._container)
+...
 
-class PriorityQueue(Generic[T]):
-    def __init__(self) -> None:
-        self._container: List[T] = []
-            
-    @property
-    def empty(self) -> bool:
-        return not self._container # 요소가 없을시에 true 반환 (= false가 아니다)
-    
-    def push(self, item: T) -> None:
-        heappush(self._container, item) # 우선순위 push()
-        
-    def pop(self) -> T:
-        return heappop(self._container) # 우선순위 pop()
-        
-    def __repr__(self) -> str:
-        return repr(self._container)
-    
 def dfs(initial: T, goal_test: Callable[[T], bool],
         successors: Callable[[T], List[T]]) -> int:
     count = 0
@@ -1275,72 +1254,6 @@ def astar(initial: T, goal_test: Callable[[T], bool], successors: Callable[[T], 
                 frontier.push(Node(child, current_node, new_cost, heuristic(child)))
     return 85  # 탐색 결과 목표지점에 도달하지 못함
 ```
-
-
-```python
-from enum import Enum
-from typing import List, NamedTuple, Callable, Optional
-import random
-from math import sqrt
-
-class Cell(str, Enum):
-    EMPTY = " "
-    BLOCKED = "X"
-    START = "S"
-    GOAL = "G"
-    PATH = "*"
-    
-class MazeLocation(NamedTuple):
-    row: int
-    column: int
-
-class Maze:
-    def __init__(self, rows: int = 10, columns: int = 10,
-                sparseness: float = 0.2,
-                start: MazeLocation = MazeLocation(0,0),
-                goal: MazeLocation= MazeLocation(9,9)) -> None:
-        #기본 인스턴스 변수 초기화
-        self._rows: int = rows
-        self._columns: int = columns
-        self.start: MazeLocation = start
-        self.goal: MazeLocation = goal
-        # 격자를 빈 공간으로 채운다.
-        self._grid: List[List[Cell]] = [[Cell.EMPTY for c in range(columns)] for r in range(rows)]
-        # 격자에 막힌 공간을 무작위로 채운다.
-        self._randomly_fill(rows, columns, sparseness)
-        # 시작 위치와 목표 위치를 설정
-        self._grid[start.row][start.column] = Cell.START
-        self._grid[goal.row][goal.column] = Cell.GOAL
-        
-    def _randomly_fill(self, rows: int, columns: int, sparseness: float):
-        for row in range(rows):
-            for column in range(columns):
-                if random.uniform(0, 1.0) < sparseness:
-                    self._grid[row][column] = Cell.BLOCKED
-    
-    def goal_test(self, ml: MazeLocation) -> bool: # 목표지점에 도달했는지 검사
-        return ml == self.goal
-    
-    def successors(self, ml: MazeLocation) -> List[MazeLocation]:
-        locations: List[MazeLocation] = []
-        if ml.row + 1 < self._rows and self._grid[ml.row + 1][ml.column] != Cell.BLOCKED: # 우측 이동 가능
-            locations.append(MazeLocation(ml.row + 1, ml.column))
-        if ml.row - 1 >= 0 and self._grid[ml.row - 1][ml.column] != Cell.BLOCKED: # 좌측 이동 가능
-            locations.append(MazeLocation(ml.row - 1, ml.column))
-        if ml.column + 1 < self._columns and self._grid[ml.row][ml.column + 1] != Cell.BLOCKED: # 하측 이동 가능
-            locations.append(MazeLocation(ml.row, ml.column + 1))
-        if ml.column - 1 >= 0 and self._grid[ml.row][ml.column - 1] != Cell.BLOCKED: # 상측 이동 가능
-            locations.append(MazeLocation(ml.row, ml.column - 1))
-        return locations
-        
-def manhattan_distance(goal: MazeLocation) -> Callable[[MazeLocation], float]:
-    def distance(ml: MazeLocation) -> float:
-        xdist: int = abs(ml.column - goal.column)
-        ydist: int = abs(ml.row - goal.row)
-        return (xdist + ydist)
-    return distance
-```
-
 
 ```python
 import numpy as np
@@ -1438,9 +1351,9 @@ MAX_NUM : int = 5
     ...
 ```
 
-`MAX_NUM = 5` 선교사와 식인종은 각각 5명으로 증가  
+- `MAX_NUM = 5` 선교사와 식인종은 각각 5명으로 증가  
 
-`successors()` 보트를 3명 탈 수 있을 때, 이동 가능한 경우 추가
+- `successors()` 보트를 3명 탈 수 있을 때, 이동 가능한 경우 추가
 
 ```python
 start: MCState = MCState(MAX_NUM, MAX_NUM, True)
@@ -1510,3 +1423,10 @@ else:
     서쪽 강둑에는 0명의 선교사와 0명의 식인종이 있다. 
     동쪽 강둑에는 5명의 선교사와 5명의 식인종이 있다. 
     배는 동쪽에 있다.
+
+**NOTE: \__hash__() 와 \__eq__() 매직 매서드가 필요한 이유는 `bfs` 너비 우선 탐색에서 `explored: Set` 로 이미 방문한 곳인지 확인하게 된다. 선교사 문제의 `successors()` 함수에서 새로운 상태의 MCState클래스로 반환할 때 클래스 내부의 상태가 같다면 같은 개체로 인정한다는 동등성을 만들어줘야 한다. 즉 서로 다른 개체가 동등함을 보이기 위해 매직 매서드를 작성해야된다.**
+{: .notice--info} 
+
+## 참고문헌
+![http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9791162242469](http://image.kyobobook.co.kr/images/book/large/469/l9791162242469.jpg)  
+고전 알고리즘 인 파이썬

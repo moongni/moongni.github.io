@@ -10,7 +10,32 @@ sidebar:
 use_math: true
 ---
 # 고전 알고리즘 인 파이썬
-
+<div class = "notice--success">
+    <h3> 목차 </h3>
+    <a href="https://moongni.github.io/algorithm/Small-Problems/#small-problems">Small Problems</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Small-Problems/#11-%ED%94%BC%EB%B3%B4%EB%82%98%EC%B9%98-%EC%88%98%EC%97%B4">1.1 피보나치 수열</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Small-Problems/#12-%EC%95%95%EC%B6%95-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">1.2 압축 알고리즘</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Small-Problems/#13-%EA%B9%A8%EC%A7%80%EC%A7%80%EC%95%8A%EB%8A%94-%EC%95%94%ED%98%B8%ED%99%94">1.3 암호화 복호화</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Small-Problems/#14-%ED%8C%8C%EC%9D%B4-%EA%B3%84%EC%82%B0%ED%95%98%EA%B8%B0">1.4 파이 계산하기</a>
+        </li>        <li>
+            <a href="https://moongni.github.io/algorithm/Small-Problems/#15-%ED%95%98%EB%85%B8%EC%9D%B4%EC%9D%98-%ED%83%91">1.5 하노이의 탑</a>
+        </li>
+    </ul>
+    <a href="https://moongni.github.io/algorithm/Small-Problems/#17-%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습문제</a>
+    <ul>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Small-Problems/#17-%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">1 번</a>
+        </li>
+    </ul>
+</div>
 ## Small problems
 
 문제해결 방식에 대해 흥미로운 시각을 제시할 수 있는 작은 문제들을 살펴본다.  
