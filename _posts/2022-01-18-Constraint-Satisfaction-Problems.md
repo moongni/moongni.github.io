@@ -12,41 +12,37 @@ use_math: true
 # 고전 알고리즘 인 파이썬
 <div class = "notice--success">
     <h3> 목차 </h3>
-    <a href="https://moongni.github.io/algorithm/Search-Problems/#21-dna-%EA%B2%80%EC%83%89">DNA 검색</a>
+    <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#%EC%A0%9C%EC%95%BD-%EC%B6%A9%EC%A1%B1-%EB%AC%B8%EC%A0%9C">제약 충족 문제</a>
     <ul>
         <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#212-%EC%84%A0%ED%98%95-%EA%B2%80%EC%83%89">선형 검색</a>
-        </li>
-        <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#213-%EC%9D%B4%EC%A7%84-%EA%B2%80%EC%83%89">이진 검색</a>
-        </li>
-        <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#214-%EC%A0%9C%EB%84%A4%EB%A6%AD-%EA%B2%80%EC%83%89">제네릭 검색</a>
+            <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#31-%EC%A0%9C%EC%95%BD-%EC%B6%A9%EC%A1%B1-%EB%AC%B8%EC%A0%9C-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC">제약 충족 문제 프레임워크</a>
         </li>
     </ul>
-    <a href="https://moongni.github.io/algorithm/Search-Problems/#22-%EB%AF%B8%EB%A1%9C-%EC%B0%BE%EA%B8%B0">미로찾기</a>
+    <a href="">활용예제</a>
     <ul>
         <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#223-%EA%B9%8A%EC%9D%B4-%EC%9A%B0%EC%84%A0-%ED%83%90%EC%83%89">깊이 우선 탐색</a>
+            <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#32-%EC%A7%80%EB%8F%84-%EC%83%89%EC%B9%A0-%EB%AC%B8%EC%A0%9C">지도 색칠 문제</a>
         </li>
         <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#224-%EB%84%88%EB%B9%84-%EC%9A%B0%EC%84%A0-%ED%83%90%EC%83%89">너비 우선 탐색</a>
+            <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#33-%EC%97%AC%EB%8D%9F-%ED%80%B8-%EB%AC%B8%EC%A0%9C">여덟 퀸 문제</a>
         </li>
         <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#225-a-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">A-star 알고리즘</a>
+            <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#34-%EB%8B%A8%EC%96%B4-%EA%B2%80%EC%83%89">단어 검색</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#35-sendmoremoney">SEND + MORE = MONEY</a>
+        </li>
+        <li>
+            <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#36-%ED%9A%8C%EB%A1%9C%ED%8C%90-%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83">회로판 레이아웃</a>
         </li>
     </ul>
-    <a href="https://moongni.github.io/algorithm/Search-Problems/#23-%EC%84%A0%EA%B5%90%EC%82%AC%EC%99%80-%EC%8B%9D%EC%9D%B8%EC%A2%85-%EB%AC%B8%EC%A0%9C">선교사와 식인종 문제</a>
-    <a href="https://moongni.github.io/algorithm/Search-Problems/#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습 문제</a>
+    <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습 문제</a>
     <ul>
         <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#1%EB%B2%88">1 번</a>
+            <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#1%EB%B2%88">1 번</a>
         </li>
         <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#2%EB%B2%88">2 번</a>
-        </li>
-        <li>
-            <a href="https://moongni.github.io/algorithm/Search-Problems/#3%EB%B2%88">3 번</a>
+            <a href="https://moongni.github.io/algorithm/Constraint-Satisfaction-Problems/#3%EB%B2%88">2 번</a>
         </li>
     </ul>
 </div>
@@ -61,7 +57,7 @@ use_math: true
 
 간단한 재귀 백트래킹 검색을 사용하여 제약 충족 문제를 해결하는 방법
 
-> 백트래킹이란 앞장에서 본 DFS(깊이 우선 탐색)과 같이 탐색 중 벽에 막혔을 때, 마지막 지점으로 돌아가 다른 경로를 선택하는 방안이다.
+**백트래킹이란 앞장에서 본 DFS(깊이 우선 탐색)과 같이 탐색 중 벽에 막혔을 때, 마지막 지점으로 돌아가 다른 경로를 선택하는 방안이다.**
 
 ## 3.1 제약 충족 문제 프레임워크
 
@@ -665,7 +661,7 @@ else:
     Y U S S T F U R I
     
 
-### 3번
+### 2번
 제약 충족 문제 해결 프레임워크를 이용하여 스도쿠 문제를 해결할 수 있는 프로그램을 작성하라.  
 
 모델링
