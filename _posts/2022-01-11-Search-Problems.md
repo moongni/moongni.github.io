@@ -37,6 +37,7 @@ use_math: true
         </li>
     </ul>
     <a href="https://moongni.github.io/algorithm/Search-Problems/#23-%EC%84%A0%EA%B5%90%EC%82%AC%EC%99%80-%EC%8B%9D%EC%9D%B8%EC%A2%85-%EB%AC%B8%EC%A0%9C">선교사와 식인종 문제</a>
+    <br>
     <a href="https://moongni.github.io/algorithm/Search-Problems/#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습 문제</a>
     <ul>
         <li>
