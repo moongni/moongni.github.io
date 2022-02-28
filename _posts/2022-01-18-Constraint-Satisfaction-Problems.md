@@ -9,7 +9,8 @@ sidebar:
     nav: "docs"
 use_math: true
 ---
-# 고전 알고리즘 인 파이썬 - 제약 충족 문제
+# 고전 알고리즘 인 파이썬
+## 제약 충족 문제
 
 광범위한 제약 충족 문제 해결의 기초
 
@@ -47,14 +48,15 @@ class Constraint(Generic[V, D], ABC):
         pass
 ```
 
-NOTE: 추상 클래스는 메서드의 목록만 가진 클래스이며 상속받는 파생 클래스에서 메서드를 구현을 강제하기 위해 사용한다. 추상 클래스의 추상 메서드를 구현했지는 파생 클래스가 인스턴스를 만들 때 확인한다.
-{: .notice --public}
+**NOTE: 추상 클래스는 메서드의 목록만 가진 클래스이며 상속받는 파생 클래스에서 메서드를 구현을 강제하기 위해 사용한다. 추상 클래스의 추상 메서드를 구현했지는 파생 클래스가 인스턴스를 만들 때 확인한다.**
+{: .notice--info}
 
-`CSP` 클래스 : 변수, 도메인, 제약조건 저장  
+**`CSP` 클래스** : 변수, 도메인, 제약조건 저장  
 
 
 ```python
 # csp.py
+...
 class CSP(Generic[V, D]):
     def __init__(self, variables: List[V], domains: Dict[V, List[D]]) -> None:
         self.variables: List[V] = variables # 제약조건을 확인할 변수
@@ -103,15 +105,15 @@ class CSP(Generic[V, D]):
         return None # 솔루션 없음
 ```
 
-`__init__()` 메서드에서 제약조건을 Dict 타입의 `self.constraints` 변수를 생성한다.  
+- `__init__()` 메서드에서 제약조건을 Dict 타입의 `self.constraints` 변수를 생성한다.  
 
-`add_constraint()` 메서드에서 모든 변수에 대해 제약 조건을 확인하고, 각 제약 조건 매핑에 자신을 추가한다.  
+- `add_constraint()` 메서드에서 모든 변수에 대해 제약 조건을 확인하고, 각 제약 조건 매핑에 자신을 추가한다.  
 
-주어진 변수 구성을 `assignment(할당)`이라고 하며, `consistent()` 메서드는 주어진 변수와 선택된 도메인값이 제약조건을 충족시키는지 확인한다.  
+- 주어진 변수 구성을 `assignment(할당)`이라고 하며, `consistent()` 메서드는 주어진 변수와 선택된 도메인값이 제약조건을 충족시키는지 확인한다.  
 
-`backtracking_search()` 메서드에서 구현된 백트래킹은 재귀 깊이 우선 탐색의 일종이다.  
+- `backtracking_search()` 메서드에서 구현된 백트래킹은 재귀 깊이 우선 탐색의 일종이다.  
 
->`backtracking_search()` 의 기저조건은 모든 변수에 대한 유효한 할당을 찾는 것이다. 즉 할당된 변수와 변수들의 길이가 같을 경우이다.   
+- `backtracking_search()` 의 기저조건은 모든 변수에 대한 유효한 할당을 찾는 것이다. 즉 할당된 변수와 변수들의 길이가 같을 경우이다.   
   
   
 **모든 변수가 할당되지 않았을 경우**
@@ -124,7 +126,8 @@ class CSP(Generic[V, D]):
 4. 특정 변수에서 가능한 모든 도메인값을 확인했을 때 솔루션이 없다면 `None`을 반환하고, 이전 재귀 체인으로 돌아간다.(백트랙킹)
 
 ## 3.2 지도 색칠 문제
-![지도색칠문제](https://greenblog.co.kr/wp-content/uploads/2020/08/%ED%98%B8%EC%A3%BC-%EC%A7%80%EB%8F%84-min.jpg)  
+<center><img src="https://greenblog.co.kr/wp-content/uploads/2020/08/%ED%98%B8%EC%A3%BC-%EC%A7%80%EB%8F%84-min.jpg" width="70%" height="70%"></center>
+
 [출처: 호주지도 무료이미지](https://greenblog.co.kr/2020/08/24/%ed%98%b8%ec%a3%bc-%ec%a7%80%eb%8f%84-4%ea%b0%80%ec%a7%80-%ec%a2%85%eb%a5%98-%eb%ac%b4%eb%a3%8c-%eb%8b%a4%ec%9a%b4%eb%a1%9c%eb%93%9c/)
 
 호주의 지도를 아래의 제약을 만족하며 색을 칠 할 것이다.  
@@ -159,8 +162,8 @@ class MapColoringConstraint(Constraint[str, str]):
         return assignment[self.place1] != assignment[self.place2]
 ```
 
-TIP: 위 코드의 `super().__init__([place1, place2])` 부분에 `Constraint.__init__([place1, place2])` 처럼 클래스 이름을 사용할 수도 있다. 다중 상속을 처리하는 경우 어떤 슈퍼클래스를 호출하는지 명시적으로 알 수 있기 때문에 유용하다.
-{: .notice --public}
+**TIP: 위 코드의 `super().__init__([place1, place2])` 부분에 `Constraint.__init__([place1, place2])` 처럼 클래스 이름을 사용할 수도 있다. 다중 상속을 처리하는 경우 어떤 슈퍼클래스를 호출하는지 명시적으로 알 수 있기 때문에 유용하다.**
+{: .notice--success}
 
 지역 간 제약 조건을 확인하는 방법을 구현했으므로 CSP클래스를 사용하여 변수와 도메인, 제약조건을 추가한다.
 
@@ -287,7 +290,7 @@ class GridLocation(NamedTuple):
         
 def generate_grid(rows:int, columns: int) -> Grid:
     # 임의의 문자로 격자를 초기화
-    return [[choice(ascii_uppercase) for c in range(columns)]for r in range(rows)]
+    return [[choice(ascii_uppercase) for c in range(columns)] for r in range(rows)]
 
 def display_grid(grid: Grid) -> None:
     for row in grid:
@@ -317,12 +320,10 @@ def generate_domain(word: str, grid: Grid) -> List[List[GridLocation]]:
     return domain
 ```
 
-`generate_grid()` 메서드를 통해 영문자로 격자를 채운다.  
+- `generate_grid()` 메서드를 통해 영문자로 격자를 채운다.  
 
-특정 단어가 격자에 들어갈 수 있는 위치를 파악하기 위해 `generate_domain()` 메서드를 구현한다.  
+- 특정 단어가 격자에 들어갈 수 있는 위치를 파악하기 위해 `generate_domain()` 메서드를 구현한다.  
 `generate_domain()` 메서드는 모든 단어에 대해 왼쪽 위부터 오른쪽 아래까지 모든 격자 위치를 순회하기 때문에 많은 연산이 필요하다.  
-
-> 한번에 같은 길이의 모든 단어를 반복문 내에서 보는 방법을 구현해야 한다.
 
 
 ```python
@@ -345,7 +346,6 @@ class WordSearchConstraint(Constraint[str, List[GridLocation]]):
 > Set 자료형을 사용하는 이유는 중복을 허용하지 않기 때문에 원본 리스트의 항목 수보다 셋으로 변환된 항목 수가 작으면 리스트에 일부 중복된 항목이 있다는 것을 의미한다.
 
 9 X 9 격자에 5개의 단어를 넣는 코드이다.
-
 
 ```python
 # word_search.py
@@ -472,7 +472,7 @@ class GridLocation(NamedTuple):
 
 def generate_grid(rows:int, columns: int) -> Grid:
     # *로 격자를 초기화
-    return [["*" for c in range(columns)]for r in range(rows)]
+    return [["*" for c in range(columns)] for r in range(rows)]
 
 def display_grid(grid: Grid) -> None:
     for row in grid:
@@ -497,7 +497,7 @@ def generate_domain(board: int, grid: Grid) -> List[List[GridLocation]]:
 [3.4 단어검색](http://localhost:4000/algorithm/Constraint-Satisfaction-Problems/#34-%EB%8B%A8%EC%96%B4-%EA%B2%80%EC%83%89) 의 코드를 변형하여 회로판 레이아웃을 해결한다.  
 
 
-`generate_domain()` 함수는 도메인을 생성하는 함수로 `int` 자료형의 형태로 넘어온 변수(61: $6\times 1$)를 통해 회로의 높이와 넓이를 구한다.  
+`generate_domain()` 함수는 도메인을 생성하는 함수로 `int` 자료형의 형태로 넘어온 변수 ( ex 61: $6\times 1$ ) 를 통해 회로의 높이와 넓이를 구한다.  
 
 
 격자의 가로와 세로의 크기를 넘지 않는 범위를 도메인 List에 `append`하여 반환한다.
