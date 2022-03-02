@@ -16,22 +16,22 @@ use_math: true
     <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">유전 알고리즘</a>
     <ul>
         <li>
-            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#51-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98">5.1 시뮬레이션</a>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#51-%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98">시뮬레이션</a>
         </li>
         <li>
-            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#52-%EC%A0%9C%EB%84%A4%EB%A6%AD-%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">5.2 제네릭 유전 알고리즘</a>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#52-%EC%A0%9C%EB%84%A4%EB%A6%AD-%EC%9C%A0%EC%A0%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">제네릭 유전 알고리즘</a>
         </li>
     </ul>
     <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#%ED%99%9C%EC%9A%A9">활용 예제</a>
     <ul>
         <li>
-            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#53-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B0%A9%EC%A0%95%EC%8B%9D">5.3 간단한 방정식</a>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#53-%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%B0%A9%EC%A0%95%EC%8B%9D">간단한 방정식</a>
         </li>
         <li>
-            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#54-send--more--money">5.4 SEND+MORE=MONEY</a>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#54-send--more--money">SEND+MORE=MONEY</a>
         </li>
         <li>
-            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#55-%EC%B5%9C%EC%A0%81%ED%99%94-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%95%95%EC%B6%95">5.5 최적화 리스트 압축</a>
+            <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#55-%EC%B5%9C%EC%A0%81%ED%99%94-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EC%95%95%EC%B6%95">최적화 리스트 압축</a>
         </li>
     </ul>
     <a href="https://moongni.github.io/algorithm/Genetic-Algorithm/#%EC%97%B0%EC%8A%B5%EB%AC%B8%EC%A0%9C">연습문제</a>
@@ -59,7 +59,9 @@ use_math: true
   
 모집단의 일부 개체가 적합도 함수에서 지정된 임계값을 초과하거나 알고리즘이 지정한 세대의 최고값을 통과한다면 가장 적합한 개체가 반환된다.  
   
->유전 알고리즘은 모든 문제의 해결책이 아니다. 위에 시뮬레이션에서도 선택, 크로스오버, 변이 등의 확률에 의존한다. 그러나 빠른 결정론적 알고리즘이 존재하지 않는 문제에서 유전 알고리즘은 좋은 선택이될 수 있다.
+**유전 알고리즘은 모든 문제의 해결책이 아니다. 위에 시뮬레이션에서도 선택, 크로스오버, 변이 등의 확률에 의존한다. 그러나 빠른 결정론적 알고리즘이 존재하지 않는 문제에서 유전 알고리즘은 좋은 선택이될 수 있다.**
+
+<hr>
 
 ### 5.2 제네릭 유전 알고리즘
 <div class="notice--info">
@@ -138,8 +140,6 @@ class Chromosome(ABC):
         </ol>
 </div>
 
-<hr>
-
 ```python
 #genetic_algorithm.py
 from __future__ import annotations
@@ -195,9 +195,9 @@ class GeneticAlgorithm(Generic[C]):
         # 이전 집단보다 하나 더 많을 수 있다.
         if len(new_population) > len(self._population):
             new_population.pop()
+        # 새로운 세대로 참조를 변경한다.
+        self._population = new_population         
 
-        self._population = new_population # 새로운 세대로 참조를 변경한다.
-        
     # _mutation_chance 확률로 각 개별 염색체를 돌연변이한다.
     def _mutate(self) -> None:
         for individual in self._population:
@@ -226,14 +226,14 @@ class GeneticAlgorithm(Generic[C]):
 ```python
 self._fitness_key: Callable = type(self._population[0]).fitness
 ```
-`_fitness_key` 변수는 GeneticAlgorithm 클래스를 통해 염색체의 적합도를 계산하는 메서드의 참조이다. GeneticAlgorithm 클래스는 Chromosome 클래스의 서브클래스와 실행되므로 `_fitness_key` 변수는 서브클래스에 따라 다를 수 있다. 그 값을 찾기 위해 `type()` 함수를 사용하여 적합도를 찾는 염색체의 특정 서브클래스를 참조한다.
+- `_fitness_key` 변수는 GeneticAlgorithm 클래스를 통해 염색체의 적합도를 계산하는 메서드의 참조이다. GeneticAlgorithm 클래스는 Chromosome 클래스의 서브클래스와 실행되므로 `_fitness_key` 변수는 서브클래스에 따라 다를 수 있다. 그 값을 찾기 위해 `type()` 함수를 사용하여 적합도를 찾는 염색체의 특정 서브클래스를 참조한다.
 
 <div class="notice--info">
 
 <h4>_reproduce_and_replace() 단계</h4>
 <ol>
 <li>
-parents의 두 개의 염색체를 룰렛휠과 토너먼트 중 하나의 방식으로 재생산을 위해 선택된다. 토너먼트 선택에서 <b>len(self._population) // 2</b>로 토너먼트를 하지만 구성 옵션을 변경할 수 있다.
+parents의 두 개의 염색체를 룰렛휠과 토너먼트 중 하나의 방식으로 재생산을 위해 선택된다. 토너먼트 선택에서 <b>len(self._population) // 2</b> 로 토너먼트를 하지만 구성 옵션을 변경할 수 있다.
 </li>
 <li>
 parents를 결합하여 두 개의 염색체를 생성하는 결합확률에 따라 <b>new_population</b>에 자식 또는 부모를 추가한다.
@@ -363,6 +363,7 @@ class SendMoreMoney2(Chromosome):
         difference: int = abs(money - (send + more))
         
         return 1 / (difference + 1)
+    
     # 첫 세대로 8개의 문자를 섞는다.
     @classmethod
     def random_instance(cls) -> SendMoreMoney2:
@@ -378,7 +379,6 @@ class SendMoreMoney2(Chromosome):
         l1, l2 = child1.letters[idx1], child2.letters[idx2]
         child1.letters[child1.letters.index(l2)], child1.letters[idx2] = child1.letters[idx2], l2
         child2.letters[child2.letters.index(l1)], child2.letters[idx1] = child2.letters[idx1], l1
-        
         return child1, child2
     
     def mutate(self) -> None: # 두 문자의 위치를 스왑한다.
@@ -398,7 +398,6 @@ class SendMoreMoney2(Chromosome):
         more: int = m * 1000 + o * 100 + r * 10 + e
         money: int = m * 10000 + o * 1000 + n * 100 + e * 10 + y
         difference: int = abs(money - (send + more))
-        
         return f"{send} + {more} = {money} 차이: {difference}"
 ```
 
@@ -433,7 +432,7 @@ difference|difference + 1|fitness(1 / (difference + 1))
 
 
 **CAUTION**: 1을 적합도로 나누는 것은 최소화 문제를 최대화 문제로 변환하는 간단한 방법이지만 **편향**이 있어서 절대로 안전한 방법은 아니다.  
-1을 정수의 균일분포로 나누는 경우 1에 가까운 숫자가 많이 생길 수 있다. **>>** 일반적인 마이크로프로세서가 부동소수점수를 해석하는 미묘한 방식에 따라 예기치 않은 결과가 발생할 수 있다.
+1을 정수의 균일분포로 나누는 경우 0에 가까운 숫자가 많이 생길 수 있다. **>>** 일반적인 마이크로프로세서가 부동소수점수를 해석하는 미묘한 방식에 따라 예기치 않은 결과가 발생할 수 있다.
 {: .notice--warning}
 
 <hr>
@@ -446,7 +445,6 @@ difference|difference + 1|fitness(1 / (difference + 1))
 
 ```python
 # list_compression.py
-
 from __future__ import annotations
 from typing import Tuple, List, Any
 from chromosome import Chromosome
@@ -462,7 +460,6 @@ PEOPLE: List[str] = ["Michael", "Sarah", "Joshua",
                      "Narine", "David", "Sajid", 
                      "Melanie", "Daniel", "Wei", 
                      "Dean", "Brian", "Murat", "Lisa"]
-
 
 class ListCompression(Chromosome):
     def __init__(self, lst: List[Any]) -> None:
@@ -522,7 +519,7 @@ print(result)
 
 원래 순서보다 5바이트 절약할 수 있다. 하지만 최적의 순서인지는 알 수 없다. 12개 항목에 대한 리스트의 경우 479,001,600(12!)개의 순서가 있다.  
   
->궁극적으로 솔루션이 최적인지 여부는 모르지만 최적의 솔루션을 찾으려고 하는 유전 알고리즘을 사용할 수 있다.
+**궁극적으로 솔루션이 최적인지 여부는 모르지만 최적의 솔루션을 찾으려고 하는 유전 알고리즘을 사용할 수 있다.**
 
 ## 유전 알고리즘 정리
 유전 알고리즘은 만병통치약이 아니며 실제 문제에서 대부분 적합하지 않다.  
@@ -608,10 +605,10 @@ print(result)
 
 ### 2. 제약 충족 문제 프레임워크에 유전 알고리즘을 사용하여 임의의 제약 충족 문제를 해결하는 새로운 메서드를 추가하라. 적합도의 가능한 측정은 염색체에 의해 해결되는 제약조건의 수다.
 
-**지도 색칠문제**  
-변수 : 호주의 7개 지역 (뉴사우스웨일스, 빅토리아, 퀸즐랜드, 사우스 오스트레일리아, 웨스턴 오스트레일리아, 태즈메이니아, 노던 준주)  
-도메인 : 3가지 색상 (빨강, 파랑, 녹색)  
-제약 : 인접한 두 지역을 같은 색상을 할당할 수 없다.  
+지도 색칠문제  
+- 변수 : 호주의 7개 지역 (뉴사우스웨일스, 빅토리아, 퀸즐랜드, 사우스 오스트레일리아, 웨스턴 오스트레일리아, 태즈메이니아, 노던 준주)  
+- 도메인 : 3가지 색상 (빨강, 파랑, 녹색)  
+- 제약 : 인접한 두 지역을 같은 색상을 할당할 수 없다.  
 
 
 ```python
@@ -651,7 +648,7 @@ class MapColoringConstraint(Chromosome):
         if self.color[self.place.index("빅토리아")] != self.color[self.place.index("태즈메이니아")]:
             count += 1
        
-        return (count // 10)
+        return (count / 10)
     
     @classmethod
     def random_instance(cls) -> MapColoringConstraint:
@@ -666,7 +663,6 @@ class MapColoringConstraint(Chromosome):
         child2: MapColoringConstraint = deepcopy(other)
         idx1, idx2 = sample(range(len(child1.place)), k = 2)
         child1.color[idx1] , child2.color[idx2] = child2.color[idx2] , child1.color[idx1]
-        
         return child1, child2
     
     def mutate(self) -> None:
@@ -688,15 +684,11 @@ result: MapColoringConstraint = ga.run()
 print(result)
 ```
 
-    세대 0 최상 0 평균 0
-    세대 1 최상 0 평균 0
-    
-    ...
-
-    세대 16 최상 0 평균 0
-    세대 17 최상 0 평균 0
-    place  ['뉴사우스웨일스', '빅토리아', '퀸즐랜드', '사우스 오스트레일리아', '웨스턴 오스트레일리아', '태즈메이니아', '노던 준주'] 
-     color  [['빨강'], ['초록'], ['초록'], ['파랑'], ['초록'], ['파랑'], ['빨강']]
+    세대 0 최상 0.9 평균 0.655
+    세대 1 최상 0.9 평균 0.78
+    세대 2 최상 0.9 평균 0.805
+    place  ['뉴사우스웨일스', '빅토리아', '퀸즐랜드', '사우스 오스트레일리아', '웨스턴 오스트레일리아', '태즈메이니아', '노던 준주']
+    color  [['빨강'], ['파랑'], ['파랑'], ['초록'], ['파랑'], ['빨강'], ['빨강']]
     
 ### 3. Chromosome 클래스를 상속받는 BitString 클래스를 생성하고, 5.3 '간단한 방정식' 문제를 해결하라
 
