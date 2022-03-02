@@ -227,12 +227,12 @@ class TTTBoard(Board):
 ### 8.2.2 최소최대(minimax) 알고리즘
 최소최대는 완벽한 정보를 가진 2인용 제로섬 게임에서 최적의 이동을 찾는 고전 알고리즘이다. 최소최대 알고리즘은 각 플레이어가 최대화 플레이어 또는 최소화 플레이어로 지정된 재귀함수를 사용하여 구현한다.  
    
-> **최대화 플레이어** : 최대이익을 얻을 수 있는 이동을 목표로 한다.  
+- **최대화 플레이어** : 최대이익을 얻을 수 있는 이동을 목표로 한다.  
   
 최대화 플레이어의 이득을 최대화하려는 시도 후 재귀적으로 호출되어 상대방 최대화 플레이어의 이득을 최소화하는 이동을 찾는다.  
 이를 재귀 함수의 기저 조건에 도달할 때까지 반복한다.  
   
-> **기저 조건** : 게임 종료(승리 또는 무승부) 또는 최대 깊이 탐색
+- **기저 조건** : 게임 종료(승리 또는 무승부) 또는 최대 깊이 탐색
 
 **TTTBoard** 클래스의 `evaluate()`메서드에서 프레이어가 최대화 플레이어에게 이기면 1점, 지면 -1점, 비기면 0점을 얻는다.  
   
@@ -250,7 +250,6 @@ from board import Piece, Board, Move
 # 게임 플레이어의 가능한 최선의 움직임을 찾는다.
 def minimax(board: Board, maximizing: bool, original_player: Piece, max_depth: int = 8) -> float:
     # 기저 조건 - 게임 종료 위치 또는 최대 깊이에 도달한다.
-    
     if board.is_win or board.is_draw or max_depth == 0:
         return board.evaluate(original_player)
 
@@ -290,7 +289,6 @@ def find_best_move(board: Board, max_depth: int = 8) -> Move:
 
 ```python
 #tictactoe_ai.py
-
 from minimax import find_best_move
 from tictactoe import TTTBoard
 from board import Move, Board
@@ -361,8 +359,6 @@ if __name__ == "__main__":
 
 ### 8.3.1 커넥트포 구현
 
-
-
 ```python
 # connectfour.py
 from __future__ import annotations
@@ -391,7 +387,6 @@ class C4Piece(Piece, Enum):
 
 ```python
 # connectfour.py
- 
 ...
 
 def generate_segments(num_columns: int, num_rows: int, segment_length: int) -> List[List[Tuple[int, int]]]:
@@ -430,7 +425,7 @@ def generate_segments(num_columns: int, num_rows: int, segment_length: int) -> L
     return segments
 ```
 
-> **세그먼트** : 4개의 격자위치 리스트  
+- **세그먼트** : 4개의 격자위치 리스트  
 보드의 세그먼트가 모두 같은 색의 말이면 해당 색의 플레이어가 게임에서 이긴 것이다.
 
 
@@ -477,7 +472,7 @@ class C4Board(Board):
             self.position: List[C4Board.Column] = [C4Board.Column() for _ in range(C4Board.NUM_COLUMNS)]
         else:
             self.position = position
-        self._turn = C4Piece = turn
+        self._turn: C4Piece = turn
         
     @property
     def turn(self) -> Piece:
@@ -549,21 +544,21 @@ class C4Board(Board):
         return display
 ```
 
-**Column** 클래스는 내부 클래스로 커넥트포 보드를 7개의 열 그룹으로 생각하여 개념적으로 쉽게 이해하기 위해 사용한다.  
+- **Column** 클래스는 내부 클래스로 커넥트포 보드를 7개의 열 그룹으로 생각하여 개념적으로 쉽게 이해하기 위해 사용한다.  
 Stack 클래스와 비슷한 형태를 가지나 `pop`되지 않는 스택이다.  
   
-> `__getitem__()` 특수 메서드를 사용해 **Column** 인스턴스를 인덱싱할 수 있어서 열 리스트를 2차원 리스트처럼 취급할 수 있다.
+- **`__getitem__()` 특수 메서드를 사용해 Column 인스턴스를 인덱싱할 수 있어서 열 리스트를 2차원 리스트처럼 취급할 수 있다.**
   
-**CAUTION**: 위에 틱택토에서 처럼 1차원 또는 2차원 리스트로 격자를 표현하는 것이 성능적으로 더 좋을 수 있다.
+**CAUTION: 위에 틱택토에서 처럼 1차원 또는 2차원 리스트로 격자를 표현하는 것이 성능적으로 더 좋을 수 있다.**
 {: .notice--danger}
 
-**C4Board** 클래스 또한 수정없이 **Board** 추상 클래스의 `is_draw` 속성을 사용할 수 있다.  
+- **C4Board** 클래스 또한 수정없이 **Board** 추상 클래스의 `is_draw` 속성을 사용할 수 있다.  
   
-`_evaluate_segment()` 는 단일 세그먼트를 평가하는 헬퍼 메서드이다.
-- 말이 섞여 있는 경우 : 0점
-- 같은 색 말 2개, 빈 공간 2개 : 1점
-- 같은 색 말 3개, 빈 공간 1개 : 100점
-- 같은 색 말 4개 : 1000000점 (승리)
+- `_evaluate_segment()` 는 단일 세그먼트를 평가하는 헬퍼 메서드이다.
+    - 말이 섞여 있는 경우 : 0점
+    - 같은 색 말 2개, 빈 공간 2개 : 1점
+    - 같은 색 말 3개, 빈 공간 1개 : 100점
+    - 같은 색 말 4개 : 1000000점 (승리)
   
 `evaluate()` 메서드는 `_evaluate_segment()` 메서드를 사용하여 모든 세그먼트의 총 점수를 반환한다.
 
