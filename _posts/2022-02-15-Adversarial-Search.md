@@ -637,11 +637,10 @@ if __name__ == "__main__":
 ### 8.3.3 알파-베타 가지치기로 최소최대 알고리즘 개선하기
 최소최대 알고리즘은 잘 작동하지만 매우 깊은 탐색은 할 수 없다. **알파-베타 가지치기**는 이미 탐색한 위치보다 점수가 낮은 탐색 위치를 제외시켜 알고리즘의 탐색 깊이를 향상시킬 수 있다.  
   
-**알파**는 탐색 트리에서 현재까지 발견된 최고의 최대화 움직임 평가를 나타낸다.  
-**베타**는 상대방에 대해 현재까지 발견된 최고의 최소화 움직임 평가를 나타낸다.  
+- **알파**는 탐색 트리에서 현재까지 발견된 최고의 최대화 움직임 평가를 나타낸다.  
+- **베타**는 상대방에 대해 현재까지 발견된 최고의 최소화 움직임 평가를 나타낸다.  
 
-> 베타 <= 알파: 해당 위치 분기에서 발견될 위치보다 더 좋거나 같은 위치가 이미 발견되었기 때문에 넘어간다.  
-휴리스틱을 통해 탐색공간을 줄인다.
+> **베타 <= 알파: 해당 위치 분기에서 발견될 위치보다 더 좋거나 같은 위치가 이미 발견되었기 때문에 넘어간다. 휴리스틱을 통해 탐색공간을 줄인다.**
 
 
 ```python
@@ -874,51 +873,6 @@ if __name__ == '__main__':
 
 ### 3. tictactoe_ai.py와 connectfour_ai.py의 코드를 두 게임 모두에서 사용할 수 있도록 두 메서드를 작성하여 리팩토링하라
 
-
-```python
-from __future__ import annotations
-from typing import NewType, List
-from abc import ABC, abstractmethod
-
-Move = NewType('Move', int)
-
-
-class Piece:
-    @property
-    def opposite(self) -> Piece:
-        raise NotImplementedError("Should be implemented by subclasses.")
-
-
-class Board(ABC):
-    @property
-    @abstractmethod
-    def turn(self) -> Piece:
-        ...
-
-    @abstractmethod
-    def move(self, location: Move) -> Board:
-        ...
-
-    @property
-    @abstractmethod
-    def legal_moves(self) -> List[Move]:
-        ...
-
-    @property
-    @abstractmethod
-    def is_win(self) -> bool:
-        ...
-
-    @property
-    def is_draw(self) -> bool:
-        return (not self.is_win) and (len(self.legal_moves) == 0)
-
-    @abstractmethod
-    def evaluate(self, player: Piece) -> float:
-        ...
-```
-
-
 ```python
 from __future__ import annotations
 from typing import List, Optional, Tuple
@@ -980,6 +934,7 @@ class GameBoard(Board):
     
     def __init__(self, position: List[GamePiece] = None, game_type: GameType = GameType.tictactoe, turn: GamePiece = GamePiece.F) -> None:
         self.game_type = game_type
+
         if position == None:
             if self.game_type == GameBoard.GameType.tictactoe:
                 self.position = [GamePiece.E] * 9
@@ -1106,15 +1061,14 @@ from random import randrange
 
 if __name__ == "__main__":
     # main game loop
-
+    # Move(0) ~ Move(6)까지 첫번째 수를 지정
     for move in range(7):
         first_win = 0
         second_win = 0
-
+        # 게임을 5번 반복한다.
         for _ in range(5):
             board: Board = C4Board()
             board = board.move(move)
-
             while True:
                 second_move: Move = find_best_move(board, 3)
                 board = board.move(second_move)
@@ -1166,5 +1120,4 @@ if __name__ == "__main__":
     6이동을 시작으로 5번을 실행한 결과 first : 5 second : 0
     
 
-게임을 바로 시작하면 first 컴퓨터가 `find_best_move()` 메서드로 인해 Move(2)를 선택하는 경우가 나와 second 컴퓨터가 이기는 경우만 나오게 된다.  
-first의 첫 move를 변화시키며 5번씩 경기를 진행했을 때, first : second 가 4 : 3 의 비율로 승리하는 것을 볼 수 있다.
+게임을 바로 시작하면 first 컴퓨터가 `find_best_move()` 메서드의 `depth`로 인해 Move(2)를 선택하는 경우만 선택되어, second 컴퓨터가 이기는 경우만 나오게 된다. first의 첫 move를 변화시키며 5번씩 경기를 진행했을 때, first : second 가 4 : 3 의 비율로 승리하는 것을 볼 수 있다.
