@@ -2,7 +2,7 @@
 layout: single
 title: "[Algorithm] 적대적 탐색"
 categories: algorithm
-tags: [python, algorithm]
+tags: [python]
 classes: wide
 author_profile: false
 sidebar:

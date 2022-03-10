@@ -2,7 +2,7 @@
 layout: single
 title: "[Algorithm] Small Problems"
 categories: algorithm
-tags: [python, algorithm]
+tags: [python]
 classes: wide
 author_profile: false
 sidebar:

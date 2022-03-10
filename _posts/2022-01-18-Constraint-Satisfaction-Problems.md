@@ -2,7 +2,7 @@
 layout: single
 title: "[Algorithm] 제약 충족 문제"
 categories: algorithm
-tags: [python, algorithm]
+tags: [python]
 classes: wide
 author_profile: false
 sidebar:

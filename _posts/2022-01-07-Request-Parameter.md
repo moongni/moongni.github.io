@@ -2,7 +2,7 @@
 layout: single
 title: "[Node.js] Request Parameter"
 categories: Node.js
-tags: [Node.js, JavaScript]
+tags: [JavaScript]
 classes: wide
 author_profile: false
 sidebar:

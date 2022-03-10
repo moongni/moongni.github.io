@@ -2,7 +2,7 @@
 layout: single
 title: "[Algorithm] 그래프 문제"
 categories: algorithm
-tags: [python, algorithm]
+tags: [python]
 classes: wide
 author_profile: false
 sidebar:

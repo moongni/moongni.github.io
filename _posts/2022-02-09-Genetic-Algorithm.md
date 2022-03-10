@@ -2,7 +2,7 @@
 layout: single
 title: "[Algorithm] 유전 알고리즘"
 categories: algorithm
-tags: [python, algorithm]
+tags: [python]
 classes: wide
 author_profile: false
 sidebar:
