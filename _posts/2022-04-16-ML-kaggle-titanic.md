@@ -421,30 +421,18 @@ plt.show()
 ```
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_12_0.png)
-    
-
-
-
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_12_1.png)
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_12_0.png" width="20%" height="20%"></center>
     
 
 
-    C:\Users\geonh\anaconda3\lib\site-packages\seaborn\_decorators.py:36: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-      warnings.warn(
-    C:\Users\geonh\anaconda3\lib\site-packages\seaborn\_decorators.py:36: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-      warnings.warn(
-    C:\Users\geonh\anaconda3\lib\site-packages\seaborn\_decorators.py:36: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-      warnings.warn(
-    C:\Users\geonh\anaconda3\lib\site-packages\seaborn\_decorators.py:36: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-      warnings.warn(
+
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_12_1.png" width="20%" height="20%"></center>
     
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_12_3.png)
+
+
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_12_3.png" width="20%" height="20%"></center>
     
 
 
@@ -488,15 +476,12 @@ train_df["SibSp"].value_counts()
 ```
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_15_0.png)
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_15_0.png" width="20%" height="20%"></center>
     
 
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_15_1.png)
-    
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_15_1.png" width="20%" height="20%"></center>
 
 
 
@@ -514,8 +499,7 @@ train_df["SibSp"].value_counts()
 
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_15_3.png)
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_15_3.png" width="20%" height="20%"></center>
     
 
 
@@ -543,14 +527,12 @@ train_df["Parch"].value_counts()
 ```
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_17_0.png)
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_17_0.png" width="20%" height="20%"></center>
     
 
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_17_1.png)
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_17_1.png" width="20%" height="20%"></center>
     
 
 
@@ -569,8 +551,7 @@ train_df["Parch"].value_counts()
 
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_17_3.png)
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_17_3.png" width="20%" height="20%"></center>
     
 
 
