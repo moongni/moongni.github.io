@@ -18,10 +18,11 @@ use_math: true
 <hr>
 
 **목차**  
-1. [데이터 불러오기]()
-2. [데이터 전처리 및 특성 추출]()
-3. [모델 선택 및 학습]()
-4. [제출]()
+1. [데이터 불러오기](https://moongni.github.io/machinelearning/ML-kaggle-titanic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0)
+2. [데이터 시각화](https://moongni.github.io/machinelearning/ML-kaggle-titanic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%8B%9C%EA%B0%81%ED%99%94)
+3. [데이터 전처리](https://moongni.github.io/machinelearning/ML-kaggle-titanic/#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%B2%98%EB%A6%AC)
+4. [모델 학습과 선택](https://moongni.github.io/machinelearning/ML-kaggle-titanic/#%EB%AA%A8%EB%8D%B8-%EC%84%A0%ED%83%9D%EA%B3%BC-%ED%9B%88%EB%A0%A8)
+5. [제출](https://moongni.github.io/machinelearning/ML-kaggle-titanic/#%EC%A0%9C%EC%B6%9C)
 
 ## 데이터 불러오기
 링크에서 데이터를 받아와야한다. 데이터는 이미 훈련셋과 테스트셋으로 나뉘어져 있으며 테스트 셋에는 라벨이 되는 생존여부에 대한 데이터가 없다.  
@@ -810,7 +811,7 @@ test_set.shape
 
 
 
-## 모델 선택과 훈련
+## 모델 학습과 훈련
 모델 학습과 평가에 필요한 pipeline을 만들어 훈련된 결과를 평가한다.
 
 평가예정 모델
