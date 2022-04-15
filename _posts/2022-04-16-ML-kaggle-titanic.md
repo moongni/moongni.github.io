@@ -212,7 +212,7 @@ ax[1].set_title('Survived')
 plt.show
 ```
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_5_2.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_5_2.png" width="20%" height="20%"></center>
 
 
 타이타닉호에 탑승한 승객의 생존율은 61.6% 이다.
@@ -247,11 +247,11 @@ pie_chart('Sex')
 ```
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_8_0.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_8_0.png" width="20%" height="20%"></center>
 
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_8_1.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_8_1.png" width="20%" height="20%"></center>
     
 
 
@@ -271,12 +271,12 @@ pd.crosstab([train_df['Sex'], train_df['Survived']],
 ```
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_10_0.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_10_0.png" width="20%" height="20%"></center>
     
 
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_10_1.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_10_1.png" width="20%" height="20%"></center>
 
 
 
@@ -421,18 +421,18 @@ plt.show()
 ```
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_12_0.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_0.png" width="20%" height="20%"></center>
     
 
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_12_1.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_1.png" width="20%" height="20%"></center>
     
 
 
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_12_3.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_3.png" width="20%" height="20%"></center>
     
 
 
@@ -476,12 +476,12 @@ train_df["SibSp"].value_counts()
 ```
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_15_0.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_0.png" width="20%" height="20%"></center>
     
 
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_15_1.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_1.png" width="20%" height="20%"></center>
 
 
 
@@ -499,7 +499,7 @@ train_df["SibSp"].value_counts()
 
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_15_3.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_3.png" width="20%" height="20%"></center>
     
 
 
@@ -527,12 +527,12 @@ train_df["Parch"].value_counts()
 ```
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_17_0.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_0.png" width="20%" height="20%"></center>
     
 
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_17_1.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_1.png" width="20%" height="20%"></center>
     
 
 
@@ -551,7 +551,7 @@ train_df["Parch"].value_counts()
 
 
 
-<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_17_3.png" width="20%" height="20%"></center>
+<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_3.png" width="20%" height="20%"></center>
     
 
 
