@@ -213,7 +213,7 @@ ax[1].set_title('Survived')
 plt.show
 ```
 
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_5_2.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_5_2.png)
 
 
 타이타닉호에 탑승한 승객의 생존율은 61.6% 이다.
