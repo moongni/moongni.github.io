@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "[MachineLearning] 캐글 타이타닉"
-categories: machinelearning
+categories: MachineLearning
 tags: [python]
 classes: wide
 author_profile: false
@@ -212,21 +212,7 @@ ax[1].set_title('Survived')
 plt.show
 ```
 
-    C:\Users\geonh\anaconda3\lib\site-packages\seaborn\_decorators.py:36: FutureWarning: Pass the following variable as a keyword arg: x. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
-      warnings.warn(
-    
-
-
-
-
-    <function matplotlib.pyplot.show(close=None, block=None)>
-
-
-
-
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_5_2.png)
-    
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_5_2.png" width="20%" height="20%"></center>
 
 
 타이타닉호에 탑승한 승객의 생존율은 61.6% 이다.
@@ -261,14 +247,11 @@ pie_chart('Sex')
 ```
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_8_0.png)
-    
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_8_0.png" width="20%" height="20%"></center>
 
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_8_1.png)
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_8_1.png" width="20%" height="20%"></center>
     
 
 
@@ -288,15 +271,12 @@ pd.crosstab([train_df['Sex'], train_df['Survived']],
 ```
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_10_0.png)
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_10_0.png" width="20%" height="20%"></center>
     
 
 
 
-    
-![png](/assets/images/2022-04-16-ML_kaggle_titanic/output_10_1.png)
-    
+<center><img src="/assets/images/2022-04-16-ML_kaggle_titanic/output_10_1.png" width="20%" height="20%"></center>
 
 
 
