@@ -247,12 +247,10 @@ def pie_chart(feature):
 pie_chart('Sex')
 ```
 
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_8_0.png" width="20%" height="20%"></center>
-
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_8_0.png)
 
 
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_8_1.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_8_1.png)
     
 
 
@@ -271,13 +269,11 @@ pd.crosstab([train_df['Sex'], train_df['Survived']],
             margins=True).style.background_gradient(cmap='summer_r')
 ```
 
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_10_0.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_10_0.png)
     
 
 
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_10_1.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_10_1.png)
 
 
 
@@ -421,19 +417,16 @@ ax[1,1].set_title('Embarked vs Pclass')
 plt.show()
 ```
 
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_0.png)
+    
 
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_0.png" width="20%" height="20%"></center>
+
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_1.png)
     
 
 
 
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_1.png" width="20%" height="20%"></center>
-    
-
-
-
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_3.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_12_3.png)
     
 
 
@@ -476,13 +469,11 @@ bar_chart("SibSp")
 train_df["SibSp"].value_counts()
 ```
 
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_0.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_0.png)
     
 
 
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_1.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_1.png)
 
 
 
@@ -499,8 +490,7 @@ train_df["SibSp"].value_counts()
 
 
 
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_3.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_15_3.png)
     
 
 
@@ -528,14 +518,12 @@ train_df["Parch"].value_counts()
 ```
 
 
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_0.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_0.png)
     
 
 
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_1.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_1.png)
     
-
 
 
 
@@ -551,8 +539,7 @@ train_df["Parch"].value_counts()
 
 
 
-
-<center><img src="/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_3.png" width="20%" height="20%"></center>
+![png](/assets/images/posting/2022-04-16-ML_kaggle_titanic/output_17_3.png)
     
 
 
