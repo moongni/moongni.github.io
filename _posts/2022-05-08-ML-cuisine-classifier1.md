@@ -25,7 +25,8 @@ use_math: true
 - 논리회귀: 두개로 나눠진 범주를 예측한다.
   예시: 호박이 노란가 안노란가
 
-Note: 지도학습은 훈련 데이터에 레이블이라는 답을 표기하여 레이블을 맞추도록 유도하는 학습을 가르킨다.{: .notice--info}
+Note: 지도학습은 훈련 데이터에 레이블이라는 답을 표기하여 레이블을 맞추도록 유도하는 학습을 가르킨다.
+{: .notice--info}
 
 분류는 크게 이진분류와 다중클래스 분류로 나뉜다.  
 메일의 분류
@@ -409,7 +410,7 @@ df.cuisine.value_counts().plot.barh()
 ```
 
     
-![png](../assets/images/posting/2022-05-08-ML_cuisine/output_13_1.png)
+![png](/assets/images/posting/2022-05-08-ML_cuisine/output_13_1.png)
     
 
 요리데이터의 나라별 데이터 shape
@@ -462,7 +463,7 @@ thai_ingredient_df.head(10).plot.barh()
 
 
     
-![png](../assets/images/posting/2022-05-08-ML_cuisine/output_19_1.png)
+![png](/assets/images/posting/2022-05-08-ML_cuisine/output_19_1.png)
     
 
 
@@ -476,7 +477,7 @@ japanese_ingredient_df.head(10).plot.barh()
 
 
     
-![png](output_20_1.png)
+![png](/assets/images/posting/2022-05-08-ML_cuisine/output_20_1.png)
     
 
 
@@ -489,17 +490,8 @@ chinese_ingredient_df.head(10).plot.barh()
 ```
 
 
-
-
-    <AxesSubplot:>
-
-
-
-
+![png](/assets/images/posting/2022-05-08-ML_cuisine//output_21_1.png)
     
-![png](output_21_1.png)
-    
-
 
 
 ```python
@@ -509,19 +501,9 @@ indian_ingredient_df = create_ingredient_df(indian_df)
 indian_ingredient_df.head(10).plot.barh()
 ```
 
-
-
-
-    <AxesSubplot:>
-
-
-
-
     
-![png](output_22_1.png)
+![png](/assets/images/posting/2022-05-08-ML_cuisine//output_22_1.png)
     
-
-
 
 ```python
 # 한국 요리의 재료 중 많이 들어간 상위 10개
@@ -530,18 +512,8 @@ korean_ingredient_df = create_ingredient_df(korean_df)
 korean_ingredient_df.head(10).plot.barh()
 ```
 
-
-
-
-    <AxesSubplot:>
-
-
-
-
     
-![png](output_23_1.png)
-    
-
+![png](/assets/images/posting/2022-05-08-ML_cuisine//output_23_1.png)
 
 
 ```python
@@ -551,12 +523,6 @@ confusion_f = (korean_ingredient_df.head(20).index & japanese_ingredient_df.head
 confusion_f
 ```
 
-    C:\Users\geonh\AppData\Roaming\Python\Python37\site-packages\ipykernel_launcher.py:3: FutureWarning: Index.__and__ operating as a set operation is deprecated, in the future this will be a logical operation matching Series.__and__.  Use index.intersection(other) instead
-      This is separate from the ipykernel package so we can avoid doing imports until
-    
-
-
-
 
     Index(['garlic', 'rice', 'ginger', 'vegetable_oil', 'onion'], dtype='object')
 
@@ -564,7 +530,7 @@ confusion_f
 
 각 나라요리에 다 들어있기 때문에 분류에 도움이 되지않는 특성을 drop한다.  
 
-drop할 특성 : rice, garlic, ginger
+- drop할 특성 : rice, garlic, ginger
 
 
 ```python
@@ -887,7 +853,7 @@ feature_df
 <p>2448 rows × 380 columns</p>
 </div>
 
-
+<hr>
 
 ### Balance
 
@@ -907,8 +873,7 @@ print(f'old label count: \n{df.cuisine.value_counts()}')
 
 label 클래스의 결과 한국 음식이 799개의 샘플 수를 가지고 가장 적은 것은 태국음식이 289개의 샘플 수를 가지고 있다.  
   
-**`SMOTE` "Synthetic Minority Over-sampling Technique"**  
-을 사용해 오버샘플링하여 샘플 수의 비율을 맞춘다.
+**`SMOTE` (Synthetic Minority Over-sampling Technique)**을 사용해 오버샘플링하여 샘플 수의 비율을 맞춘다.
 
 오버샘플링에 대한 효과는 [Scikit-learn](https://imbalanced-learn.org/stable/auto_examples/over-sampling/plot_comparison_over_sampling.html#sphx-glr-auto-examples-over-sampling-plot-comparison-over-sampling-py)홈페이지에 설명되어 있다.  
   
@@ -925,13 +890,6 @@ transformed_feature_df, transformed_label_df = oversample.fit_resample(feature_d
 print(f'new label count: \n{transformed_label_df.value_counts()}')
 ```
 
-    old label count: 
-    korean      799
-    indian      598
-    chinese     442
-    japanese    320
-    thai        289
-    Name: cuisine, dtype: int64
     new label count: 
     indian      799
     thai        799
@@ -962,3 +920,6 @@ DATA_PATH.mkdir(parents=True, exist_ok=True)
 
 transformed_df.to_csv("./datasets/classifier/cleaned_cuisines.csv")
 ```
+
+[다음 포스팅](https://moongni.github.io/machinelearning/ML-cuisine-classifier2/)에서는 전처리된 데이터를 가지고 분류 훈련을 진행한다.  
+여러 분류 알고리즘을 통해 정확도를 통해 최선의 성능을 가진 모델을 선택한다.  
