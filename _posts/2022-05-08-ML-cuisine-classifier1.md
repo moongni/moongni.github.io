@@ -402,7 +402,7 @@ df.info()
   
 cuisine : 요리의 지역 (클래스)
   
-데이터의 클래스를 바히스토그램으로 시각화 (`barh()`)
+데이터의 클래스를 가로 바그래프로 시각화 (`barh()`)
 
 
 ```python
@@ -456,7 +456,7 @@ def create_ingredient_df(df):
 
 ```python
 # 태국 요리의 재료 중 많이 들어간 상위 10개
-# 바히스토그램으로 시각화
+# 바그래프으로 시각화
 thai_ingredient_df = create_ingredient_df(thai_df)
 thai_ingredient_df.head(10).plot.barh()
 ```
@@ -470,7 +470,7 @@ thai_ingredient_df.head(10).plot.barh()
 
 ```python
 # 일본 요리의 재료 중 많이 들어간 상위 10개
-# 바히스토그램으로 시각화
+# 바그래프으로 시각화
 japanese_ingredient_df = create_ingredient_df(japanese_df)
 japanese_ingredient_df.head(10).plot.barh()
 ```
@@ -484,7 +484,7 @@ japanese_ingredient_df.head(10).plot.barh()
 
 ```python
 # 중국 요리의 재료 중 많이 들어간 상위 10개
-# 바히스토그램으로 시각화
+# 바그래프으로 시각화
 chinese_ingredient_df = create_ingredient_df(chinese_df)
 chinese_ingredient_df.head(10).plot.barh()
 ```
@@ -496,7 +496,7 @@ chinese_ingredient_df.head(10).plot.barh()
 
 ```python
 # 인도 요리의 재료 중 많이 들어간 상위 10개
-# 바히스토그램으로 시각화
+# 바그래프으로 시각화
 indian_ingredient_df = create_ingredient_df(indian_df)
 indian_ingredient_df.head(10).plot.barh()
 ```
@@ -507,7 +507,7 @@ indian_ingredient_df.head(10).plot.barh()
 
 ```python
 # 한국 요리의 재료 중 많이 들어간 상위 10개
-# 바히스토그램으로 시각화
+# 바그래프으로 시각화
 korean_ingredient_df = create_ingredient_df(korean_df)
 korean_ingredient_df.head(10).plot.barh()
 ```
