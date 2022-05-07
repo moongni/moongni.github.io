@@ -14,7 +14,7 @@ use_math: true
 
 # 머신러닝 - 음식지역 분류
 ## 음식분류 웹앱 만들기
-이전 포스팅에서 만든 모델을 웹앱에서 바로 사용가능하며, 로컬서버에서 간단히 구현해본다.  
+[이전 포스팅](https://moongni.github.io/machinelearning/ML-cuisine-classifier2/)에서 만든 모델을 웹앱에서 바로 사용가능하며, 로컬서버에서 간단히 구현해본다.  
   
 `model.onnx`와 같은 디렉토리에 `index.html`파일을 생성한다. `index.html`의 내용은 아래와 같다.  
   
@@ -67,9 +67,11 @@ use_math: true
         </div> 
     </body>
 </html>
-
+```
 
 각 `checkbox`는 value는 데이터셋의 특성을 인덱싱값이며 예를 들어 apple의 value 4는 데이터셋에서 5번째 특성으로 인덱싱은 0에서부터 시작한다.
+
+<hr>
 
 **Onnx Runtime** import 하기  
 
@@ -79,6 +81,7 @@ use_math: true
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.9.0/dist/ort.min.js"></script> 
 ```
 
+<hr>
 
 **Runtime**을 추가한 후 아래의 코드도 삽입한다.
 
@@ -143,20 +146,21 @@ use_math: true
     4. 'feeds'를 모델에 보낸 후 결과값을 기다린다.
   
   
-> const session = await ort.InferenceSession.create('http::/localhost:8080/model.onnx'); 에서 localhost: 다음 포트번호는 node에서 local 서버를 실행할 때 설정한 포트번호를 입력한다.
+> const session = await ort.InferenceSession.create('http::/localhost:8080/model.onnx');  
+localhost: 다음 포트번호는 node에서 local 서버를 실행할 때 설정한 포트번호를 입력한다.
 
 **npx local 서버 실행**  
 1. 터미널에서 `index.html`과 `model.onnx`가 설치된 디렉토리로 이동한다.
 2. 아래의 명령어를 입력한다.  
     `npx light-server -s . -p 8080` 8080번 포트는 변경해도 되지만 변경한다면 위에 외부 자바스크립트 코드를 삽입할 때 포트번호도 수정해야한다.
-3. chrome 주소창에 http://localhost:8080/index.html 로 이동한다.
+3. chrome에서 http://localhost:8080/index.html 로 이동한다.
 
 ## 앱 테스트 화면
 
-![](./images/classifier/model_runtime.jpg)  
+![](/assets/images/posting/2022-05-08-ML_cuisine/model_runtime.jpg)  
 
 
-![](./images/classifier/model_runtime2.jpg)
+![](/assets/images/posting/2022-05-08-ML_cuisine/images/classifier/model_runtime2.jpg)
 
 ### 아쉬운 점
-그리트탐색이나 랜덤탐색을 사용하여 모델의 최적의 파라미터를 찾아서 훈련시키면 더 좋은 모델을 만들 수 있었을 것 같다.
+모델 선택에 있어 교차검증을 통해 훈련중 검증셋에 대한 정확도를 가지고 평가한 후 그리트탐색이나 랜덤탐색을 사용하여 모델의 최적의 파라미터를 찾아서 훈련시키면 더 좋은 모델을 만들 수 있었을 것 같다.
