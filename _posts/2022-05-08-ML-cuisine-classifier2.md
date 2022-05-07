@@ -894,8 +894,9 @@ with open("./model.onnx", "wb") as f:
 ```
     
 
-**NOTE: 변환스크립트에 option을 전달할 수 있다. 위 경우에** `'nocl':False`, `'zipmap': False`**을 옵션으로 전달했다.**  
-**분류모델이기 때문에 dict의 list를 생성하는 ZipMap은 필수가 아닙니다.** `nocl`**은 모델의 클래스정보를 저장할 것인가 유무이며** `'nocl':True`**로 설정하면 클래스정보를 저장하지 않아 모델의 크기를 줄일 수 있습니다.**
+**NOTE: 변환스크립트에 option을 전달할 수 있다. 위 경우에 'nocl':False, 'zipmap': False을 옵션으로 전달했다.**  
+**분류모델이기 때문에 dict의 list를 생성하는 ZipMap은 필수가 아닙니다.**  
+**'nocl'은 모델의 클래스정보를 저장할 것인가 유무이며 'nocl':True로 설정하면 클래스정보를 저장하지 않아 모델의 크기를 줄일 수 있습니다.**
 {: .notice--info}
   
 notebook이 실행되는 위치에 onnx 파일이 생성된 것을 볼 수 있다.  
