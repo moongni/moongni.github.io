@@ -14,7 +14,9 @@ use_math: true
 
 # 머신러닝 - 음식지역 분류
 
-이번 포스팅에서는 [1]()에서 전처리한 데이터로 **사용된 재료를 가지고 요리의 지역을 분류한다.**
+이번 포스팅에서는 [이전포스팅](https://moongni.github.io/machinelearning/ML-cuisine-classifier1/)에서 전처리한 데이터를 불러온 후 문제를 해결한다.  
+  
+**문제: 사용된 재료를 가지고 요리의 지역을 분류한다.**
 
 
 ```python
@@ -341,8 +343,7 @@ cuisines_df
 </div>
 
 
-
-분류 훈련에 필요한 패키지 및 모듈을 불러온다.
+훈련을 시키기 위해 불러온 데이터를 특성(사용된 재료)과 지도학습의 라벨(지역)로 나눈다.
 
 
 ```python
@@ -558,10 +559,10 @@ cuisines_label_df.head()
 - Multiclass and multioutput algorithms (multiclass and multilabel classification, multiclass-multioutput classification)
   
 > 또한 neural networks 를 통해 데이터를 분류할 수 있지만 이번 포스팅에서는 다루지 않겠습니다.
-  
+   
 분류기를 선택하는 방법은 여러 가지를 실행하고 좋은 결과를 찾는 것이 일반적인 방법이다.  
   
-사이킷런에서 10가지 다른 분류기에 따른 데이터 분류를 시각화 해서 보여준다.
+사이킷런에서 10가지 다른 예측기에 따른 데이터 분류를 시각화 해서 보여준다.
 - KNeighbors
 - SVC의 2가지 커널방식(linear, rbf)
 - GaussianProcessClassifier 
@@ -571,7 +572,8 @@ cuisines_label_df.head()
 - AdaBoostClassifier
 - GaussianNB
 - QuadraticDiscrinationAnalysis,
-![](./images/classifier/comparison.png)
+![](/assets/images/posting/2022-05-08-ML_cuisine/comparison.png)
+
 출처: [Scikit-learn.Classifier comparison](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html)
 
 ### 다중 클래스 분류
@@ -590,12 +592,13 @@ cuisines_label_df.head()
 - 다중클래스 Neural Network 는 좋은 성능을 보이지만 우리가 수행해야될 과제에 비해 너무 무겁다.
 - Boosted Decision Tree는 비모수 과제에 적합하며 순위를 만들기 위해 만들어진 모델이므로 우리 과제에는 유용하지 않다.
 
-데이터 분류를 하기 위해 사이킷런을 사용할 것이며 분류모델을 다중클래스 분류로 사용하기 위해 하이퍼파라미터 설정이 필요한 모델들이 있다.  
+데이터 분류를 하기 위해 사이킷런 패키지에서 제공하는 예측기를 사용할 것이며 분류모델을 다중클래스 분류로 사용하기 위해 하이퍼파라미터 설정이 필요한 모델들이 있다.  
   
-LogisticRegression 예측기를 사용하는 경우  `multi_class`와 `solver`를 설정해야한다.  
+LogisticRegression 예측기를 사용하는 경우 하이퍼파라미터 `multi_class`와 `solver`를 설정해야한다.  
 
 - `multi_class='ovr'`: one-vs-rest 방식
-- `multi_class='multinomial'`: multinomial로 설정한 경우 현재 solver는 'lbfgs', 'sag', 'saga', 'newton-cg'만 지원한다.
+- `multi_class='multinomial'`: multinomial로 설정한 경우  
+  현재 solver는 'lbfgs', 'sag', 'saga', 'newton-cg'만 지원한다.
 
 사이킷런 [sklearn.linear_model.LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)에서 solver에 따라 지원하는 규제를 알 수 있다.
 
@@ -629,7 +632,7 @@ X_train, X_test, y_train, y_test = train_test_split(cuisines_feature_df, cuisine
 ### LogisticRegression 
 sklearn의 LogisticRegression 예측기를 사용하여 다중클래스 분류를 실행한다.  
   
-1. `multi_class='ovr'` , `solve='liblinear'`로 하이퍼 파라미터를 설정한 후 훈련시킨다.
+1.`multi_class='ovr'` , `solve='liblinear'`로 하이퍼 파라미터를 설정한 후 훈련시켰을 때 정확도
 
 
 ```python
@@ -645,7 +648,7 @@ print(f"Accuracy is {accuracy}")
     Accuracy is 0.7973311092577148
     
 
-2. `multi_class='multinomail'` , `solver='lbfgs'`로 하이퍼 파라미터를 설정한 후 훈련시킨다.  
+2.`multi_class='multinomial'` , `solver='lbfgs'`로 하이퍼 파라미터를 설정한 후 훈련시켰을 때 정확도.  
   
 solver의 기본값이 'lbfgs'이므로 설정하지 않고 훈련시킨다.
 
@@ -661,7 +664,7 @@ print(f"Accuracy is {accuracy}")
     Accuracy is 0.8031693077564637
     
 
-`multi_class='multinomail'` , `solver='lbfgs'`와 `multi_class='ovr'` , `solve='liblinear'`가 둘다 대략 80%로 비슷한 정확도를 보인다.
+1(`multi_class='ovr'` , `solve='liblinear'`)과 2(`multi_class='multinomial'` , `solver='lbfgs'`)는 둘다 대략 80%로 비슷한 정확도를 보이지만, 2번의 경우가 정확도가 미세하게 더 높은 것을 볼 수 있다.
   
 <hr>
 테스트셋 처음 50개의 샘플을 각 클래스에 대해 예측함수의 결과를 확인한다.
@@ -676,12 +679,6 @@ resultdf = pd.DataFrame(data=proba, columns=classes)
 topPrediction = resultdf.T.sort_values(by=[0], ascending=[False])
 topPrediction.head()
 ```
-
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\base.py:451: UserWarning: X does not have valid feature names, but LogisticRegression was fitted with feature names
-      "X does not have valid feature names, but"
-    
-
-
 
 
 <div>
@@ -738,7 +735,8 @@ topPrediction.head()
 
 
 ```python
-from sklearn.metrics import accuracy_score,precision_score,confusion_matrix,classification_report, precision_recall_curve
+from sklearn.metrics import accuracy_score, precision_score,\
+  confusion_matrix, classification_report, precision_recall_curve
 
 y_pred = model.predict(X_test)
 print(classification_report(y_test,y_pred))
@@ -770,14 +768,13 @@ print(classification_report(y_test,y_pred))
 
 **Linear kernerl SVC**  
 서포트 벡터 군집화는 `kernel='linear'`로 설정된 서포즈 벡터 머신이다.  
-하이퍼파라미터
 - `C`: 규제 정도를 말하며 양수 `C` 0에 가까울 수록 규제가 강해진다.  
 - `probability`: bool값을 받으며 확률 추정를 사용하는지 여부를 설정한다. `fit`을 실행하기 전에 설정해야 하며, True로 설정하면 5-fold 교차검증을 한다. default값은 False이다.
 - `random_state`를 42로 설정한다.
   
   
 **K-Neighbors classifier**  
-지도학습과 비지도학습 둘다에서 사용하는 머신러닝 메서드로 k개의 포인트로 군집화를 시킨다.
+지도학습과 비지도학습에서 사용하는 머신러닝 메서드로 k개의 포인트로 군집화를 시킨다.  
 - `n_neighbors`: neighbors의 개수
 - `p`: 거리함수이다. p=1이면 맨해튼거리, p=2이면 유클리디안거리이다.
   
@@ -792,7 +789,7 @@ print(classification_report(y_test,y_pred))
   
   
 **RandomForestClassifier**  
-결정트리 모델을 `n_estimator`만큼 돌린다.  
+`n_estimator`개의 결정트리 모델을 사용하여 훈련한다.  
   
   
 **AdaBoostClassifier**  
@@ -835,9 +832,6 @@ for index, (name, classifiers) in enumerate(classifiers.items()):
     accuracy = accuracy_score(y_test, y_pred)
     print(f"Accuracy for {name} : {accuracy * 100:.2f}")
 ```
-
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\svm\_base.py:1208: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
-      ConvergenceWarning,
     
 
     Accuracy for Linear SVC : 79.73
@@ -876,10 +870,10 @@ print(classification_report(y_test, y_pred))
 랜덤포레스트분류기로 인도음식을 분류할 때, 정밀도와 재현율이 가장 높다.  
   
 
-## 훈련된 모델 다운
+## 훈련된 모델 onnx파일로 다운
 `skl2onnx` 모듈을 사용하여 훈련된 사이킷런 모델을 Onnx포멧으로 저장한다.  
   
-> skl2onnx 모듈을 다운 받기 위해 아래의 명령어를 프롬포트에 친다.  
+> skl2onnx 모듈을 다운 받기 위해 아래의 명령어를 프롬포트에 입력한다.  
 `pip install skl2onnx`  
 구글코랩이나 주피터노트북의 경우  
 `!pip install skl2onnx`
@@ -898,17 +892,12 @@ onx = convert_sklearn(rf_clf, initial_types=initial_types, options=options)
 with open("./model.onnx", "wb") as f:
     f.write(onx.SerializeToString())
 ```
-
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\utils\deprecation.py:103: FutureWarning: The attribute `n_features_` is deprecated in 1.0 and will be removed in 1.2. Use `n_features_in_` instead.
-      warnings.warn(msg, category=FutureWarning)
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\utils\deprecation.py:103: FutureWarning: Attribute `n_features_` was deprecated in version 1.0 and will be removed in 1.2. Use `n_features_in_` instead.
-      warnings.warn(msg, category=FutureWarning)
     
 
 NOTE: 변환스크립트에 option을 전달할 수 있다. 위 경우에 `'nocl':False`, `'zipmap': False`을 옵션으로 전달했다.  
 분류모델이기 때문에 dict의 list를 생성하는 ZipMap은 필수가 아닙니다. `nocl`은 모델의 클래스정보를 저장할 것인가 유무이며 `'nocl':True`로 설정하여 클래스정보를 저장하지 않아 모델의 크기를 줄일 수 있습니다.
-{:notice--info}  
+{: .notice--info}
   
 notebook이 실행되는 위치에 onnx 파일이 생성된 것을 볼 수 있다.  
   
-다음 포스팅에서는 onnx로 다운받은 파일을 통해 재료를 입력하면 어느나라의 음식을 만들 것인지 판단하는 웹서비스를 구현한다.  
+[다음 포스팅](https://moongni.github.io/machinelearning/ML-cuisine-classifier3/)에서는 onnx로 다운받은 파일을 통해 재료를 입력하면 어느나라의 음식을 만들 것인지 판단하는 웹서비스를 구현한다.  
