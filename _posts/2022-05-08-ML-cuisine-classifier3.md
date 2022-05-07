@@ -1,6 +1,18 @@
+---
+layout: single
+title: "[MachineLearning] 요리지역분류(3)"
+categories: MachineLearning
+tags: [python]
+classes: wide
+author_profile: false
+sidebar:
+    nav: "docs"
+use_math: true
+---
+
 포스팅에 앞서 본 내용의 출처는 [ML-For-Beginners](https://github.com/codingalzi/ML-For-Beginners/tree/main/4-Classification)의 내용을 요약 정리하며 공부한 것임을 알려드립니다.
 
-# [머신러닝] 음식지역 분류
+# 머신러닝 - 음식지역 분류
 ## 음식분류 웹앱 만들기
 이전 포스팅에서 만든 모델을 웹앱에서 바로 사용가능하며, 로컬서버에서 간단히 구현해본다.  
   

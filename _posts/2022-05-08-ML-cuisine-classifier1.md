@@ -1,8 +1,19 @@
+---
+layout: single
+title: "[MachineLearning] 요리지역분류(1)"
+categories: MachineLearning
+tags: [python]
+classes: wide
+author_profile: false
+sidebar:
+    nav: "docs"
+use_math: true
+---
+
 포스팅에 앞서 본 내용의 출처는 [ML-For-Beginners](https://github.com/codingalzi/ML-For-Beginners/tree/main/4-Classification)의 내용을 요약 정리하며 공부한 것임을 알려드립니다.
 
-# [머신러닝] 음식지역 분류
+# 머신러닝 - 음식지역 분류
 ## 소개
-
 
 머신러닝 기법 중 분류에 대해서 설명한다.  
 
