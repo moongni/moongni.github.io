@@ -25,8 +25,8 @@ use_math: true
 - 논리회귀: 두개로 나눠진 범주를 예측한다.
   예시: 호박이 노란가 안노란가
 
-Note: 지도학습은 훈련 데이터에 레이블이라는 답을 표기하여 레이블을 맞추도록 유도하는 학습을 가르킨다.{:notice--info}
-  
+Note: 지도학습은 훈련 데이터에 레이블이라는 답을 표기하여 레이블을 맞추도록 유도하는 학습을 가르킨다.{: .notice--info}
+
 분류는 크게 이진분류와 다중클래스 분류로 나뉜다.  
 메일의 분류
 - 이진분류: 메일이 스팸메일인가 아닌가?
@@ -44,7 +44,7 @@ Note: 지도학습은 훈련 데이터에 레이블이라는 답을 표기하여
   
 >윈도우 기준 프롬포트에 아래의 명령어를 통해 설치를 한다.  
 `pip install imblearn`  
-구글코랩이나 주피터노트북을 사용한다면
+구글코랩이나 주피터노트북을 사용한다면  
 `!pip install imblearn`  
 을 사용한다.
 
@@ -60,31 +60,10 @@ import numpy as np
 from imblearn.over_sampling import SMOTE
 ```
 
-
-```python
-from pathlib import Path
-import tarfile
-import urllib.request
-
-IMAGES_PATH = Path() / "images" / "classifier"
-IMAGES_PATH.mkdir(parents=True, exist_ok=True)
-
-def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=300):
-    path = IMAGES_PATH / f"{fig_id}.{fig_extension}"
-    if tight_layout:
-        plt.tight_layout()
-    plt.savefig(path, format=fig_extension, dpi=resolution)
-```
-
-
 ```python
 # 데이터 불러오기
 datapath = "https://raw.githubusercontent.com/codingalzi/ML-For-Beginners/main/4-Classification/data/cuisines.csv"
 df = pd.read_csv(datapath)
-```
-
-
-```python
 # 데이터 shape 확인
 df
 ```
@@ -420,29 +399,18 @@ df.info()
 
 총 2448개의 샘플을 가지고 385개의 특성을 가진다.  
   
-cuisine : 요리의 나라 (클래스)
+cuisine : 요리의 지역 (클래스)
   
-- 데이터의 클래스를 바히스토그램으로 시각화 (`barh()`)
+데이터의 클래스를 바히스토그램으로 시각화 (`barh()`)
 
 
 ```python
 df.cuisine.value_counts().plot.barh()
 ```
 
-
-
-
-    <AxesSubplot:>
-
-
-
-
     
-![png](output_13_1.png)
+![png](../assets/images/posting/2022-05-08-ML_cuisine/output_13_1.png)
     
-
-
-요리의 지역이 고르게 분포하고 있지 않기 때문에 데이터 분포를 고르게 만든다.
 
 요리데이터의 나라별 데이터 shape
 
@@ -467,8 +435,11 @@ print(f'korean df: {korean_df.shape}')
     indian df: (598, 385)
     korean df: (799, 385)
     
-
-데이터를 살펴보고 나라별 요리의 일반적인 재료가 무엇인지 알아봐야한다. 요리를 분류하는 것에 혼동을 주는 데이터 특성을 정리해야한다.
+한국 요리가 799개의 샘플을 가지고 있고 가장 적은 것은 태국 요리가 289개의 샘플을 가지고 있다.  
+이처럼 요리의 지역이 고르게 분포하고 있지 않기 때문에 데이터 분포를 고르게 만들어야 한다.  
+    
+또한 데이터를 파악해 지역별 요리의 일반적인 재료가 무엇인지 알아봐야한다.  
+재료가 여러지역에 똑같이 많이 들어간다면 분류를 훈련하는데 필요없는 특성으로 혼동을 주는 데이터 특성을 정리해야한다.
 
 
 ```python
@@ -490,15 +461,8 @@ thai_ingredient_df.head(10).plot.barh()
 ```
 
 
-
-
-    <AxesSubplot:>
-
-
-
-
     
-![png](output_19_1.png)
+![png](../assets/images/posting/2022-05-08-ML_cuisine/output_19_1.png)
     
 
 
@@ -509,13 +473,6 @@ thai_ingredient_df.head(10).plot.barh()
 japanese_ingredient_df = create_ingredient_df(japanese_df)
 japanese_ingredient_df.head(10).plot.barh()
 ```
-
-
-
-
-    <AxesSubplot:>
-
-
 
 
     
