@@ -538,10 +538,6 @@ plt.show
 
 
 
-    <function matplotlib.pyplot.show(close=None, block=None)>
-
-
-
 
     
 ![png](/assets/images/posting/2022-05-22-ML-UFO-classify/output_18_1.png)
@@ -597,86 +593,6 @@ dt_cls = train_cross_val(DecisionTreeClassifier())
 rf_cls = train_cross_val(RandomForestClassifier())
 ```
 
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\linear_model\_logistic.py:818: ConvergenceWarning: lbfgs failed to converge (status=1):
-    STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-    
-    Increase the number of iterations (max_iter) or scale the data as shown in:
-        https://scikit-learn.org/stable/modules/preprocessing.html
-    Please also refer to the documentation for alternative solver options:
-        https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-      extra_warning_msg=_LOGISTIC_SOLVER_CONVERGENCE_MSG,
     
 
     accuracy: 0.9592556790720156
@@ -736,11 +652,7 @@ print(model.predict([[50,44,-12]]))
 ```
 
     [2]
-    
-
-    C:\Users\geonh\anaconda3\envs\py3.7\lib\site-packages\sklearn\base.py:451: UserWarning: X does not have valid feature names, but DecisionTreeClassifier was fitted with feature names
-      "X does not have valid feature names, but"
-    
+        
 
 
 |나라|국가코드|인덱싱|
@@ -909,5 +821,3 @@ app.py 파일이 실행과정은 아래와 같다.
 4. 예측결과를 나라 인덱스로 사용해 출력한다.
 
 flask와 pickle을 사용해서 모델을 웹앱에 구현하는 것은 비교적 간단하지만 예측을 위해 모델에 입력해야 하는 데이터의 형태를 이해하는 것이 중요하다. 이 예시의 경우 Seconds Latitude Logitude 세개의 데이터를 넘파이 어레이로 묶어서 예측을 진행했다.
-
-
