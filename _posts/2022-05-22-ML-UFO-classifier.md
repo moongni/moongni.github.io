@@ -51,7 +51,7 @@ Pickle : Python 객체 구조를 직렬화 또는 역직렬화하는 파이썬 �
 
 [NUFORC](https://nuforc.org/)(The National UFO Reporting Center)에서 제공하는 80,000개의 UFO관측기록을 데이터로 사용한다.
 
-목표는 ufo가 관측된 나라를 맞추는 것이다.
+목표는 UFO가 발견된 위치와 몇 초동안 발견되었는지 입력하면 발견된 나라를 예측하는 것이다.
 
 
 ```python
@@ -821,3 +821,9 @@ app.py 파일이 실행과정은 아래와 같다.
 4. 예측결과를 나라 인덱스로 사용해 출력한다.
 
 flask와 pickle을 사용해서 모델을 웹앱에 구현하는 것은 비교적 간단하지만 예측을 위해 모델에 입력해야 하는 데이터의 형태를 이해하는 것이 중요하다. 이 예시의 경우 Seconds Latitude Logitude 세개의 데이터를 넘파이 어레이로 묶어서 예측을 진행했다.
+
+## 실행화면
+
+![jpg](/assets/images/posting/2022-05-22-ML-UFO-classify/app1.jpg)
+![jpg](/assets/images/posting/2022-05-22-ML-UFO-classify/app2.jpg)
+![jpg](/assets/images/posting/2022-05-22-ML-UFO-classify/app3.jpg)
